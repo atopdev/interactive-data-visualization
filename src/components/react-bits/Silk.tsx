@@ -1,31 +1,32 @@
-import React, { forwardRef, useMemo, useRef, useLayoutEffect, useEffect } from 'react';
-import { Canvas, useFrame, useThree, type RootState } from '@react-three/fiber';
-import { Color, Mesh, ShaderMaterial } from 'three';
-import { type IUniform } from 'three';
+import React, { forwardRef, useMemo, useRef, useLayoutEffect, useEffect } from 'react'
+import { Canvas, useFrame, useThree, type RootState } from '@react-three/fiber'
+import type { Mesh, ShaderMaterial } from 'three'
+import { Color } from 'three'
+import { type IUniform } from 'three'
 
-type NormalizedRGB = [number, number, number];
+type NormalizedRGB = [number, number, number]
 
 const hexToNormalizedRGB = (hex: string): NormalizedRGB => {
-  const clean = hex.replace('#', '');
-  const r = parseInt(clean.slice(0, 2), 16) / 255;
-  const g = parseInt(clean.slice(2, 4), 16) / 255;
-  const b = parseInt(clean.slice(4, 6), 16) / 255;
-  return [r, g, b];
-};
+  const clean = hex.replace('#', '')
+  const r = parseInt(clean.slice(0, 2), 16) / 255
+  const g = parseInt(clean.slice(2, 4), 16) / 255
+  const b = parseInt(clean.slice(4, 6), 16) / 255
+  return [r, g, b]
+}
 
 interface UniformValue<T = number | Color> {
-  value: T;
+  value: T
 }
 
 interface SilkUniforms {
-  uSpeed: UniformValue<number>;
-  uScale: UniformValue<number>;
-  uNoiseIntensity: UniformValue<number>;
-  uColor: UniformValue<Color>;
-  uRotation: UniformValue<number>;
-  uLightMode: UniformValue<number>;
-  uTime: UniformValue<number>;
-  [uniform: string]: IUniform;
+  uSpeed: UniformValue<number>
+  uScale: UniformValue<number>
+  uNoiseIntensity: UniformValue<number>
+  uColor: UniformValue<Color>
+  uRotation: UniformValue<number>
+  uLightMode: UniformValue<number>
+  uTime: UniformValue<number>
+  [uniform: string]: IUniform
 }
 
 const vertexShader = `
@@ -37,7 +38,7 @@ void main() {
   vUv = uv;
   gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
 }
-`;
+`
 
 const fragmentShader = `
 varying vec2 vUv;
@@ -96,48 +97,52 @@ if (uLightMode > 0.5) {
 }
   gl_FragColor = vec4(clamp(result, 0.0, 1.0), 1.0);
 }
-`;
+`
 
 interface SilkPlaneProps {
-  uniforms: SilkUniforms;
+  uniforms: SilkUniforms
 }
 
 const SilkPlane = forwardRef<Mesh, SilkPlaneProps>(function SilkPlane({ uniforms }, ref) {
-  const { viewport } = useThree();
+  const { viewport } = useThree()
 
   useLayoutEffect(() => {
-    const mesh = ref as React.MutableRefObject<Mesh | null>;
+    const mesh = ref as React.MutableRefObject<Mesh | null>
     if (mesh.current) {
-      mesh.current.scale.set(viewport.width, viewport.height, 1);
+      mesh.current.scale.set(viewport.width, viewport.height, 1)
     }
-  }, [ref, viewport]);
+  }, [ref, viewport])
 
   useFrame((_state: RootState, delta: number) => {
-    const mesh = ref as React.MutableRefObject<Mesh | null>;
+    const mesh = ref as React.MutableRefObject<Mesh | null>
     if (mesh.current) {
       const material = mesh.current.material as ShaderMaterial & {
-        uniforms: SilkUniforms;
-      };
-      material.uniforms.uTime.value += 0.1 * delta;
+        uniforms: SilkUniforms
+      }
+      material.uniforms.uTime.value += 0.1 * delta
     }
-  });
+  })
 
   return (
     <mesh ref={ref}>
       <planeGeometry args={[1, 1, 1, 1]} />
-      <shaderMaterial uniforms={uniforms} vertexShader={vertexShader} fragmentShader={fragmentShader} />
+      <shaderMaterial
+        uniforms={uniforms}
+        vertexShader={vertexShader}
+        fragmentShader={fragmentShader}
+      />
     </mesh>
-  );
-});
-SilkPlane.displayName = 'SilkPlane';
+  )
+})
+SilkPlane.displayName = 'SilkPlane'
 
 export interface SilkProps {
-  speed?: number;
-  scale?: number;
-  color?: string;
-  noiseIntensity?: number;
-  rotation?: number;
-  lightMode?: boolean;
+  speed?: number
+  scale?: number
+  color?: string
+  noiseIntensity?: number
+  rotation?: number
+  lightMode?: boolean
 }
 
 const Silk: React.FC<SilkProps> = ({
@@ -146,9 +151,9 @@ const Silk: React.FC<SilkProps> = ({
   color = '#7B7481',
   noiseIntensity = 1.5,
   rotation = 0,
-  lightMode = false
+  lightMode = false,
 }) => {
-  const meshRef = useRef<Mesh>(null);
+  const meshRef = useRef<Mesh>(null)
 
   const uniforms = useMemo<SilkUniforms>(
     () => ({
@@ -158,26 +163,26 @@ const Silk: React.FC<SilkProps> = ({
       uColor: { value: new Color(...hexToNormalizedRGB(color)) },
       uRotation: { value: rotation },
       uLightMode: { value: lightMode ? 1 : 0 },
-      uTime: { value: 0 }
+      uTime: { value: 0 },
     }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
-  );
+
+    [],
+  )
 
   useEffect(() => {
-    uniforms.uSpeed.value = speed;
-    uniforms.uScale.value = scale;
-    uniforms.uNoiseIntensity.value = noiseIntensity;
-    uniforms.uColor.value.setRGB(...hexToNormalizedRGB(color));
-    uniforms.uRotation.value = rotation;
-    uniforms.uLightMode.value = lightMode ? 1 : 0;
-  }, [speed, scale, noiseIntensity, color, rotation, lightMode, uniforms]);
+    uniforms.uSpeed.value = speed
+    uniforms.uScale.value = scale
+    uniforms.uNoiseIntensity.value = noiseIntensity
+    uniforms.uColor.value.setRGB(...hexToNormalizedRGB(color))
+    uniforms.uRotation.value = rotation
+    uniforms.uLightMode.value = lightMode ? 1 : 0
+  }, [speed, scale, noiseIntensity, color, rotation, lightMode, uniforms])
 
   return (
     <Canvas dpr={[1, 2]} frameloop="always">
       <SilkPlane ref={meshRef} uniforms={uniforms} />
     </Canvas>
-  );
-};
+  )
+}
 
-export default Silk;
+export default Silk

@@ -48,6 +48,27 @@ export default defineConfig([
     },
   },
   {
+    // React Bits components are copied in from the registry. Type errors and
+    // `any` usage have been fixed, but several React Compiler rules conflict
+    // with the imperative WebGL/animation patterns these components rely on:
+    //  - refs/immutability: "latest props" refs and mutating three.js/ogl
+    //    uniforms in place are how they avoid tearing down GL contexts.
+    //  - set-state-in-effect: measurement/animation state seeded after mount.
+    //  - exhaustive-deps: effects intentionally omit props that are read via
+    //    refs so a slider change does not rebuild the whole renderer.
+    //  - prefer-const: `let program` is declared before closures that read it
+    //    and assigned once afterwards (read-before-assign).
+    // Keep this override scoped to the vendored folder only.
+    files: ['src/components/react-bits/**/*.tsx'],
+    rules: {
+      'react-hooks/refs': 'off',
+      'react-hooks/immutability': 'off',
+      'react-hooks/set-state-in-effect': 'off',
+      'react-hooks/exhaustive-deps': 'off',
+      'prefer-const': ['error', { ignoreReadBeforeAssign: true }],
+    },
+  },
+  {
     files: ['scripts/**/*.ts', 'vite.config.ts'],
     languageOptions: { globals: globals.node },
   },
