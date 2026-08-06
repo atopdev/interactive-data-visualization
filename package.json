@@ -12,7 +12,8 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "typecheck": "tsc -b --noEmit",
-    "snapshots": "tsx scripts/fetch-snapshots.ts"
+    "snapshots": "tsx scripts/fetch-snapshots.ts",
+    "build:fresh": "npm run snapshots && npm run build"
   },
   "dependencies": {
     "@faker-js/faker": "^10.6.0",
