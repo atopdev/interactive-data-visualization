@@ -10,33 +10,115 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as D3RouteImport } from './routes/d3'
+import { Route as EchartsRouteImport } from './routes/echarts'
+import { Route as GsapRouteImport } from './routes/gsap'
+import { Route as MotionRouteImport } from './routes/motion'
+import { Route as ReactBitsRouteImport } from './routes/react-bits'
+import { Route as ReactSpringRouteImport } from './routes/react-spring'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const D3Route = D3RouteImport.update({
+  id: '/d3',
+  path: '/d3',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EchartsRoute = EchartsRouteImport.update({
+  id: '/echarts',
+  path: '/echarts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GsapRoute = GsapRouteImport.update({
+  id: '/gsap',
+  path: '/gsap',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MotionRoute = MotionRouteImport.update({
+  id: '/motion',
+  path: '/motion',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReactBitsRoute = ReactBitsRouteImport.update({
+  id: '/react-bits',
+  path: '/react-bits',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReactSpringRoute = ReactSpringRouteImport.update({
+  id: '/react-spring',
+  path: '/react-spring',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/d3': typeof D3Route
+  '/echarts': typeof EchartsRoute
+  '/gsap': typeof GsapRoute
+  '/motion': typeof MotionRoute
+  '/react-bits': typeof ReactBitsRoute
+  '/react-spring': typeof ReactSpringRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/d3': typeof D3Route
+  '/echarts': typeof EchartsRoute
+  '/gsap': typeof GsapRoute
+  '/motion': typeof MotionRoute
+  '/react-bits': typeof ReactBitsRoute
+  '/react-spring': typeof ReactSpringRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/d3': typeof D3Route
+  '/echarts': typeof EchartsRoute
+  '/gsap': typeof GsapRoute
+  '/motion': typeof MotionRoute
+  '/react-bits': typeof ReactBitsRoute
+  '/react-spring': typeof ReactSpringRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/d3'
+    | '/echarts'
+    | '/gsap'
+    | '/motion'
+    | '/react-bits'
+    | '/react-spring'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/d3'
+    | '/echarts'
+    | '/gsap'
+    | '/motion'
+    | '/react-bits'
+    | '/react-spring'
+  id:
+    | '__root__'
+    | '/'
+    | '/d3'
+    | '/echarts'
+    | '/gsap'
+    | '/motion'
+    | '/react-bits'
+    | '/react-spring'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  D3Route: typeof D3Route
+  EchartsRoute: typeof EchartsRoute
+  GsapRoute: typeof GsapRoute
+  MotionRoute: typeof MotionRoute
+  ReactBitsRoute: typeof ReactBitsRoute
+  ReactSpringRoute: typeof ReactSpringRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +130,59 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/d3': {
+      id: '/d3'
+      path: '/d3'
+      fullPath: '/d3'
+      preLoaderRoute: typeof D3RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/echarts': {
+      id: '/echarts'
+      path: '/echarts'
+      fullPath: '/echarts'
+      preLoaderRoute: typeof EchartsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gsap': {
+      id: '/gsap'
+      path: '/gsap'
+      fullPath: '/gsap'
+      preLoaderRoute: typeof GsapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/motion': {
+      id: '/motion'
+      path: '/motion'
+      fullPath: '/motion'
+      preLoaderRoute: typeof MotionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/react-bits': {
+      id: '/react-bits'
+      path: '/react-bits'
+      fullPath: '/react-bits'
+      preLoaderRoute: typeof ReactBitsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/react-spring': {
+      id: '/react-spring'
+      path: '/react-spring'
+      fullPath: '/react-spring'
+      preLoaderRoute: typeof ReactSpringRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  D3Route: D3Route,
+  EchartsRoute: EchartsRoute,
+  GsapRoute: GsapRoute,
+  MotionRoute: MotionRoute,
+  ReactBitsRoute: ReactBitsRoute,
+  ReactSpringRoute: ReactSpringRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
