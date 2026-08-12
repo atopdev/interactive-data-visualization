@@ -1,8 +1,9 @@
 import { Link } from '@tanstack/react-router'
 import { ArrowLeft, ArrowRight, ExternalLink } from 'lucide-react'
-import { useMemo, type ReactNode } from 'react'
+import { useEffect, useMemo, type ReactNode } from 'react'
 import { useActiveSection } from '@/hooks/use-active-section'
 import { neighbors, pageById, type PageId } from '@/lib/pages'
+import { useTransitionPhase } from '@/lib/transition-store'
 import { cn } from '@/lib/utils'
 
 export interface TocEntry {
@@ -23,15 +24,41 @@ interface DemoPageProps {
   credits: readonly DataCredit[]
   /** Optional hero content rendered under the lead (e.g. stats, a live background). */
   hero?: ReactNode
+  /** Section id to scroll to once the page has been revealed (?demo=<id>). */
+  focus?: string
   children: ReactNode
 }
 
 /** Shared layout for the six demo pages. */
-export function DemoPage({ pageId, lead, toc, credits, hero, children }: DemoPageProps) {
+export function DemoPage({
+  pageId,
+  lead,
+  toc,
+  credits,
+  hero,
+  focus,
+  children,
+}: DemoPageProps) {
   const page = pageById(pageId)
   const ids = useMemo(() => toc.map((t) => t.id), [toc])
   const active = useActiveSection(ids)
   const { prev, next } = neighbors(pageId)
+  // Wait for idle: ScrollTrigger refreshes (and pin spacers resize) after the reveal.
+  const idle = useTransitionPhase() === 'idle'
+
+  useEffect(() => {
+    if (!idle || !focus) return
+    const id = window.setTimeout(
+      () =>
+        document
+          .getElementById(focus)
+          ?.scrollIntoView({ behavior: 'smooth', block: 'start' }),
+      250,
+    )
+    return () => window.clearTimeout(id)
+    // Only on first reveal: later search-param changes must not yank the scroll position.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [idle])
 
   return (
     <div className="relative">
