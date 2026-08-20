@@ -5,14 +5,16 @@ export interface Size {
   height: number
 }
 
-/** Track an element's content-box size with ResizeObserver. */
+/** Track an element's border-box size (includes padding) with ResizeObserver. */
 export function useElementSize<T extends Element>(ref: RefObject<T | null>): Size {
   const [size, setSize] = useState<Size>({ width: 0, height: 0 })
   useEffect(() => {
     const el = ref.current
     if (!el) return
     const ro = new ResizeObserver(([entry]) => {
-      const { width, height } = entry.contentRect
+      const box = entry.borderBoxSize?.[0]
+      const width = box ? box.inlineSize : entry.contentRect.width
+      const height = box ? box.blockSize : entry.contentRect.height
       setSize((prev) =>
         Math.round(prev.width) === Math.round(width) &&
         Math.round(prev.height) === Math.round(height)
