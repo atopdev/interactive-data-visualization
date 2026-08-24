@@ -84,6 +84,16 @@ export default function SplashCursor({
     if (!canvas) return
 
     const pointers: Pointer[] = [pointerPrototype()]
+    // Teardown state (added: upstream never removed its listeners or rAF loop).
+    const controller = new AbortController()
+    const { signal } = controller
+    let rafId = 0
+    let disposed = false
+    const listen = <K extends keyof WindowEventMap>(
+      type: K,
+      fn: (e: WindowEventMap[K]) => void,
+      _capture?: boolean,
+    ): void => window.addEventListener(type, fn, { signal })
 
     const config = {
       SIM_RESOLUTION: SIM_RESOLUTION!,
@@ -967,7 +977,7 @@ export default function SplashCursor({
       applyInputs()
       step(dt)
       render(null)
-      requestAnimationFrame(updateFrame)
+      if (!disposed) rafId = requestAnimationFrame(updateFrame)
     }
 
     function calcDeltaTime() {
@@ -1352,7 +1362,7 @@ export default function SplashCursor({
       return ((value - min) % range) + min
     }
 
-    window.addEventListener('mousedown', (e) => {
+    listen('mousedown', (e) => {
       const pointer = pointers[0]
       const posX = scaleByPixelRatio(e.clientX)
       const posY = scaleByPixelRatio(e.clientY)
@@ -1369,9 +1379,9 @@ export default function SplashCursor({
       updatePointerMoveData(pointer, posX, posY, color)
       document.body.removeEventListener('mousemove', handleFirstMouseMove)
     }
-    document.body.addEventListener('mousemove', handleFirstMouseMove)
+    document.body.addEventListener('mousemove', handleFirstMouseMove, { signal })
 
-    window.addEventListener('mousemove', (e) => {
+    listen('mousemove', (e) => {
       const pointer = pointers[0]
       const posX = scaleByPixelRatio(e.clientX)
       const posY = scaleByPixelRatio(e.clientY)
@@ -1390,9 +1400,9 @@ export default function SplashCursor({
       }
       document.body.removeEventListener('touchstart', handleFirstTouchStart)
     }
-    document.body.addEventListener('touchstart', handleFirstTouchStart)
+    document.body.addEventListener('touchstart', handleFirstTouchStart, { signal })
 
-    window.addEventListener(
+    listen(
       'touchstart',
       (e) => {
         const touches = e.targetTouches
@@ -1406,7 +1416,7 @@ export default function SplashCursor({
       false,
     )
 
-    window.addEventListener(
+    listen(
       'touchmove',
       (e) => {
         const touches = e.targetTouches
@@ -1420,13 +1430,20 @@ export default function SplashCursor({
       false,
     )
 
-    window.addEventListener('touchend', (e) => {
+    listen('touchend', (e) => {
       const touches = e.changedTouches
       const pointer = pointers[0]
       for (let i = 0; i < touches.length; i++) {
         updatePointerUpData(pointer)
       }
     })
+
+    return () => {
+      disposed = true
+      controller.abort()
+      cancelAnimationFrame(rafId)
+      gl.getExtension('WEBGL_lose_context')?.loseContext()
+    }
   }, [
     SIM_RESOLUTION,
     DYE_RESOLUTION,

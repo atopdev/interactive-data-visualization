@@ -231,6 +231,8 @@ const Particles: React.FC<ParticlesProps> = ({
         container.removeEventListener('mousemove', handleMouseMove)
       }
       cancelAnimationFrame(animationFrameId)
+      // Release the GPU context immediately instead of waiting for GC.
+      gl.getExtension('WEBGL_lose_context')?.loseContext()
       if (container.contains(gl.canvas)) {
         container.removeChild(gl.canvas)
       }

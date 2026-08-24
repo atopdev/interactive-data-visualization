@@ -786,6 +786,8 @@ class App {
     window.removeEventListener('touchstart', this.boundOnTouchDown)
     window.removeEventListener('touchmove', this.boundOnTouchMove)
     window.removeEventListener('touchend', this.boundOnTouchUp)
+    // Release the GPU context immediately instead of waiting for GC.
+    this.renderer?.gl?.getExtension('WEBGL_lose_context')?.loseContext()
     if (this.renderer && this.renderer.gl && this.renderer.gl.canvas.parentNode) {
       this.renderer.gl.canvas.parentNode.removeChild(
         this.renderer.gl.canvas as HTMLCanvasElement,
