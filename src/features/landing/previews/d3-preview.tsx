@@ -9,7 +9,7 @@ import {
 } from 'd3'
 import { useEffect, useRef } from 'react'
 import { usePrefersReducedMotion } from '@/hooks/use-reduced-motion'
-import { seededRandom } from '@/lib/fake'
+import { seededRandom } from '@/lib/random'
 
 interface Node extends SimulationNodeDatum {
   r: number

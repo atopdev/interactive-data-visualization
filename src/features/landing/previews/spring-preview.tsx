@@ -1,7 +1,7 @@
 import { animated, config, useSprings } from '@react-spring/web'
 import { useEffect, useState } from 'react'
 import { usePrefersReducedMotion } from '@/hooks/use-reduced-motion'
-import { seededRandom } from '@/lib/fake'
+import { seededRandom } from '@/lib/random'
 
 const BARS = 14
 const rand = seededRandom('landing-spring')

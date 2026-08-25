@@ -10,7 +10,7 @@ import { EChart } from '@/components/charts/echart'
 import { echarts, type ComposeOption } from '@/lib/echarts'
 import { useChartTheme } from '@/hooks/use-chart-theme'
 import { usePrefersReducedMotion } from '@/hooks/use-reduced-motion'
-import { seededRandom } from '@/lib/fake'
+import { seededRandom } from '@/lib/random'
 
 echarts.use([LineChart, BarChart, GridComponent])
 

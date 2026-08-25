@@ -1,6 +1,6 @@
 import { motion, MotionConfig } from 'motion/react'
 import { useEffect, useState } from 'react'
-import { seededRandom } from '@/lib/fake'
+import { seededRandom } from '@/lib/random'
 
 const rand = seededRandom('landing-motion')
 const TILES = Array.from({ length: 9 }, (_, i) => i)
