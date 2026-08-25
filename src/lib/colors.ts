@@ -44,6 +44,28 @@ export function alpha(color: string, opacity: number): string {
   return `rgba(${m[1]}, ${m[2]}, ${m[3]}, ${opacity})`
 }
 
+function channels(color: string): [number, number, number] {
+  const m = toRgb(color).match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/)
+  if (m) return [Number(m[1]), Number(m[2]), Number(m[3])]
+  const hex = color.replace('#', '')
+  const full = hex.length === 3 ? [...hex].map((c) => c + c).join('') : hex
+  const n = Number.parseInt(full, 16)
+  return [(n >> 16) & 255, (n >> 8) & 255, n & 255]
+}
+
+/** Any CSS color → `#rrggbb` (for WebGL components that parse hex). */
+export function toHex(color: string): string {
+  return `#${channels(color)
+    .map((c) => c.toString(16).padStart(2, '0'))
+    .join('')}`
+}
+
+/** Any CSS color → `[r, g, b]` in 0..1 (shader uniforms). */
+export function toUnitRgb(color: string): [number, number, number] {
+  const [r, g, b] = channels(color)
+  return [r / 255, g / 255, b / 255]
+}
+
 export interface ChartTheme {
   mode: 'light' | 'dark'
   series: string[]
