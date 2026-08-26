@@ -26,6 +26,8 @@ interface DemoPageProps {
   hero?: ReactNode
   /** Section id to scroll to once the page has been revealed (?demo=<id>). */
   focus?: string
+  /** Shown in the eyebrow; defaults to the number of TOC entries. */
+  demoCount?: number
   children: ReactNode
 }
 
@@ -37,6 +39,7 @@ export function DemoPage({
   credits,
   hero,
   focus,
+  demoCount,
   children,
 }: DemoPageProps) {
   const page = pageById(pageId)
@@ -72,7 +75,7 @@ export function DemoPage({
           className="flex items-center gap-2 text-sm font-medium text-page-accent"
         >
           <span className="size-2 rounded-full bg-page-accent" />
-          {page.group} · {toc.length} demos
+          {page.group} · {demoCount ?? toc.length} demos
         </p>
         <h1
           data-page-heading
