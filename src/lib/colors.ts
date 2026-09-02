@@ -36,14 +36,13 @@ export function cssVar(name: string, el: Element = document.documentElement): st
   return toRgb(getComputedStyle(el).getPropertyValue(name).trim() || '#888')
 }
 
-/** Mix a color with transparency (works for any CSS color). */
+/** Mix a color with transparency (works for any CSS color, including hex). */
 export function alpha(color: string, opacity: number): string {
-  const rgb = toRgb(color)
-  const m = rgb.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/)
-  if (!m) return color
-  return `rgba(${m[1]}, ${m[2]}, ${m[3]}, ${opacity})`
+  const [r, g, b] = channels(color)
+  return `rgba(${r}, ${g}, ${b}, ${opacity})`
 }
 
+// toRgb passes hex through untouched, so hex is decoded here explicitly.
 function channels(color: string): [number, number, number] {
   const m = toRgb(color).match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/)
   if (m) return [Number(m[1]), Number(m[2]), Number(m[3])]
