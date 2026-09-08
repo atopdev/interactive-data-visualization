@@ -1,14 +1,139 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { DemoPage } from '@/components/page/demo-page'
+import { z } from 'zod'
+import { DemoPage, type DataCredit, type TocEntry } from '@/components/page/demo-page'
+import { BarRaceDemo } from '@/features/d3/demos/bar-race'
+import { D3BonusDemo } from '@/features/d3/demos/bonus'
+import { ChordDemo } from '@/features/d3/demos/chord'
+import { CirclePackDemo } from '@/features/d3/demos/circle-pack'
+import { ForceNetworkDemo } from '@/features/d3/demos/force-network'
+import { GlobeDemo } from '@/features/d3/demos/globe'
+import { PageviewsDemo } from '@/features/d3/demos/pageviews'
+import { StreamgraphDemo } from '@/features/d3/demos/streamgraph'
+import { VoronoiDemo } from '@/features/d3/demos/voronoi'
+import {
+  fxQuery,
+  nobelQuery,
+  npmDownloadsQuery,
+  owidQuery,
+  pageviewsQuery,
+  quakesQuery,
+  temperatureYearQuery,
+} from '@/features/d3/queries'
+import { ensureWithBudget } from '@/lib/query'
 
-export const Route = createFileRoute('/d3')({
-  component: Page,
+const searchSchema = z.object({
+  demo: z.string().optional().catch(undefined),
+  nodes: z.coerce.number().int().min(40).max(400).optional().catch(undefined),
 })
 
-function Page() {
+export const Route = createFileRoute('/d3')({
+  validateSearch: searchSchema,
+  loader: ({ context: { queryClient } }) =>
+    ensureWithBudget([
+      queryClient.ensureQueryData(nobelQuery()),
+      queryClient.ensureQueryData(owidQuery('life-expectancy')),
+      queryClient.ensureQueryData(owidQuery('co-emissions-per-capita')),
+      queryClient.ensureQueryData(quakesQuery()),
+      queryClient.ensureQueryData(npmDownloadsQuery()),
+      queryClient.ensureQueryData(fxQuery()),
+      queryClient.ensureQueryData(pageviewsQuery()),
+      queryClient.ensureQueryData(temperatureYearQuery()),
+    ]),
+  component: D3Page,
+})
+
+const TOC: TocEntry[] = [
+  { id: 'force', title: 'Force network' },
+  { id: 'pack', title: 'Circle packing' },
+  { id: 'bar-race', title: 'Bar chart race' },
+  { id: 'globe', title: 'Globe' },
+  { id: 'streamgraph', title: 'Streamgraph' },
+  { id: 'chord', title: 'Chord diagram' },
+  { id: 'pageviews', title: 'Brush & zoom' },
+  { id: 'voronoi', title: 'Voronoi field' },
+  { id: 'bonus', title: 'Bonus' },
+]
+
+const CREDITS: DataCredit[] = [
+  {
+    name: 'Nobel Prize API v2.1',
+    url: 'https://www.nobelprize.org/about/developer-zone-2/',
+    note: 'Laureates, categories, birth countries',
+  },
+  {
+    name: 'Our World in Data',
+    url: 'https://ourworldindata.org',
+    note: 'Life expectancy, population and CO₂ per capita (CC BY 4.0)',
+  },
+  {
+    name: 'USGS Earthquake Hazards Program',
+    url: 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php',
+    note: 'Past-week earthquake feed',
+  },
+  {
+    name: 'npm registry downloads API',
+    url: 'https://github.com/npm/registry/blob/main/docs/download-counts.md',
+    note: 'Daily downloads per package',
+  },
+  {
+    name: 'Frankfurter',
+    url: 'https://frankfurter.dev',
+    note: 'ECB reference exchange rates',
+  },
+  {
+    name: 'Wikimedia REST API',
+    url: 'https://wikimedia.org/api/rest_v1/',
+    note: 'Daily article pageviews',
+  },
+  {
+    name: 'Open-Meteo Historical Weather',
+    url: 'https://open-meteo.com/en/docs/historical-weather-api',
+    note: 'Daily temperature archive (CC BY 4.0)',
+  },
+  {
+    name: 'world-atlas / Natural Earth',
+    url: 'https://github.com/topojson/world-atlas',
+    note: 'Bundled country shapes (public domain)',
+  },
+]
+
+function D3Page() {
+  const search = Route.useSearch()
+  const navigate = Route.useNavigate()
+  const demo = search.demo ?? (search.nodes ? 'force' : undefined)
   return (
-    <DemoPage pageId="d3" lead="Coming up." toc={[]} credits={[]}>
-      <div className="h-[150vh]" />
+    <DemoPage
+      pageId="d3"
+      focus={demo}
+      lead={
+        <>
+          D3 is a toolkit rather than a chart library: scales, layouts, geo projections
+          and a data join you compose into anything. Each demo lets D3 own the maths and
+          the DOM inside a React ref, sizes itself with ResizeObserver, renders heavy
+          scenes to canvas and tears everything down on unmount.
+        </>
+      }
+      toc={TOC}
+      credits={CREDITS}
+    >
+      <ForceNetworkDemo
+        count={search.nodes ?? 120}
+        onCount={(nodes) =>
+          void navigate({
+            search: (prev) => ({ ...prev, nodes }),
+            replace: true,
+            resetScroll: false,
+          })
+        }
+      />
+      <CirclePackDemo />
+      <BarRaceDemo />
+      <GlobeDemo />
+      <StreamgraphDemo />
+      <ChordDemo />
+      <PageviewsDemo />
+      <VoronoiDemo />
+      <D3BonusDemo />
     </DemoPage>
   )
 }
