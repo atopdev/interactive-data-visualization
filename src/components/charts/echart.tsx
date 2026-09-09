@@ -103,9 +103,9 @@ export function EChart({
   const themeName = `atlas-${theme.mode}-${theme.accent.replace(/\W+/g, '')}`
 
   // Keep the latest option/handlers available to the init effect without re-running it.
-  const latest = useRef({ option, onReady, onEvents })
+  const latest = useRef({ option, onReady, onEvents, ariaLabel, replaceMerge })
   useEffect(() => {
-    latest.current = { option, onReady, onEvents }
+    latest.current = { option, onReady, onEvents, ariaLabel, replaceMerge }
   })
 
   useEffect(() => {
@@ -114,7 +114,9 @@ export function EChart({
     echarts.registerTheme(themeName, buildTheme(theme))
     const chart = echarts.init(el, themeName, { renderer: 'canvas' })
     chartRef.current = chart
-    chart.setOption({ aria: { enabled: true, label: { description: ariaLabel } } })
+    chart.setOption({
+      aria: { enabled: true, label: { description: latest.current.ariaLabel } },
+    })
     chart.setOption(
       reduced ? { ...latest.current.option, animation: false } : latest.current.option,
     )
@@ -132,10 +134,18 @@ export function EChart({
       chart.dispose()
       chartRef.current = null
     }
-  }, [themeName, theme, reduced, ariaLabel])
+  }, [themeName, theme, reduced])
+
+  // The description can change with the data (e.g. a gauge value); update it in
+  // place instead of re-initializing, which would restart every animation.
+  useEffect(() => {
+    chartRef.current?.setOption({ aria: { label: { description: ariaLabel } } })
+  }, [ariaLabel])
 
   // Subsequent option updates are applied in place, so ECharts animates between states.
   const isFirst = useRef(true)
+  // Keyed by content so inline arrays (new identity each render) don't re-apply.
+  const replaceKey = replaceMerge?.join(',')
   useEffect(() => {
     if (isFirst.current) {
       isFirst.current = false
@@ -143,9 +153,9 @@ export function EChart({
     }
     chartRef.current?.setOption(reduced ? { ...option, animation: false } : option, {
       notMerge,
-      replaceMerge,
+      replaceMerge: latest.current.replaceMerge,
     })
-  }, [option, notMerge, replaceMerge, reduced])
+  }, [option, notMerge, replaceKey, reduced])
 
   return (
     <div
