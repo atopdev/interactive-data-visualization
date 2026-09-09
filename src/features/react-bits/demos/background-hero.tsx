@@ -14,7 +14,8 @@ import { useChartTheme } from '@/hooks/use-chart-theme'
 import { toHex, toUnitRgb } from '@/lib/colors'
 import { fakeWith } from '@/lib/fake'
 import { BACKGROUNDS, type BackgroundId } from '../backgrounds'
-import { CodeSnippet, ColorControl, WebGLStage } from '../showcase'
+import { CodeSnippet, ColorControl } from '../showcase'
+import { WebGLStage } from '@/components/webgl-stage'
 import { usage } from '../usage'
 
 const LABELS: Record<BackgroundId, string> = {
