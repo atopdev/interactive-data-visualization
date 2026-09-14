@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { seededRandom } from '@/lib/fake'
+import { seededRandom } from '@/lib/random'
 import { COINBASE_WS_URL, tickerMessageSchema } from '@/lib/sources/crypto'
 
 export interface Tick {
@@ -156,7 +156,9 @@ export function useCoinbaseTicker({
       retryTimer = window.setTimeout(connect, delay)
     }
 
-    connect()
+    // No network at all: skip the retry ladder and simulate straight away.
+    if (!navigator.onLine) startSimulation()
+    else connect()
     return () => {
       disposed = true
       window.clearTimeout(retryTimer)
@@ -165,7 +167,14 @@ export function useCoinbaseTicker({
       cancelAnimationFrame(raf)
       if (socket) {
         socket.onclose = null
-        socket.close()
+        socket.onmessage = null
+        // Closing mid-handshake logs a browser warning; close once it opens instead.
+        if (socket.readyState === WebSocket.CONNECTING) {
+          const pending = socket
+          pending.onopen = () => pending.close()
+        } else {
+          socket.close()
+        }
       }
     }
   }, [enabled, product])
