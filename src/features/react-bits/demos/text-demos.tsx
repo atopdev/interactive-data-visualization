@@ -16,6 +16,7 @@ import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 import { useChartTheme } from '@/hooks/use-chart-theme'
 import { toHex } from '@/lib/colors'
 import { fakeWith } from '@/lib/fake'
+import type { BadgeState } from '@/components/page/source-badge'
 import { ColorControl, Showcase } from '../showcase'
 import { usage } from '../usage'
 
@@ -410,13 +411,23 @@ export function ScrollRevealShowcase() {
   )
 }
 
-export function CountUpShowcase({ total }: { total: number }) {
+export function CountUpShowcase({
+  total,
+  source,
+  sourceReason,
+}: {
+  total: number
+  source: BadgeState
+  sourceReason?: string
+}) {
   const [duration, setDuration] = useState(2)
   const [run, setRun] = useState(0)
   const props = { from: 0, to: total, separator: ',', duration }
   return (
     <Showcase
       id="count-up"
+      source={source}
+      sourceReason={sourceReason}
       title="CountUp"
       category={CATEGORY}
       description="A spring-driven counter that starts when in view. Here it counts to the combined npm downloads of the five libraries showcased on this site over the last year."

@@ -124,7 +124,11 @@ function ReactBitsPage() {
         <CircularTextShowcase />
         <TextPressureShowcase />
         {npm.data ? (
-          <CountUpShowcase total={total} />
+          <CountUpShowcase
+            total={total}
+            source={npm.data.source}
+            sourceReason={npm.data.reason}
+          />
         ) : (
           <div className="min-h-64 animate-pulse rounded-2xl border bg-card" />
         )}
