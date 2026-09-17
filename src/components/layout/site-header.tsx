@@ -44,7 +44,7 @@ export function SiteHeader() {
           <span className="grid size-7 place-items-center rounded-lg bg-foreground text-background">
             <Sparkles className="size-4" />
           </span>
-          <span className="hidden sm:inline">Motion Atlas</span>
+          <span className="hidden sm:inline">Interactive Data Visualization</span>
         </Link>
 
         <NavigationMenu viewport={false} className="ml-2 hidden md:flex">
@@ -100,7 +100,7 @@ export function SiteHeader() {
             </SheetTrigger>
             <SheetContent side="right" className="w-80">
               <SheetHeader>
-                <SheetTitle>Motion Atlas</SheetTitle>
+                <SheetTitle>Interactive Data Visualization</SheetTitle>
                 <SheetDescription>Six libraries, one gallery.</SheetDescription>
               </SheetHeader>
               <nav className="flex flex-col gap-6 px-4" aria-label="Mobile">

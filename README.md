@@ -1,4 +1,4 @@
-# Motion Atlas
+# Interactive Data Visualization
 
 An interactive gallery of animated data visualization and UI motion, built as a React single-page app. Six pages each showcase one library (**D3.js**, **Apache ECharts**, **GSAP**, **React Spring**, **Motion** and **React Bits**) with 80+ demos driven by real public data, seeded generated content and seeded photography.
 
