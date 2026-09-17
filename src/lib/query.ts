@@ -52,7 +52,7 @@ export function parseSnapshot<S extends z.ZodType>(schema: S) {
  */
 export async function ensureWithBudget(
   pending: readonly Promise<unknown>[],
-  budgetMs = 2500,
+  budgetMs = 2000,
 ): Promise<void> {
   await Promise.race([
     Promise.allSettled(pending),
