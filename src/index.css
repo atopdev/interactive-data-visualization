@@ -290,6 +290,27 @@
   }
 }
 
+/* Arrival cue after jumping to a section from the table of contents. */
+@keyframes section-flash {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--page-accent) 0%, transparent);
+  }
+  25% {
+    box-shadow:
+      0 0 0 2px var(--page-accent),
+      0 0 32px 4px color-mix(in oklab, var(--page-accent) 35%, transparent);
+  }
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--page-accent) 0%, transparent);
+  }
+}
+.section-flash {
+  animation: section-flash 1.4s ease-out;
+}
+[data-demo-section]:focus:not(:focus-visible) {
+  outline: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

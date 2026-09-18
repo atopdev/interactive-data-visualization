@@ -1,8 +1,16 @@
 import { Link } from '@tanstack/react-router'
 import { ArrowLeft, ArrowRight, ExternalLink } from 'lucide-react'
-import { useEffect, useMemo, type ReactNode } from 'react'
+import {
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+  type ReactNode,
+} from 'react'
 import { useActiveSection } from '@/hooks/use-active-section'
 import { neighbors, pageById, type PageId } from '@/lib/pages'
+import { scrollToSection } from '@/lib/scroll-to-section'
 import { useTransitionPhase } from '@/lib/transition-store'
 import { cn } from '@/lib/utils'
 
@@ -44,20 +52,34 @@ export function DemoPage({
 }: DemoPageProps) {
   const page = pageById(pageId)
   const ids = useMemo(() => toc.map((t) => t.id), [toc])
-  const active = useActiveSection(ids)
+  const scrolled = useActiveSection(ids)
+  // While a TOC click is animating the scroll, pin the highlight to the target
+  // so the indicator glides straight there instead of stepping through every
+  // section passed on the way.
+  const [pending, setPending] = useState<string | null>(null)
+  const active = pending ?? scrolled
+  const go = (id: string) => {
+    setPending(id)
+    scrollToSection(id, {
+      onArrive: () => setPending(null),
+      onInterrupt: () => setPending(null),
+    })
+  }
+
+  // Sliding active-item indicator, positioned from the active link's box.
+  const listRef = useRef<HTMLOListElement>(null)
+  const [indicator, setIndicator] = useState<{ top: number; height: number } | null>(null)
+  useLayoutEffect(() => {
+    const link = listRef.current?.querySelector<HTMLElement>(`[data-toc-id="${active}"]`)
+    setIndicator(link ? { top: link.offsetTop, height: link.offsetHeight } : null)
+  }, [active])
   const { prev, next } = neighbors(pageId)
   // Wait for idle: ScrollTrigger refreshes (and pin spacers resize) after the reveal.
   const idle = useTransitionPhase() === 'idle'
 
   useEffect(() => {
     if (!idle || !focus) return
-    const id = window.setTimeout(
-      () =>
-        document
-          .getElementById(focus)
-          ?.scrollIntoView({ behavior: 'smooth', block: 'start' }),
-      250,
-    )
+    const id = window.setTimeout(() => scrollToSection(focus), 250)
     return () => window.clearTimeout(id)
     // Only on first reveal: later search-param changes must not yank the scroll position.
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -105,16 +127,33 @@ export function DemoPage({
           <p className="mb-3 text-xs font-medium tracking-wider text-muted-foreground uppercase">
             On this page
           </p>
-          <ol className="relative flex flex-col border-l">
+          <ol ref={listRef} className="relative flex flex-col border-l">
+            {indicator && (
+              <span
+                aria-hidden
+                className="absolute -left-px w-0.5 rounded-full bg-page-accent transition-[transform,height] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none"
+                style={{
+                  height: indicator.height,
+                  transform: `translateY(${indicator.top}px)`,
+                }}
+              />
+            )}
             {toc.map((entry, i) => (
               <li key={entry.id}>
                 <a
                   href={`#${entry.id}`}
+                  data-toc-id={entry.id}
+                  onClick={(e) => {
+                    // Plain anchors still work without JS; with JS we animate.
+                    // Modified clicks keep their default (new tab, etc.).
+                    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return
+                    e.preventDefault()
+                    go(entry.id)
+                  }}
                   aria-current={active === entry.id ? 'location' : undefined}
                   className={cn(
-                    '-ml-px flex gap-2 border-l-2 border-transparent py-1.5 pl-3 text-sm text-muted-foreground transition-colors hover:text-foreground',
-                    active === entry.id &&
-                      'border-page-accent font-medium text-foreground',
+                    'flex gap-2 py-1.5 pl-3 text-sm text-muted-foreground transition-[color,transform] duration-300 hover:translate-x-0.5 hover:text-foreground',
+                    active === entry.id && 'translate-x-1 font-medium text-foreground',
                   )}
                 >
                   <span className="font-mono text-xs tabular-nums opacity-60">
