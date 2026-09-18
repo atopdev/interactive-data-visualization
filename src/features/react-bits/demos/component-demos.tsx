@@ -272,10 +272,11 @@ export function StackShowcase() {
   const [autoplay, setAutoplay] = useState(false)
   const cards = useMemo(
     () =>
-      STACK_PEOPLE.map((p) => (
+      STACK_PEOPLE.map((p, i) => (
         <img
           key={p.id}
-          src={picsum({ seed: p.avatarSeed, w: 500, h: 500 })}
+          // Fixed seeds, vetted by eye: the profile-derived seed landed on a flag photo.
+          src={picsum({ seed: `bits-stack-card-${i}`, w: 500, h: 500 })}
           alt={`Portrait for ${p.name}`}
           width={500}
           height={500}
