@@ -1,8 +1,31 @@
 {
   "name": "interactive-data-visualization",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "description": "A portfolio of animated data visualizations and UI motion built with React, TypeScript and Vite, showcasing D3.js, Apache ECharts, GSAP, React Spring, Motion and React Bits with live public data and offline snapshots.",
+  "keywords": [
+    "data-visualization",
+    "animation",
+    "react",
+    "typescript",
+    "vite",
+    "d3",
+    "echarts",
+    "gsap",
+    "react-spring",
+    "motion",
+    "react-bits",
+    "tanstack-router",
+    "tanstack-query",
+    "tailwindcss",
+    "shadcn-ui"
+  ],
+  "author": "atopdev (https://github.com/atopdev)",
+  "license": "UNLICENSED",
   "type": "module",
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build && tsc -b",
@@ -40,7 +63,6 @@
     "lucide-react": "^1.47.0",
     "motion": "^13.4.2",
     "ogl": "^1.0.11",
-    "postprocessing": "^6.39.5",
     "radix-ui": "^1.6.7",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
