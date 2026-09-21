@@ -196,8 +196,6 @@ Components were installed with `npx shadcn@latest add @react-bits/<Name>-TS-TW`,
 | [world-atlas](https://github.com/topojson/world-atlas) / Natural Earth                                | Map shapes (bundled, no runtime fetch)                         | npm package                                                                                                                                                                                                                                     |
 | [Faker](https://fakerjs.dev)                                                                          | All names, labels, captions and copy (seeded)                  | npm package                                                                                                                                                                                                                                     |
 
-Each demo page also credits its sources in a "Data sources" footer.
-
 ## Refreshing snapshots
 
 ```bash

@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { z } from 'zod'
-import { DemoPage, type DataCredit, type TocEntry } from '@/components/page/demo-page'
+import { DemoPage, type TocEntry } from '@/components/page/demo-page'
 import { EChartsBonusDemo } from '@/features/echarts/demos/bonus'
 import { CalendarHeatmapDemo } from '@/features/echarts/demos/calendar-heatmap'
 import { CandlestickDemo } from '@/features/echarts/demos/candlestick'
@@ -51,45 +51,6 @@ const TOC: TocEntry[] = [
   { id: 'bonus', title: 'Bonus' },
 ]
 
-const CREDITS: DataCredit[] = [
-  {
-    name: 'Coinbase Exchange API',
-    url: 'https://docs.cdp.coinbase.com/exchange/docs/websocket-overview',
-    note: 'BTC-USD ticker WebSocket and daily candles',
-  },
-  {
-    name: 'Binance public data mirror',
-    url: 'https://data-api.binance.vision',
-    note: 'Backup daily candles',
-  },
-  {
-    name: 'World Bank Indicators API',
-    url: 'https://datahelpdesk.worldbank.org/knowledgebase/articles/889392',
-    note: 'Population (SP.POP.TOTL) and GDP per capita (NY.GDP.PCAP.CD), CC BY 4.0',
-  },
-  {
-    name: 'Nobel Prize API v2.1',
-    url: 'https://www.nobelprize.org/about/developer-zone-2/',
-    note: 'Laureates and prizes',
-  },
-  {
-    name: 'Open-Meteo',
-    url: 'https://open-meteo.com',
-    note: 'Current weather and daily temperature archive (CC BY 4.0)',
-  },
-  { name: 'PokeAPI', url: 'https://pokeapi.co', note: 'Pokémon base stats' },
-  {
-    name: 'npm registry downloads API',
-    url: 'https://github.com/npm/registry/blob/main/docs/download-counts.md',
-    note: 'Daily downloads',
-  },
-  {
-    name: 'USGS Earthquake Hazards Program',
-    url: 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php',
-    note: 'Past-week earthquake feed',
-  },
-]
-
 function EChartsPage() {
   const { demo } = Route.useSearch()
   return (
@@ -107,7 +68,6 @@ function EChartsPage() {
         </>
       }
       toc={TOC}
-      credits={CREDITS}
     >
       <LiveStreamDemo />
       <CandlestickDemo />

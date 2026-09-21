@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { MotionConfig } from 'motion/react'
 import { z } from 'zod'
-import { DemoPage, type DataCredit, type TocEntry } from '@/components/page/demo-page'
+import { DemoPage, type TocEntry } from '@/components/page/demo-page'
 import { BonusDemo } from '@/features/motion/demos/bonus'
 import { DragPhysicsDemo } from '@/features/motion/demos/drag-physics'
 import { GesturesDemo } from '@/features/motion/demos/gestures'
@@ -44,25 +44,6 @@ const TOC: TocEntry[] = [
   { id: 'bonus', title: 'Bonus' },
 ]
 
-const CREDITS: DataCredit[] = [
-  {
-    name: 'Coinbase Exchange API',
-    url: 'https://docs.cdp.coinbase.com/exchange/docs/websocket-overview',
-    note: 'BTC-USD ticker WebSocket and daily candles',
-  },
-  {
-    name: 'Binance public data mirror',
-    url: 'https://data-api.binance.vision',
-    note: 'Backup daily candles',
-  },
-  {
-    name: 'Lorem Picsum',
-    url: 'https://picsum.photos',
-    note: 'Seeded photographs for galleries and parallax',
-  },
-  { name: 'Faker', url: 'https://fakerjs.dev', note: 'Seeded names, products and copy' },
-]
-
 function MotionPage() {
   const { demo } = Route.useSearch()
   return (
@@ -83,7 +64,6 @@ function MotionPage() {
           </>
         }
         toc={TOC}
-        credits={CREDITS}
       >
         <SharedLayoutDemo />
         <PresenceDemo />

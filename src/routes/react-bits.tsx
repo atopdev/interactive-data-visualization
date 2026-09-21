@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { createFileRoute } from '@tanstack/react-router'
 import { z } from 'zod'
-import { DemoPage, type DataCredit, type TocEntry } from '@/components/page/demo-page'
+import { DemoPage, type TocEntry } from '@/components/page/demo-page'
 import {
   ClickSparkShowcase,
   MagnetShowcase,
@@ -52,25 +52,6 @@ const TOC: TocEntry[] = [
   { id: 'components', title: 'Components' },
 ]
 
-const CREDITS: DataCredit[] = [
-  {
-    name: 'React Bits',
-    url: 'https://reactbits.dev',
-    note: 'Components installed via the shadcn registry (TS + Tailwind variants)',
-  },
-  {
-    name: 'npm registry downloads API',
-    url: 'https://github.com/npm/registry/blob/main/docs/download-counts.md',
-    note: 'Combined downloads for the CountUp demo',
-  },
-  {
-    name: 'Lorem Picsum',
-    url: 'https://picsum.photos',
-    note: 'Seeded gallery photographs',
-  },
-  { name: 'Faker', url: 'https://fakerjs.dev', note: 'Seeded names, cities and copy' },
-]
-
 function ReactBitsPage() {
   const search = Route.useSearch()
   const navigate = Route.useNavigate()
@@ -97,7 +78,6 @@ function ReactBitsPage() {
         </>
       }
       toc={TOC}
-      credits={CREDITS}
     >
       <BackgroundHero
         background={search.bg ?? 'aurora'}

@@ -1,5 +1,5 @@
 import { Link } from '@tanstack/react-router'
-import { ArrowLeft, ArrowRight, ExternalLink } from 'lucide-react'
+import { ArrowLeft, ArrowRight } from 'lucide-react'
 import {
   useEffect,
   useLayoutEffect,
@@ -19,17 +19,10 @@ export interface TocEntry {
   title: string
 }
 
-export interface DataCredit {
-  name: string
-  url: string
-  note: string
-}
-
 interface DemoPageProps {
   pageId: PageId
   lead: ReactNode
   toc: readonly TocEntry[]
-  credits: readonly DataCredit[]
   /** Optional hero content rendered under the lead (e.g. stats, a live background). */
   hero?: ReactNode
   /** Section id to scroll to once the page has been revealed (?demo=<id>). */
@@ -44,7 +37,6 @@ export function DemoPage({
   pageId,
   lead,
   toc,
-  credits,
   hero,
   focus,
   demoCount,
@@ -200,31 +192,6 @@ export function DemoPage({
               <span className="text-sm text-muted-foreground">{next.tagline}</span>
             </Link>
           </nav>
-
-          <footer
-            aria-labelledby="data-sources"
-            className="rounded-2xl border bg-surface-2 p-5 sm:p-6"
-          >
-            <h2 id="data-sources" className="text-sm font-semibold">
-              Data sources
-            </h2>
-            <ul className="mt-3 grid gap-2 text-sm sm:grid-cols-2">
-              {credits.map((c) => (
-                <li key={c.name} className="flex flex-col">
-                  <a
-                    href={c.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-1 font-medium hover:underline"
-                  >
-                    {c.name}
-                    <ExternalLink className="size-3" />
-                  </a>
-                  <span className="text-muted-foreground">{c.note}</span>
-                </li>
-              ))}
-            </ul>
-          </footer>
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { z } from 'zod'
-import { DemoPage, type DataCredit, type TocEntry } from '@/components/page/demo-page'
+import { DemoPage, type TocEntry } from '@/components/page/demo-page'
 import { SpringBonusDemo } from '@/features/react-spring/demos/bonus'
 import { ChainDemo } from '@/features/react-spring/demos/chain'
 import { CountersRingsDemo } from '@/features/react-spring/demos/counters-rings'
@@ -39,21 +39,6 @@ const TOC: TocEntry[] = [
   { id: 'bonus', title: 'Bonus' },
 ]
 
-const CREDITS: DataCredit[] = [
-  {
-    name: 'Open-Meteo',
-    url: 'https://open-meteo.com',
-    note: 'Current conditions for pull-to-refresh and the rings (CC BY 4.0)',
-  },
-  {
-    name: 'Coinbase Exchange API',
-    url: 'https://docs.cdp.coinbase.com/exchange/docs/welcome',
-    note: 'Daily BTC-USD candles',
-  },
-  { name: 'Lorem Picsum', url: 'https://picsum.photos', note: 'Seeded photographs' },
-  { name: 'Faker', url: 'https://fakerjs.dev', note: 'Seeded people, songs and copy' },
-]
-
 function ReactSpringPage() {
   const { demo } = Route.useSearch()
   return (
@@ -70,7 +55,6 @@ function ReactSpringPage() {
         </>
       }
       toc={TOC}
-      credits={CREDITS}
     >
       <PhysicsPlaygroundDemo />
       <TrailDemo />

@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { z } from 'zod'
-import { DemoPage, type DataCredit, type TocEntry } from '@/components/page/demo-page'
+import { DemoPage, type TocEntry } from '@/components/page/demo-page'
 import { CardDeckDemo } from '@/features/gsap/demos/card-deck'
 import { CountersDemo } from '@/features/gsap/demos/counters'
 import { DrawMorphDemo } from '@/features/gsap/demos/draw-morph'
@@ -53,29 +53,6 @@ const TOC: TocEntry[] = [
   { id: 'counters', title: 'Live counters' },
 ]
 
-const CREDITS: DataCredit[] = [
-  {
-    name: 'npm registry downloads API',
-    url: 'https://github.com/npm/registry/blob/main/docs/download-counts.md',
-    note: 'Daily downloads for the counters',
-  },
-  {
-    name: 'USGS Earthquake Hazards Program',
-    url: 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php',
-    note: 'Past-week earthquake feed',
-  },
-  {
-    name: 'Lorem Picsum',
-    url: 'https://picsum.photos',
-    note: 'Seeded photographs for galleries and parallax layers',
-  },
-  {
-    name: 'Faker',
-    url: 'https://fakerjs.dev',
-    note: 'Seeded names, captions and headlines',
-  },
-]
-
 function GsapPage() {
   const search = Route.useSearch()
   const navigate = Route.useNavigate()
@@ -100,7 +77,6 @@ function GsapPage() {
         </>
       }
       toc={TOC}
-      credits={CREDITS}
     >
       <SplitHeroDemo
         mode={search.split ?? 'chars'}

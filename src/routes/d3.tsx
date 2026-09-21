@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { z } from 'zod'
-import { DemoPage, type DataCredit, type TocEntry } from '@/components/page/demo-page'
+import { DemoPage, type TocEntry } from '@/components/page/demo-page'
 import { BarRaceDemo } from '@/features/d3/demos/bar-race'
 import { D3BonusDemo } from '@/features/d3/demos/bonus'
 import { ChordDemo } from '@/features/d3/demos/chord'
@@ -54,49 +54,6 @@ const TOC: TocEntry[] = [
   { id: 'bonus', title: 'Bonus' },
 ]
 
-const CREDITS: DataCredit[] = [
-  {
-    name: 'Nobel Prize API v2.1',
-    url: 'https://www.nobelprize.org/about/developer-zone-2/',
-    note: 'Laureates, categories, birth countries',
-  },
-  {
-    name: 'Our World in Data',
-    url: 'https://ourworldindata.org',
-    note: 'Life expectancy, population and CO₂ per capita (CC BY 4.0)',
-  },
-  {
-    name: 'USGS Earthquake Hazards Program',
-    url: 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php',
-    note: 'Past-week earthquake feed',
-  },
-  {
-    name: 'npm registry downloads API',
-    url: 'https://github.com/npm/registry/blob/main/docs/download-counts.md',
-    note: 'Daily downloads per package',
-  },
-  {
-    name: 'Frankfurter',
-    url: 'https://frankfurter.dev',
-    note: 'ECB reference exchange rates',
-  },
-  {
-    name: 'Wikimedia REST API',
-    url: 'https://wikimedia.org/api/rest_v1/',
-    note: 'Daily article pageviews',
-  },
-  {
-    name: 'Open-Meteo Historical Weather',
-    url: 'https://open-meteo.com/en/docs/historical-weather-api',
-    note: 'Daily temperature archive (CC BY 4.0)',
-  },
-  {
-    name: 'world-atlas / Natural Earth',
-    url: 'https://github.com/topojson/world-atlas',
-    note: 'Bundled country shapes (public domain)',
-  },
-]
-
 function D3Page() {
   const search = Route.useSearch()
   const navigate = Route.useNavigate()
@@ -114,7 +71,6 @@ function D3Page() {
         </>
       }
       toc={TOC}
-      credits={CREDITS}
     >
       <ForceNetworkDemo
         count={search.nodes ?? 120}
