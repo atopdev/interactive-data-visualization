@@ -66,7 +66,10 @@ function buildGraph(data: NobelData, n: number) {
     })),
   ]
   const links: GLink[] = picked.flatMap((l) => [
-    ...l.prizes.map((p) => ({ source: `l:${l.id}`, target: `cat:${p.category}` })),
+    ...l.prizes.map((p) => ({
+      source: `l:${l.id}`,
+      target: `cat:${p.category}`,
+    })),
     { source: `l:${l.id}`, target: `country:${l.country}` },
   ])
   return { nodes, links, picked }

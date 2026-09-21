@@ -15,9 +15,9 @@ export interface Sourced<T> {
 }
 
 /** Requests slower than this fall back to the bundled snapshot. */
-export const REQUEST_TIMEOUT_MS = 8_000
+const REQUEST_TIMEOUT_MS = 8_000
 
-export class HttpError extends Error {
+class HttpError extends Error {
   readonly status: number
   readonly url: string
   constructor(status: number, url: string) {
@@ -59,7 +59,7 @@ export async function fetchJson<S extends z.ZodType>(
   return schema.parse(json)
 }
 
-export async function fetchText(url: string, options?: FetchOptions): Promise<string> {
+async function fetchText(url: string, options?: FetchOptions): Promise<string> {
   const res = await request(url, options)
   return res.text()
 }

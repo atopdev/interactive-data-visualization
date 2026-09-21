@@ -8,7 +8,7 @@ export interface City {
 }
 
 /** Default location for weather demos (snapshots are captured for this city). */
-export const DEFAULT_CITY: City = { name: 'London', latitude: 51.51, longitude: -0.13 }
+const DEFAULT_CITY: City = { name: 'London', latitude: 51.51, longitude: -0.13 }
 
 const forecastResponse = z.object({
   timezone: z.string(),
@@ -92,7 +92,7 @@ export const temperatureYearSchema = z.object({
 export type TemperatureYear = z.infer<typeof temperatureYearSchema>
 
 /** The most recent complete calendar year (the archive lags a few days). */
-export function lastFullYear(now = new Date()): number {
+function lastFullYear(now = new Date()): number {
   return now.getUTCFullYear() - 1
 }
 

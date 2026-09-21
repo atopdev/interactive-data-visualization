@@ -64,7 +64,6 @@ export const PAGES = [
 
 export type PageMeta = (typeof PAGES)[number]
 export type PageId = PageMeta['id']
-export type PagePath = PageMeta['to']
 
 export const PAGE_GROUPS = ['Data Viz', 'Motion & UI'] as const
 

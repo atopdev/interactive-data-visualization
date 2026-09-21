@@ -60,7 +60,10 @@ export function GesturesDemo() {
             <motion.input
               type="search"
               placeholder="Focus me"
-              whileFocus={{ width: 260, boxShadow: '0 0 0 3px var(--page-accent)' }}
+              whileFocus={{
+                width: 260,
+                boxShadow: '0 0 0 3px var(--page-accent)',
+              }}
               initial={{ width: 180 }}
               transition={{ type: 'spring', stiffness: 400, damping: 30 }}
               className="h-10 rounded-full border bg-card pr-4 pl-9 text-sm outline-none"

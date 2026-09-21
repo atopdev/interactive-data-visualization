@@ -72,7 +72,10 @@ export function ChainDemo() {
         >
           {tiles((style, t) => (
             <animated.div
-              style={{ ...style, background: `var(--series-${(t.id % 8) + 1})` }}
+              style={{
+                ...style,
+                background: `var(--series-${(t.id % 8) + 1})`,
+              }}
               className="flex min-h-0 flex-col justify-between rounded-lg p-2 text-white"
             >
               <span className="truncate text-[11px] font-medium opacity-90">

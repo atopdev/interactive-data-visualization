@@ -6,12 +6,12 @@ import { hashSeed } from './random'
  * through this module so names, labels and alt text are identical on every
  * load.
  */
-export const FAKER_SEED = 20_260_923
+const FAKER_SEED = 20_260_923
 
 faker.seed(FAKER_SEED)
 
 export { faker }
-export { hashSeed, seededRandom } from './random'
+export { seededRandom } from './random'
 
 /**
  * Generate content from a namespaced seed. Re-seeding per call makes the

@@ -17,7 +17,10 @@ const TRANSITIONS = [
     label: 'tween easeInOut',
     transition: { type: 'tween', ease: 'easeInOut', duration: 0.8 },
   },
-  { label: 'tween linear', transition: { type: 'tween', ease: 'linear', duration: 0.8 } },
+  {
+    label: 'tween linear',
+    transition: { type: 'tween', ease: 'linear', duration: 0.8 },
+  },
   {
     label: 'inertia-like (backOut)',
     transition: { type: 'tween', ease: 'backOut', duration: 0.8 },
@@ -91,7 +94,9 @@ export function KeyframesDemo() {
                   className="absolute top-0.5 size-6 rounded-full"
                   style={{ background: `var(--series-${i + 1})` }}
                   initial={false}
-                  animate={{ left: side ? 'calc(100% - 1.625rem)' : '0.125rem' }}
+                  animate={{
+                    left: side ? 'calc(100% - 1.625rem)' : '0.125rem',
+                  }}
                   transition={t.transition}
                 />
               </div>

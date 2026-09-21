@@ -29,7 +29,10 @@ const Magnet: React.FC<MagnetProps> = ({
   ...props
 }) => {
   const [isActive, setIsActive] = useState<boolean>(false)
-  const [position, setPosition] = useState<{ x: number; y: number }>({ x: 0, y: 0 })
+  const [position, setPosition] = useState<{ x: number; y: number }>({
+    x: 0,
+    y: 0,
+  })
   const magnetRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {

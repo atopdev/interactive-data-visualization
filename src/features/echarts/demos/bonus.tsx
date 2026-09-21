@@ -136,7 +136,9 @@ function River({ downloads }: { downloads: NpmDownloads }) {
           type: 'themeRiver',
           data: weekly(downloads),
           label: { show: false },
-          emphasis: { itemStyle: { shadowBlur: 20, shadowColor: 'rgba(0,0,0,0.3)' } },
+          emphasis: {
+            itemStyle: { shadowBlur: 20, shadowColor: 'rgba(0,0,0,0.3)' },
+          },
         },
       ],
     }),
@@ -225,7 +227,9 @@ function Bars3D({ downloads }: { downloads: NpmDownloads }) {
       tooltip: {},
       visualMap: {
         max: Math.max(...values.map((v) => v[2])),
-        inRange: { color: [theme.seq[0], theme.seq[1], theme.seq[2], theme.seq[3]] },
+        inRange: {
+          color: [theme.seq[0], theme.seq[1], theme.seq[2], theme.seq[3]],
+        },
         show: false,
       },
       xAxis3D: {
@@ -256,7 +260,10 @@ function Bars3D({ downloads }: { downloads: NpmDownloads }) {
           alpha: 22,
           beta: 30,
         },
-        light: { main: { intensity: 1.2, shadow: true }, ambient: { intensity: 0.4 } },
+        light: {
+          main: { intensity: 1.2, shadow: true },
+          ambient: { intensity: 0.4 },
+        },
         axisLine: { lineStyle: { color: theme.muted } },
         splitLine: { lineStyle: { color: theme.grid } },
         axisPointer: { lineStyle: { color: theme.accent } },

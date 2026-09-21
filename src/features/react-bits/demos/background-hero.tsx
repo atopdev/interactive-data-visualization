@@ -70,7 +70,10 @@ export function BackgroundHero({
           moveParticlesOnHover: true,
           alphaParticles: false,
         }
-        return { element: <Particles {...props} />, code: usage('Particles', props) }
+        return {
+          element: <Particles {...props} />,
+          code: usage('Particles', props),
+        }
       }
       case 'silk': {
         const props = {
@@ -90,7 +93,10 @@ export function BackgroundHero({
           distance: 0.1,
           enableMouseInteraction: true,
         }
-        return { element: <Threads {...props} />, code: usage('Threads', props) }
+        return {
+          element: <Threads {...props} />,
+          code: usage('Threads', props),
+        }
       }
       case 'waves': {
         const props = {
@@ -106,8 +112,16 @@ export function BackgroundHero({
         return { element: <Waves {...props} />, code: usage('Waves', props) }
       }
       case 'iridescence': {
-        const props = { color: toUnitRgb(color), speed, amplitude: 0.1, mouseReact: true }
-        return { element: <Iridescence {...props} />, code: usage('Iridescence', props) }
+        const props = {
+          color: toUnitRgb(color),
+          speed,
+          amplitude: 0.1,
+          mouseReact: true,
+        }
+        return {
+          element: <Iridescence {...props} />,
+          code: usage('Iridescence', props),
+        }
       }
       case 'galaxy': {
         const props = {

@@ -8,7 +8,7 @@ export interface Tick {
   time: number
 }
 
-export type TickerStatus = 'idle' | 'connecting' | 'live' | 'simulated'
+type TickerStatus = 'idle' | 'connecting' | 'live' | 'simulated'
 
 export interface TickerState {
   price: number | null

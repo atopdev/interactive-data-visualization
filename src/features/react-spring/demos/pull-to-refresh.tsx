@@ -29,7 +29,11 @@ export function PullToRefreshDemo() {
         api.start({ y: 64, immediate: reduced })
         void weather.refetch().finally(() => api.start({ y: 0, immediate: reduced }))
       } else {
-        api.start({ y: 0, immediate: reduced, config: { tension: 400, friction: 22 } })
+        api.start({
+          y: 0,
+          immediate: reduced,
+          config: { tension: 400, friction: 22 },
+        })
       }
     },
     { axis: 'y', filterTaps: true, pointer: { touch: true } },

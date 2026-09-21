@@ -152,7 +152,9 @@ function Candles({ set }: { set: CandleSet }) {
           yAxisIndex: 1,
           data: c.map((d) => ({
             value: d.volume,
-            itemStyle: { color: alpha(d.close >= d.open ? upColor : downColor, 0.6) },
+            itemStyle: {
+              color: alpha(d.close >= d.open ? upColor : downColor, 0.6),
+            },
           })),
         },
       ],

@@ -40,7 +40,10 @@ function buildTheme(t: ChartTheme) {
     color: t.series,
     backgroundColor: 'transparent',
     textStyle: { color: t.foreground, fontFamily: t.font },
-    title: { textStyle: { color: t.foreground }, subtextStyle: { color: t.muted } },
+    title: {
+      textStyle: { color: t.foreground },
+      subtextStyle: { color: t.muted },
+    },
     legend: { textStyle: { color: t.muted }, inactiveColor: t.grid },
     tooltip: {
       backgroundColor: t.card,
@@ -58,7 +61,10 @@ function buildTheme(t: ChartTheme) {
       fillerColor: 'rgba(128,128,128,0.15)',
       handleStyle: { color: t.card, borderColor: t.muted },
       moveHandleStyle: { color: t.muted },
-      dataBackground: { lineStyle: { color: t.muted }, areaStyle: { color: t.grid } },
+      dataBackground: {
+        lineStyle: { color: t.muted },
+        areaStyle: { color: t.grid },
+      },
     },
     visualMap: { textStyle: { color: t.muted } },
     radar: {

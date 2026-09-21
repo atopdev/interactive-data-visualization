@@ -2,16 +2,7 @@ import { z } from 'zod'
 import { addDays, fetchJson, isoDate, type FetchOptions } from '../fetchers'
 
 const FRANKFURTER = 'https://api.frankfurter.dev/v1'
-export const FX_CURRENCIES = [
-  'USD',
-  'JPY',
-  'GBP',
-  'CHF',
-  'CAD',
-  'AUD',
-  'CNY',
-  'INR',
-] as const
+const FX_CURRENCIES = ['USD', 'JPY', 'GBP', 'CHF', 'CAD', 'AUD', 'CNY', 'INR'] as const
 
 const latestResponse = z.object({
   base: z.string(),

@@ -7,5 +7,5 @@ echarts.use([CanvasRenderer])
 
 export { echarts }
 export type EChartsInstance = echarts.ECharts
-export type { ComposeOption, ECElementEvent, EChartsCoreOption } from 'echarts/core'
+export type { ComposeOption, EChartsCoreOption } from 'echarts/core'
 export type EChartsEventHandler = (params: echarts.ECElementEvent) => void

@@ -40,7 +40,7 @@ export interface EffectInstance {
 }
 
 /** How the new page's heading animates in once the overlay lifts. */
-export interface HeadingIntro {
+interface HeadingIntro {
   split: 'chars' | 'words'
   mask: boolean
   from: gsap.TweenVars
@@ -80,9 +80,17 @@ const shutter: TransitionEffect = {
     const count = width < 640 ? 4 : 6
     // Home spans every library: one column per page accent, then the surface.
     const layers = [PAGE_ACCENTS, [palette.surface]].map((colors) => {
-      const row = div(stage, { position: 'absolute', inset: '0', display: 'flex' })
+      const row = div(stage, {
+        position: 'absolute',
+        inset: '0',
+        display: 'flex',
+      })
       return Array.from({ length: count }, (_, i) =>
-        div(row, { flex: '1', margin: '0 -1px', background: colors[i % colors.length] }),
+        div(row, {
+          flex: '1',
+          margin: '0 -1px',
+          background: colors[i % colors.length],
+        }),
       )
     })
     gsap.set(layers.flat(), { yPercent: 100 })
@@ -188,7 +196,13 @@ const liquid: TransitionEffect = {
   heading: {
     split: 'chars',
     mask: true,
-    from: { yPercent: 120, rotate: 6, duration: 0.9, ease: 'power4.out', stagger: 0.02 },
+    from: {
+      yPercent: 120,
+      rotate: 6,
+      duration: 0.9,
+      ease: 'power4.out',
+      stagger: 0.02,
+    },
   },
   blocks: DEFAULT_BLOCKS,
 }
@@ -197,7 +211,11 @@ const bars: TransitionEffect = {
   name: 'bars',
   create: ({ stage, palette, width }) => {
     const count = width < 640 ? 8 : 14
-    const row = div(stage, { position: 'absolute', inset: '0', display: 'flex' })
+    const row = div(stage, {
+      position: 'absolute',
+      inset: '0',
+      display: 'flex',
+    })
     // A sequential ramp from the accent to its deep shade, like a bar series.
     const columns = Array.from({ length: count }, (_, i) =>
       div(row, {
@@ -279,9 +297,12 @@ const blades: TransitionEffect = {
     gsap.set(panels, { skewX: -14, xPercent: 115 })
     return {
       cover: () =>
-        gsap
-          .timeline()
-          .to(panels, { xPercent: 0, duration: 0.75, ease: 'expo.inOut', stagger: 0.08 }),
+        gsap.timeline().to(panels, {
+          xPercent: 0,
+          duration: 0.75,
+          ease: 'expo.inOut',
+          stagger: 0.08,
+        }),
       reveal: () =>
         gsap.timeline().to([...panels].reverse(), {
           xPercent: -115,
@@ -426,13 +447,16 @@ const morph: TransitionEffect = {
           stagger: 0.1,
         }),
       reveal: () =>
-        gsap
-          .timeline()
-          .fromTo(
-            [...layers].reverse(),
-            { clipPath: full },
-            { clipPath: lifted, duration: 0.8, ease: 'expo.inOut', stagger: 0.1 },
-          ),
+        gsap.timeline().fromTo(
+          [...layers].reverse(),
+          { clipPath: full },
+          {
+            clipPath: lifted,
+            duration: 0.8,
+            ease: 'expo.inOut',
+            stagger: 0.1,
+          },
+        ),
     }
   },
   heading: {
@@ -487,7 +511,11 @@ const pixels: TransitionEffect = {
           })
           .to(
             solid,
-            { autoAlpha: 1, duration: 0.05, stagger: { amount: 0.35, from: 'random' } },
+            {
+              autoAlpha: 1,
+              duration: 0.05,
+              stagger: { amount: 0.35, from: 'random' },
+            },
             0.25,
           ),
       reveal: () =>
@@ -513,7 +541,11 @@ const pixels: TransitionEffect = {
   heading: {
     split: 'chars',
     mask: false,
-    from: { autoAlpha: 0, duration: 0.05, stagger: { amount: 0.5, from: 'random' } },
+    from: {
+      autoAlpha: 0,
+      duration: 0.05,
+      stagger: { amount: 0.5, from: 'random' },
+    },
   },
   blocks: { ...DEFAULT_BLOCKS, y: 0, duration: 0.4, ease: 'steps(5)' },
 }

@@ -249,7 +249,11 @@ export function PageviewsDemo() {
   const pv = query.data?.data
   const points = useMemo(() => (pv ? toPoints(pv, article) : []), [pv, article])
   const columns: InspectorColumn<Point>[] = [
-    { id: 'date', header: 'Date', value: (p) => p.date.toISOString().slice(0, 10) },
+    {
+      id: 'date',
+      header: 'Date',
+      value: (p) => p.date.toISOString().slice(0, 10),
+    },
     { id: 'views', header: 'Views', value: (p) => p.views, numeric: true },
   ]
   return (

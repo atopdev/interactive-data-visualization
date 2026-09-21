@@ -2,7 +2,7 @@ import { z } from 'zod'
 import { fetchCsv, type FetchOptions } from '../fetchers'
 
 /** Our World in Data grapher charts used by the demos. */
-export const OWID_DATASETS = {
+const OWID_DATASETS = {
   'life-expectancy': {
     label: 'Life expectancy',
     unit: 'years',
@@ -13,10 +13,14 @@ export const OWID_DATASETS = {
     unit: 't CO₂',
     column: 'emissions_total_per_capita',
   },
-  population: { label: 'Population', unit: 'people', column: 'population_historical' },
+  population: {
+    label: 'Population',
+    unit: 'people',
+    column: 'population_historical',
+  },
 } as const
 
-export const owidSlugSchema = z.enum([
+const owidSlugSchema = z.enum([
   'life-expectancy',
   'co-emissions-per-capita',
   'population',
@@ -44,7 +48,7 @@ export type OwidTable = z.infer<typeof owidTableSchema>
  * The grapher CSV endpoint. `csvType=filtered` only returns a chart's default
  * selection (usually continents), so the country-level demos request `full`.
  */
-export function owidUrl(slug: OwidSlug, csvType: 'full' | 'filtered' = 'full'): string {
+function owidUrl(slug: OwidSlug, csvType: 'full' | 'filtered' = 'full'): string {
   return `https://ourworldindata.org/grapher/${slug}.csv?v=1&csvType=${csvType}&useColumnShortNames=true`
 }
 

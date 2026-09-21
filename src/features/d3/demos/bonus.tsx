@@ -48,7 +48,10 @@ function buildSankey(data: NobelData) {
   const nodes: SNode[] = [
     ...[...top, 'Rest of world'].map((name) => ({ name, column: 0 as const })),
     ...CATEGORIES.map((name) => ({ name, column: 1 as const })),
-    ...['Male', 'Female', 'Organization'].map((name) => ({ name, column: 2 as const })),
+    ...['Male', 'Female', 'Organization'].map((name) => ({
+      name,
+      column: 2 as const,
+    })),
   ]
   const index = new Map(nodes.map((n, i) => [`${n.column}:${n.name}`, i]))
   const a = d3.rollups(

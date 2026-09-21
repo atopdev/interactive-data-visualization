@@ -11,7 +11,7 @@ export interface ThemeContextValue {
 
 export const ThemeContext = createContext<ThemeContextValue | null>(null)
 
-export const THEME_STORAGE_KEY = 'idv-theme'
+const THEME_STORAGE_KEY = 'idv-theme'
 
 export function readStoredTheme(): Theme {
   try {

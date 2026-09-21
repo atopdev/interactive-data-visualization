@@ -57,7 +57,9 @@ export function LiveStreamDemo() {
     setOpen((o) => o ?? ticks[0].price)
     if (points.current.length > MAX_POINTS)
       points.current.splice(0, points.current.length - MAX_POINTS)
-    chartRef.current?.setOption({ series: [{ id: 'price', data: points.current }] })
+    chartRef.current?.setOption({
+      series: [{ id: 'price', data: points.current }],
+    })
   }, [])
 
   const ticker = useCoinbaseTicker({
@@ -79,7 +81,9 @@ export function LiveStreamDemo() {
         type: 'value',
         scale: true,
         // The live range is narrow, so show whole dollars rather than $84.3k.
-        axisLabel: { formatter: (v: number) => `${Math.round(v).toLocaleString('en')}` },
+        axisLabel: {
+          formatter: (v: number) => `${Math.round(v).toLocaleString('en')}`,
+        },
       },
       series: [
         {

@@ -62,7 +62,12 @@ export function ObserverSlidesDemo() {
           )
           .from(
             incoming.querySelector('[data-slide-text]'),
-            { y: 60, opacity: 0, duration: reduced ? 0 : 0.8, ease: 'power3.out' },
+            {
+              y: 60,
+              opacity: 0,
+              duration: reduced ? 0 : 0.8,
+              ease: 'power3.out',
+            },
             0.4,
           )
         index = target

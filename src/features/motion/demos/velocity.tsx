@@ -23,7 +23,10 @@ function Marquee({ baseVelocity, items }: { baseVelocity: number; items: string[
   const { scrollY } = useScroll()
   // Scroll speed (px/s) -> smoothed -> a multiplier and a skew angle.
   const scrollVelocity = useVelocity(scrollY)
-  const smoothVelocity = useSpring(scrollVelocity, { damping: 50, stiffness: 400 })
+  const smoothVelocity = useSpring(scrollVelocity, {
+    damping: 50,
+    stiffness: 400,
+  })
   const factor = useTransform(smoothVelocity, [-2000, 0, 2000], [-5, 0, 5], {
     clamp: false,
   })

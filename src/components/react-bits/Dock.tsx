@@ -18,7 +18,7 @@ import React, {
   useState,
 } from 'react'
 
-export type DockItemData = {
+type DockItemData = {
   icon: React.ReactNode
   label: React.ReactNode
   onClick: () => void

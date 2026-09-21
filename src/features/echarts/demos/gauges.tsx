@@ -64,7 +64,11 @@ function Gauge({ spec }: { spec: GaugeSpec }) {
           anchor: {
             show: true,
             size: 10,
-            itemStyle: { color: theme.card, borderColor: spec.color, borderWidth: 3 },
+            itemStyle: {
+              color: theme.card,
+              borderColor: spec.color,
+              borderWidth: 3,
+            },
           },
           axisTick: {
             distance: -20,

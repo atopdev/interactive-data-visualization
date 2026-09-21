@@ -60,7 +60,10 @@ export function DemoPage({
 
   // Sliding active-item indicator, positioned from the active link's box.
   const listRef = useRef<HTMLOListElement>(null)
-  const [indicator, setIndicator] = useState<{ top: number; height: number } | null>(null)
+  const [indicator, setIndicator] = useState<{
+    top: number
+    height: number
+  } | null>(null)
   useLayoutEffect(() => {
     const link = listRef.current?.querySelector<HTMLElement>(`[data-toc-id="${active}"]`)
     setIndicator(link ? { top: link.offsetTop, height: link.offsetHeight } : null)

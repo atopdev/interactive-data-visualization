@@ -27,7 +27,7 @@ const laureateResponse = z.object({
   ),
 })
 
-export const laureateSchema = z.object({
+const laureateSchema = z.object({
   id: z.string(),
   name: z.string(),
   /** `male`, `female` or `org` for organizations. */
@@ -35,7 +35,11 @@ export const laureateSchema = z.object({
   country: z.string().nullable(),
   birthYear: z.number().int().nullable(),
   prizes: z.array(
-    z.object({ year: z.number().int(), category: z.string(), portion: z.string() }),
+    z.object({
+      year: z.number().int(),
+      category: z.string(),
+      portion: z.string(),
+    }),
   ),
 })
 export type Laureate = z.infer<typeof laureateSchema>

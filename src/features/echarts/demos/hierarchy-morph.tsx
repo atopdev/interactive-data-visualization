@@ -94,11 +94,31 @@ function Morph({ data, shape }: { data: WorldBankData; shape: Shape }) {
               breadcrumb: { show: false },
               width: '100%',
               height: '100%',
-              label: { show: true, formatter: '{b}', color: '#fff', fontSize: 11 },
-              upperLabel: { show: true, height: 22, color: '#fff', fontWeight: 600 },
-              itemStyle: { borderColor: theme.card, borderWidth: 1, gapWidth: 1 },
+              label: {
+                show: true,
+                formatter: '{b}',
+                color: '#fff',
+                fontSize: 11,
+              },
+              upperLabel: {
+                show: true,
+                height: 22,
+                color: '#fff',
+                fontWeight: 600,
+              },
+              itemStyle: {
+                borderColor: theme.card,
+                borderWidth: 1,
+                gapWidth: 1,
+              },
               levels: [
-                { itemStyle: { borderColor: theme.card, borderWidth: 3, gapWidth: 3 } },
+                {
+                  itemStyle: {
+                    borderColor: theme.card,
+                    borderWidth: 3,
+                    gapWidth: 3,
+                  },
+                },
                 {
                   colorSaturation: [0.35, 0.6],
                   itemStyle: { gapWidth: 1, borderColorSaturation: 0.6 },
@@ -116,13 +136,22 @@ function Morph({ data, shape }: { data: WorldBankData; shape: Shape }) {
               radius: ['12%', '95%'],
               sort: undefined,
               itemStyle: { borderColor: theme.card, borderWidth: 1 },
-              label: { rotate: 'radial', fontSize: 10, color: '#fff', minAngle: 6 },
+              label: {
+                rotate: 'radial',
+                fontSize: 10,
+                color: '#fff',
+                minAngle: 6,
+              },
               levels: [
                 {},
                 {
                   r0: '12%',
                   r: '42%',
-                  label: { rotate: 'tangential', fontSize: 11, fontWeight: 600 },
+                  label: {
+                    rotate: 'tangential',
+                    fontSize: 11,
+                    fontWeight: 600,
+                  },
                 },
                 { r0: '42%', r: '95%', label: { align: 'right' } },
               ],

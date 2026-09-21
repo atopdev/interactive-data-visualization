@@ -9,7 +9,7 @@
 let ctx: CanvasRenderingContext2D | null = null
 const cache = new Map<string, string>()
 
-export function toRgb(color: string): string {
+function toRgb(color: string): string {
   const key = color.trim()
   const hit = cache.get(key)
   if (hit) return hit
@@ -32,7 +32,7 @@ export function toRgb(color: string): string {
   return out
 }
 
-export function cssVar(name: string, el: Element = document.documentElement): string {
+function cssVar(name: string, el: Element = document.documentElement): string {
   return toRgb(getComputedStyle(el).getPropertyValue(name).trim() || '#888')
 }
 

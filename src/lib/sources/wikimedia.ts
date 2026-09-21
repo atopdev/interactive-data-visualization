@@ -1,9 +1,7 @@
 import { z } from 'zod'
 import { addDays, fetchJson, type FetchOptions } from '../fetchers'
 
-export const WIKI_ARTICLES = ['D3.js', 'Data_visualization', 'Infographic'] as const
-export type WikiArticle = (typeof WIKI_ARTICLES)[number]
-export const wikiArticleSchema = z.enum(WIKI_ARTICLES)
+const WIKI_ARTICLES = ['D3.js', 'Data_visualization', 'Infographic'] as const
 
 const pageviewsResponse = z.object({
   items: z.array(

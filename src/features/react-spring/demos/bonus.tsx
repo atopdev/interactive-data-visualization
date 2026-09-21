@@ -78,7 +78,9 @@ function ScrollParallax() {
     <div className="relative h-56 overflow-hidden rounded-xl bg-black">
       <animated.div
         className="absolute inset-[-25%]"
-        style={{ y: reduced ? 0 : scrollYProgress.to((p) => `${(p - 0.5) * 40}%`) }}
+        style={{
+          y: reduced ? 0 : scrollYProgress.to((p) => `${(p - 0.5) * 40}%`),
+        }}
       >
         <SmartImage
           src={picsum({ seed: 'spring-scroll-parallax', w: 1200, h: 900 })}
@@ -140,7 +142,12 @@ export function SpringBonusDemo() {
             {PAGES.map((p, i) => (
               <ParallaxLayer key={`bg-${i}`} offset={i} speed={0.2} factor={1}>
                 <SmartImage
-                  src={picsum({ seed: `spring-parallax-${i}`, w: 900, h: 700, blur: 1 })}
+                  src={picsum({
+                    seed: `spring-parallax-${i}`,
+                    w: 900,
+                    h: 700,
+                    blur: 1,
+                  })}
                   alt={`Backdrop near ${p.city}`}
                   width={900}
                   height={700}

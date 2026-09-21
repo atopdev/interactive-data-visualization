@@ -64,7 +64,11 @@ function Race({
     }
     const yi = table.years.indexOf(year)
     const ranked = table.series
-      .map((s) => ({ entity: s.entity, code: s.code, value: s.values[yi] ?? NaN }))
+      .map((s) => ({
+        entity: s.entity,
+        code: s.code,
+        value: s.values[yi] ?? NaN,
+      }))
       .filter((d) => Number.isFinite(d.value))
       .sort((a, b) => b.value - a.value)
       .slice(0, TOP)
@@ -211,7 +215,11 @@ export function BarRaceDemo() {
     const t = queryData?.data
     if (!t) return []
     const yi = t.years.indexOf(year)
-    return t.series.map((s) => ({ entity: s.entity, code: s.code, value: s.values[yi] }))
+    return t.series.map((s) => ({
+      entity: s.entity,
+      code: s.code,
+      value: s.values[yi],
+    }))
   }, [queryData, year])
   const columns: InspectorColumn<(typeof rows)[number]>[] = [
     { id: 'entity', header: 'Country', value: (r) => r.entity },

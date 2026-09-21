@@ -55,7 +55,11 @@ function Race({
     const colorOf = (region: string) =>
       theme.series[Math.max(0, REGION_ORDER.indexOf(region)) % 8]
     const rows = data.countries
-      .map((c) => ({ name: c.name, region: c.region, value: c[metric][yearIndex] }))
+      .map((c) => ({
+        name: c.name,
+        region: c.region,
+        value: c[metric][yearIndex],
+      }))
       .filter(
         (r): r is { name: string; region: string; value: number } => r.value !== null,
       )
@@ -164,7 +168,12 @@ export function RealtimeRaceDemo() {
     { id: 'name', header: 'Country', value: (r) => r.name },
     { id: 'region', header: 'Region', value: (r) => r.region },
     { id: 'pop', header: 'Population', value: (r) => r.pop, numeric: true },
-    { id: 'gdp', header: 'GDP per capita (US$)', value: (r) => r.gdp, numeric: true },
+    {
+      id: 'gdp',
+      header: 'GDP per capita (US$)',
+      value: (r) => r.gdp,
+      numeric: true,
+    },
   ]
 
   return (

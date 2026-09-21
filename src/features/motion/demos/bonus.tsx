@@ -22,7 +22,7 @@ const STACK = fakeProfiles('motion-stack', 5)
 const QUOTE = fakeWith('motion-text-reveal', (f) => f.company.catchPhrase())
 
 /** A 3D stack you can tilt; clicking sends the top card to the back. */
-export function CardStack3D() {
+function CardStack3D() {
   const [order, setOrder] = useState(STACK.map((_, i) => i))
   const mx = useMotionValue(0)
   const my = useMotionValue(0)
@@ -62,7 +62,11 @@ export function CardStack3D() {
               layout
               onClick={() => setOrder((o) => [...o.slice(1), o[0]])}
               className="absolute inset-0 overflow-hidden rounded-2xl border bg-card text-left shadow-xl"
-              animate={{ z: -depth * 40, y: -depth * 10, opacity: 1 - depth * 0.15 }}
+              animate={{
+                z: -depth * 40,
+                y: -depth * 10,
+                opacity: 1 - depth * 0.15,
+              }}
               transition={{ type: 'spring', stiffness: 260, damping: 26 }}
               style={{ zIndex: STACK.length - depth }}
               aria-label={`${p.name}; send to back`}
@@ -86,7 +90,7 @@ export function CardStack3D() {
 }
 
 /** Per-character reveal with blur and a staggered spring. */
-export function TextReveal() {
+function TextReveal() {
   const [run, setRun] = useState(0)
   const words = QUOTE.split(' ')
   let charIndex = 0
@@ -105,8 +109,18 @@ export function TextReveal() {
                 <motion.span
                   key={i}
                   className="inline-block"
-                  initial={{ opacity: 0, y: 24, filter: 'blur(8px)', rotate: 8 }}
-                  whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)', rotate: 0 }}
+                  initial={{
+                    opacity: 0,
+                    y: 24,
+                    filter: 'blur(8px)',
+                    rotate: 8,
+                  }}
+                  whileInView={{
+                    opacity: 1,
+                    y: 0,
+                    filter: 'blur(0px)',
+                    rotate: 0,
+                  }}
                   viewport={{ once: true }}
                   transition={{
                     type: 'spring',
@@ -156,13 +170,16 @@ function Digit({ char }: { char: string }) {
 }
 
 /** BTC-USD over the Coinbase WebSocket; digits roll as the price changes. */
-export function LiveTicker() {
+function LiveTicker() {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref)
   const visible = usePageVisible()
   const candles = useQuery(candlesQuery())
   const seed = candles.data?.data.candles.at(-1)?.close
-  const ticker = useCoinbaseTicker({ enabled: inView && visible, seedPrice: seed })
+  const ticker = useCoinbaseTicker({
+    enabled: inView && visible,
+    seedPrice: seed,
+  })
   const price = ticker.price ?? seed ?? null
   const up = ticker.previous === null || price === null || price >= ticker.previous
   const open = candles.data?.data.candles.at(-1)?.open

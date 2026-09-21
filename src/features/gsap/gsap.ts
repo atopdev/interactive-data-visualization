@@ -29,14 +29,4 @@ gsap.registerPlugin(
 export const NO_MOTION = '(prefers-reduced-motion: reduce)'
 export const MOTION_OK = '(prefers-reduced-motion: no-preference)'
 
-export {
-  Draggable,
-  Flip,
-  gsap,
-  InertiaPlugin,
-  MorphSVGPlugin,
-  Observer,
-  ScrollTrigger,
-  SplitText,
-  useGSAP,
-}
+export { Draggable, Flip, gsap, InertiaPlugin, Observer, SplitText, useGSAP }

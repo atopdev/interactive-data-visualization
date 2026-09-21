@@ -1,7 +1,7 @@
 import { z } from 'zod'
 import { fetchJson, type FetchOptions } from '../fetchers'
 
-export const USGS_WEEK_URL =
+const USGS_WEEK_URL =
   'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson'
 
 const featureCollection = z.object({
@@ -22,7 +22,7 @@ const featureCollection = z.object({
   ),
 })
 
-export const quakeSchema = z.object({
+const quakeSchema = z.object({
   id: z.string(),
   mag: z.number(),
   place: z.string(),
@@ -48,7 +48,15 @@ export async function fetchQuakes(options?: FetchOptions): Promise<QuakeFeed> {
       if (mag === null || type !== 'earthquake') return []
       const [lon, lat, depth] = f.geometry.coordinates
       return [
-        { id: f.id, mag, place: place ?? 'Unknown location', time, lon, lat, depth },
+        {
+          id: f.id,
+          mag,
+          place: place ?? 'Unknown location',
+          time,
+          lon,
+          lat,
+          depth,
+        },
       ]
     }),
   }

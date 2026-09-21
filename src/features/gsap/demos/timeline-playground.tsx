@@ -38,7 +38,11 @@ export function TimelinePlaygroundDemo() {
           ease: 'back.out(2)',
         })
         .addLabel('spin')
-        .to('[data-shape]', { rotation: 180, borderRadius: '50%', stagger: 0.08 })
+        .to('[data-shape]', {
+          rotation: 180,
+          borderRadius: '50%',
+          stagger: 0.08,
+        })
         .addLabel('orbit')
         .to('[data-shape]', {
           x: (i) => Math.cos((i / 5) * Math.PI * 2) * 110,
@@ -55,7 +59,12 @@ export function TimelinePlaygroundDemo() {
           stagger: 0.06,
         })
         .addLabel('exit')
-        .to('[data-shape]', { x: 260, opacity: 0, stagger: 0.07, ease: 'power2.in' })
+        .to('[data-shape]', {
+          x: 260,
+          opacity: 0,
+          stagger: 0.07,
+          ease: 'power2.in',
+        })
       tlRef.current = tl
       setMarkers(LABELS.map((l) => ({ label: l, at: tl.labels[l] / tl.duration() })))
     },

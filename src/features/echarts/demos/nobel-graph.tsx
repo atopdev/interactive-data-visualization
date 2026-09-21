@@ -76,7 +76,10 @@ function Graph({ data, count }: { data: NobelData; count: number }) {
       })),
     ]
     const links = picked.flatMap((l) => [
-      ...l.prizes.map((p) => ({ source: `l:${l.id}`, target: `cat:${p.category}` })),
+      ...l.prizes.map((p) => ({
+        source: `l:${l.id}`,
+        target: `cat:${p.category}`,
+      })),
       { source: `l:${l.id}`, target: `country:${l.country}` },
     ])
     return {
@@ -108,10 +111,23 @@ function Graph({ data, count }: { data: NobelData; count: number }) {
             })),
             { name: 'Birth country', itemStyle: { color: theme.muted } },
           ],
-          force: { repulsion: 60, edgeLength: [30, 80], gravity: 0.08, friction: 0.15 },
-          lineStyle: { color: theme.border, opacity: 0.8, width: 0.8, curveness: 0.1 },
+          force: {
+            repulsion: 60,
+            edgeLength: [30, 80],
+            gravity: 0.08,
+            friction: 0.15,
+          },
+          lineStyle: {
+            color: theme.border,
+            opacity: 0.8,
+            width: 0.8,
+            curveness: 0.1,
+          },
           label: { position: 'right', fontSize: 11, color: theme.foreground },
-          emphasis: { focus: 'adjacency', lineStyle: { width: 2, color: theme.accent } },
+          emphasis: {
+            focus: 'adjacency',
+            lineStyle: { width: 2, color: theme.accent },
+          },
           blur: { itemStyle: { opacity: 0.1 }, lineStyle: { opacity: 0.05 } },
         },
       ],
@@ -189,12 +205,18 @@ function Sankey({ data }: { data: NobelData }) {
           nodeGap: 12,
           emphasis: { focus: 'adjacency' },
           data: [
-            ...eras.map((name, i) => ({ name, itemStyle: { color: theme.seq[i + 1] } })),
+            ...eras.map((name, i) => ({
+              name,
+              itemStyle: { color: theme.seq[i + 1] },
+            })),
             ...CATEGORIES.map((name, i) => ({
               name,
               itemStyle: { color: theme.series[i] },
             })),
-            ...genders.map((name) => ({ name, itemStyle: { color: theme.muted } })),
+            ...genders.map((name) => ({
+              name,
+              itemStyle: { color: theme.muted },
+            })),
           ],
           links: [...count].map(([k, value]) => {
             const [source, target] = k.split('→')

@@ -3,15 +3,18 @@ import { fetchJson, type FetchOptions } from '../fetchers'
 import { roundSig } from './owid'
 
 const WB = 'https://api.worldbank.org/v2'
-export const WB_FIRST_YEAR = 2000
-export const WB_LAST_YEAR = 2023
+const WB_FIRST_YEAR = 2000
+const WB_LAST_YEAR = 2023
 
-export const WB_INDICATORS = {
+const WB_INDICATORS = {
   population: 'SP.POP.TOTL',
   gdpPerCapita: 'NY.GDP.PCAP.CD',
 } as const
 
-const metaSchema = z.object({ page: z.coerce.number(), pages: z.coerce.number() })
+const metaSchema = z.object({
+  page: z.coerce.number(),
+  pages: z.coerce.number(),
+})
 
 const countriesResponse = z.tuple([
   metaSchema,

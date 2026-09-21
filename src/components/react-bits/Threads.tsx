@@ -137,7 +137,12 @@ const Threads: React.FC<ThreadsProps> = ({
 
   // Keep the latest props in a ref so updating them mutates the live shader
   // uniforms instead of tearing down and rebuilding the whole WebGL context.
-  const propsRef = useRef({ color, amplitude, distance, enableMouseInteraction })
+  const propsRef = useRef({
+    color,
+    amplitude,
+    distance,
+    enableMouseInteraction,
+  })
   propsRef.current = { color, amplitude, distance, enableMouseInteraction }
 
   useEffect(() => {

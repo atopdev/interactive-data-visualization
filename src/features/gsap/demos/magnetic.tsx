@@ -25,13 +25,25 @@ export function MagneticDemo() {
         const buttons = gsap.utils.toArray<HTMLElement>('[data-magnet]')
         if (!follower) return
         // quickTo reuses a single tween per property: ideal for pointermove.
-        const fx = gsap.quickTo(follower, 'x', { duration: 0.45, ease: 'power3' })
-        const fy = gsap.quickTo(follower, 'y', { duration: 0.45, ease: 'power3' })
+        const fx = gsap.quickTo(follower, 'x', {
+          duration: 0.45,
+          ease: 'power3',
+        })
+        const fy = gsap.quickTo(follower, 'y', {
+          duration: 0.45,
+          ease: 'power3',
+        })
         const magnets = buttons.map((btn) => ({
           btn,
           inner: btn.querySelector<HTMLElement>('[data-magnet-inner]'),
-          x: gsap.quickTo(btn, 'x', { duration: 0.6, ease: 'elastic.out(1, 0.35)' }),
-          y: gsap.quickTo(btn, 'y', { duration: 0.6, ease: 'elastic.out(1, 0.35)' }),
+          x: gsap.quickTo(btn, 'x', {
+            duration: 0.6,
+            ease: 'elastic.out(1, 0.35)',
+          }),
+          y: gsap.quickTo(btn, 'y', {
+            duration: 0.6,
+            ease: 'elastic.out(1, 0.35)',
+          }),
         }))
 
         const onMove = (e: PointerEvent) => {

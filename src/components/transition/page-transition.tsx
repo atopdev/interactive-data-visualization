@@ -54,10 +54,14 @@ export function PageTransition() {
   const titleRef = useRef<HTMLParagraphElement>(null)
   const taglineRef = useRef<HTMLParagraphElement>(null)
   const coverRef = useRef<Promise<void> | null>(null)
-  const activeRef = useRef<{ effect: TransitionEffect; instance: EffectInstance } | null>(
-    null,
-  )
-  const revealRef = useRef<{ tl: gsap.core.Timeline; cleanup: () => void } | null>(null)
+  const activeRef = useRef<{
+    effect: TransitionEffect
+    instance: EffectInstance
+  } | null>(null)
+  const revealRef = useRef<{
+    tl: gsap.core.Timeline
+    cleanup: () => void
+  } | null>(null)
 
   /** Build the effect for a destination inside a fresh stage. */
   const mount = useCallback((pathname: string) => {
@@ -160,7 +164,12 @@ export function PageTransition() {
 
     const tl = gsap.timeline({ onComplete: finish })
     revealRef.current = { tl, cleanup }
-    tl.to(labelRef.current, { autoAlpha: 0, y: -12, duration: 0.2, ease: 'power2.in' })
+    tl.to(labelRef.current, {
+      autoAlpha: 0,
+      y: -12,
+      duration: 0.2,
+      ease: 'power2.in',
+    })
     tl.add(instance.reveal(), 0.1)
     if (effect === FADE) return
 

@@ -1,7 +1,7 @@
 import { z } from 'zod'
 import { fetchJson, type FetchOptions } from '../fetchers'
 
-export const POKEMON = [
+const POKEMON = [
   'pikachu',
   'charizard',
   'blastoise',
@@ -33,9 +33,8 @@ export const STAT_KEYS = [
   'special-defense',
   'speed',
 ] as const
-export type StatKey = (typeof STAT_KEYS)[number]
 
-export const pokemonSchema = z.object({
+const pokemonSchema = z.object({
   id: z.number(),
   name: z.string(),
   height: z.number(),

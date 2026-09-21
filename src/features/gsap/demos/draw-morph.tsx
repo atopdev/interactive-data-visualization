@@ -85,11 +85,21 @@ export function DrawMorphDemo() {
           .fromTo(
             '[data-draw]',
             { drawSVG: '0% 0%' },
-            { drawSVG: '0% 100%', duration: 1.8, ease: 'power2.inOut', stagger: 0.25 },
+            {
+              drawSVG: '0% 100%',
+              duration: 1.8,
+              ease: 'power2.inOut',
+              stagger: 0.25,
+            },
           )
           .to(
             '[data-draw]',
-            { drawSVG: '100% 100%', duration: 1.2, ease: 'power2.in', stagger: 0.15 },
+            {
+              drawSVG: '100% 100%',
+              duration: 1.2,
+              ease: 'power2.in',
+              stagger: 0.15,
+            },
             '+=0.4',
           )
 

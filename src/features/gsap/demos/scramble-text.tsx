@@ -51,7 +51,10 @@ export function ScrambleTextDemo() {
   }
 
   const hover = contextSafe((el: HTMLElement, text: string) => {
-    gsap.to(el, { duration: 0.6, scrambleText: { text, chars: '▪▫◆◇', speed: 0.8 } })
+    gsap.to(el, {
+      duration: 0.6,
+      scrambleText: { text, chars: '▪▫◆◇', speed: 0.8 },
+    })
   })
 
   return (

@@ -98,12 +98,3 @@ export function useWebGLSlot(
     () => false,
   )
 }
-
-/** Id of the demo currently holding the context (for status labels). */
-export function useActiveWebGL(): string | null {
-  return useSyncExternalStore(
-    subscribe,
-    () => active,
-    () => null,
-  )
-}

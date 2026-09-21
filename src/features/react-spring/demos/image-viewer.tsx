@@ -34,7 +34,11 @@ export function ImageViewerDemo() {
   }
   const zoomTo = (s: number) => {
     const next = Math.min(MAX, Math.max(MIN, s))
-    api.start({ scale: next, ...clampXY(x.get(), y.get(), next), immediate: reduced })
+    api.start({
+      scale: next,
+      ...clampXY(x.get(), y.get(), next),
+      immediate: reduced,
+    })
   }
 
   useGesture(

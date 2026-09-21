@@ -1379,7 +1379,9 @@ export default function SplashCursor({
       updatePointerMoveData(pointer, posX, posY, color)
       document.body.removeEventListener('mousemove', handleFirstMouseMove)
     }
-    document.body.addEventListener('mousemove', handleFirstMouseMove, { signal })
+    document.body.addEventListener('mousemove', handleFirstMouseMove, {
+      signal,
+    })
 
     listen('mousemove', (e) => {
       const pointer = pointers[0]
@@ -1400,7 +1402,9 @@ export default function SplashCursor({
       }
       document.body.removeEventListener('touchstart', handleFirstTouchStart)
     }
-    document.body.addEventListener('touchstart', handleFirstTouchStart, { signal })
+    document.body.addEventListener('touchstart', handleFirstTouchStart, {
+      signal,
+    })
 
     listen(
       'touchstart',

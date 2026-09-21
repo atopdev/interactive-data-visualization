@@ -30,7 +30,11 @@ function Row({ task, rank }: { task: Task; rank: number }) {
       dragListener={false}
       dragControls={controls}
       className="relative flex items-center gap-3 rounded-xl border bg-card p-3 shadow-xs select-none"
-      whileDrag={{ scale: 1.03, boxShadow: '0 16px 32px rgba(0,0,0,0.25)', zIndex: 10 }}
+      whileDrag={{
+        scale: 1.03,
+        boxShadow: '0 16px 32px rgba(0,0,0,0.25)',
+        zIndex: 10,
+      }}
       transition={{ type: 'spring', stiffness: 600, damping: 40 }}
     >
       <button

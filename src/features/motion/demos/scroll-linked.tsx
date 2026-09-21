@@ -37,7 +37,10 @@ export function ScrollLinkedDemo() {
   const target = useRef<HTMLDivElement>(null)
   // Progress of this element crossing the viewport: 0 when its top meets the
   // bottom of the screen, 1 when its bottom leaves the top.
-  const { scrollYProgress } = useScroll({ target, offset: ['start end', 'end start'] })
+  const { scrollYProgress } = useScroll({
+    target,
+    offset: ['start end', 'end start'],
+  })
   const smooth = useSpring(scrollYProgress, { stiffness: 90, damping: 24 })
   const bgY = useTransform(smooth, [0, 1], ['-18%', '18%'])
   const fgY = useTransform(smooth, [0, 1], ['30%', '-30%'])
@@ -60,7 +63,12 @@ export function ScrollLinkedDemo() {
       <div ref={target} className="relative h-[32rem] overflow-hidden bg-black">
         <motion.div className="absolute inset-[-20%]" style={{ y: bgY }}>
           <SmartImage
-            src={picsum({ seed: 'motion-scroll-bg', w: 1600, h: 1200, blur: 2 })}
+            src={picsum({
+              seed: 'motion-scroll-bg',
+              w: 1600,
+              h: 1200,
+              blur: 2,
+            })}
             alt={`Blurred landscape near ${COPY.city}`}
             width={1600}
             height={1200}

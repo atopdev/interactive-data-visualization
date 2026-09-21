@@ -24,14 +24,26 @@ export function DockShowcase() {
   const [size, setSize] = useState(50)
   const [clicked, setClicked] = useState('none yet')
   const items = [
-    { icon: <Home size={18} />, label: 'Home', onClick: () => setClicked('Home') },
+    {
+      icon: <Home size={18} />,
+      label: 'Home',
+      onClick: () => setClicked('Home'),
+    },
     {
       icon: <Archive size={18} />,
       label: 'Archive',
       onClick: () => setClicked('Archive'),
     },
-    { icon: <User size={18} />, label: 'Profile', onClick: () => setClicked('Profile') },
-    { icon: <Sparkles size={18} />, label: 'Magic', onClick: () => setClicked('Magic') },
+    {
+      icon: <User size={18} />,
+      label: 'Profile',
+      onClick: () => setClicked('Profile'),
+    },
+    {
+      icon: <Sparkles size={18} />,
+      label: 'Magic',
+      onClick: () => setClicked('Magic'),
+    },
     {
       icon: <Settings size={18} />,
       label: 'Settings',
@@ -163,10 +175,10 @@ export function CircularGalleryShowcase() {
       title="CircularGallery"
       category={CATEGORY}
       description="An ogl WebGL carousel of picsum photos bent along an arc; drag or scroll to spin it. Runs only while it owns the WebGL slot."
-      code={usage('CircularGallery', { items: [] as unknown[], ...props }).replace(
-        'items={[]}',
-        'items={items}',
-      )}
+      code={usage('CircularGallery', {
+        items: [] as unknown[],
+        ...props,
+      }).replace('items={[]}', 'items={items}')}
       previewClassName="h-96 p-0 place-items-stretch"
       controls={
         <>

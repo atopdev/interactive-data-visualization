@@ -25,7 +25,11 @@ export function PhysicsPlaygroundDemo() {
   // One spring per preset, all racing to the same target.
   const [races] = useSprings(
     PRESETS.length,
-    (i) => ({ x: side ? 1 : 0, config: presets[PRESETS[i]], immediate: reduced }),
+    (i) => ({
+      x: side ? 1 : 0,
+      config: presets[PRESETS[i]],
+      immediate: reduced,
+    }),
     [side, reduced],
   )
 

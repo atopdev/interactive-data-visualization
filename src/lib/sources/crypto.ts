@@ -3,7 +3,7 @@ import { fetchJson, type FetchOptions } from '../fetchers'
 
 export const COINBASE_WS_URL = 'wss://ws-feed.exchange.coinbase.com'
 
-export const candleSchema = z.object({
+const candleSchema = z.object({
   /** Candle open time, epoch ms. */
   time: z.number(),
   open: z.number(),
@@ -33,7 +33,7 @@ const binanceResponse = z.array(
     .rest(z.union([z.number(), z.string()])),
 )
 
-export async function fetchCoinbaseCandles(options?: FetchOptions): Promise<CandleSet> {
+async function fetchCoinbaseCandles(options?: FetchOptions): Promise<CandleSet> {
   const rows = await fetchJson(
     'https://api.exchange.coinbase.com/products/BTC-USD/candles?granularity=86400',
     coinbaseResponse,
@@ -55,7 +55,7 @@ export async function fetchCoinbaseCandles(options?: FetchOptions): Promise<Cand
   }
 }
 
-export async function fetchBinanceCandles(options?: FetchOptions): Promise<CandleSet> {
+async function fetchBinanceCandles(options?: FetchOptions): Promise<CandleSet> {
   const rows = await fetchJson(
     'https://data-api.binance.vision/api/v3/klines?symbol=BTCUSDT&interval=1d&limit=300',
     binanceResponse,
@@ -110,4 +110,3 @@ export const tickerMessageSchema = z.object({
   best_ask: z.coerce.number().optional(),
   last_size: z.coerce.number().optional(),
 })
-export type TickerMessage = z.infer<typeof tickerMessageSchema>
