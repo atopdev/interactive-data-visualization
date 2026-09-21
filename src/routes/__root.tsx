@@ -2,6 +2,7 @@ import type { QueryClient } from '@tanstack/react-query'
 import { createRootRouteWithContext, Outlet } from '@tanstack/react-router'
 import { lazy, Suspense } from 'react'
 import { RouteError, RouteNotFound, RoutePending } from '@/components/layout/route-states'
+import { SiteFooter } from '@/components/layout/site-footer'
 import { SiteHeader } from '@/components/layout/site-header'
 import { PageTransition } from '@/components/transition/page-transition'
 
@@ -33,6 +34,7 @@ function RootLayout() {
       <main id="main" className="min-h-[calc(100svh-3.5rem)]">
         <Outlet />
       </main>
+      <SiteFooter />
       {Devtools && (
         <Suspense>
           <Devtools />
