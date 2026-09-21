@@ -13,7 +13,7 @@ export function SiteFooter() {
           >
             atopdev
           </a>
-          . All rights reserved.
+          . Released under the MIT License.
         </p>
       </div>
     </footer>

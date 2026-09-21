@@ -21,7 +21,7 @@
     "shadcn-ui"
   ],
   "author": "atopdev (https://github.com/atopdev)",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "type": "module",
   "engines": {
     "node": "^20.19.0 || >=22.12.0"

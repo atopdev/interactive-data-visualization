@@ -205,3 +205,7 @@ npm run snapshots
 `scripts/fetch-snapshots.ts` (run with `tsx`) fetches every endpoint once through the same source clients the app uses, trims the result (for example, top-N entities, rounded values, M1.5+ quakes) and writes `src/data/snapshots/*.json`. A failing endpoint is reported without stopping the run, and its previous snapshot is kept. The committed snapshots are real data captured on 2026-09-23, when all 13 endpoints responded. The largest file is `nobel.json` at 157 KB. `npm run build:fresh` refreshes the snapshots and then builds.
 
 Snapshots are loaded with dynamic `import()` only by the routes that use them.
+
+## License
+
+[MIT](LICENSE) © atopdev
