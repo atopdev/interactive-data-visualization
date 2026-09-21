@@ -66,7 +66,9 @@ export function TimelinePlaygroundDemo() {
           ease: 'power2.in',
         })
       tlRef.current = tl
-      setMarkers(LABELS.map((l) => ({ label: l, at: tl.labels[l] / tl.duration() })))
+      setMarkers(
+        LABELS.map((l) => ({ label: l, at: tl.labels[l] / tl.duration() })),
+      )
     },
     { scope },
   )
@@ -107,7 +109,8 @@ export function TimelinePlaygroundDemo() {
                 setPaused(false)
               }}
             >
-              {reversed ? <FastForward /> : <Rewind />} {reversed ? 'Forward' : 'Reverse'}
+              {reversed ? <FastForward /> : <Rewind />}{' '}
+              {reversed ? 'Forward' : 'Reverse'}
             </Button>
             <Button
               size="sm"
@@ -134,7 +137,11 @@ export function TimelinePlaygroundDemo() {
             aria-label="Playback speed"
           >
             {SPEEDS.map((s) => (
-              <ToggleGroupItem key={s} value={s} className="px-2.5 font-mono text-xs">
+              <ToggleGroupItem
+                key={s}
+                value={s}
+                className="px-2.5 font-mono text-xs"
+              >
                 {s}×
               </ToggleGroupItem>
             ))}

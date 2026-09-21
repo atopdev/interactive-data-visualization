@@ -39,7 +39,11 @@ export function DragPhysicsDemo() {
             onChange={setPower}
             format={(v) => v.toFixed(2)}
           />
-          <SwitchControl label="Momentum" checked={momentum} onChange={setMomentum} />
+          <SwitchControl
+            label="Momentum"
+            checked={momentum}
+            onChange={setMomentum}
+          />
         </>
       }
     >

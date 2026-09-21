@@ -1,7 +1,10 @@
 import { useQuery } from '@tanstack/react-query'
 import * as d3 from 'd3'
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { DataInspector, type InspectorColumn } from '@/components/data-inspector'
+import {
+  DataInspector,
+  type InspectorColumn,
+} from '@/components/data-inspector'
 import { DataState } from '@/components/page/data-state'
 import { DemoSection } from '@/components/page/demo-section'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
@@ -20,7 +23,13 @@ const FOCUS_H = 300
 const CONTEXT_H = 70
 const M = { top: 14, right: 16, bottom: 24, left: 48 }
 
-function FocusContext({ points, article }: { points: Point[]; article: string }) {
+function FocusContext({
+  points,
+  article,
+}: {
+  points: Point[]
+  article: string
+}) {
   const wrap = useRef<HTMLDivElement>(null)
   const svgRef = useRef<SVGSVGElement>(null)
   const tipRef = useRef<HTMLDivElement>(null)
@@ -71,16 +80,18 @@ function FocusContext({ points, article }: { points: Point[]; article: string })
       .attr('width', innerW)
       .attr('height', FOCUS_H)
     const focus = svg.append('g').attr('transform', `translate(${M.left},0)`)
-    const gx = focus.append('g').attr('transform', `translate(0,${FOCUS_H - M.bottom})`)
+    const gx = focus
+      .append('g')
+      .attr('transform', `translate(0,${FOCUS_H - M.bottom})`)
     const gy = focus.append('g')
     const style = (g: d3.Selection<SVGGElement, unknown, null, undefined>) => {
       g.select('.domain').remove()
       g.selectAll('.tick line').attr('stroke', 'var(--grid)')
       g.selectAll('.tick text').attr('fill', 'var(--muted-foreground)')
     }
-    gy.call(d3.axisLeft(y).ticks(5).tickSize(-innerW).tickFormat(d3.format('.2s'))).call(
-      style,
-    )
+    gy.call(
+      d3.axisLeft(y).ticks(5).tickSize(-innerW).tickFormat(d3.format('.2s')),
+    ).call(style)
     gx.call(d3.axisBottom(x).ticks(width / 120)).call(style)
 
     const plot = focus.append('g').attr('clip-path', `url(#${clipId})`)
@@ -109,11 +120,19 @@ function FocusContext({ points, article }: { points: Point[]; article: string })
         .ease(d3.easeCubicInOut)
         .attr('stroke-dashoffset', 0)
         .on('end', () => linePath.attr('stroke-dasharray', null))
-      areaPath.attr('opacity', 0).transition().delay(900).duration(700).attr('opacity', 1)
+      areaPath
+        .attr('opacity', 0)
+        .transition()
+        .delay(900)
+        .duration(700)
+        .attr('opacity', 1)
     }
 
     // Crosshair + tooltip.
-    const cross = focus.append('g').attr('pointer-events', 'none').attr('opacity', 0)
+    const cross = focus
+      .append('g')
+      .attr('pointer-events', 'none')
+      .attr('opacity', 0)
     const vLine = cross
       .append('line')
       .attr('y1', M.top)
@@ -194,7 +213,9 @@ function FocusContext({ points, article }: { points: Point[]; article: string })
         if (!e.sourceEvent) return
         const sel = e.selection as [number, number] | null
         x.domain(sel ? sel.map(x2.invert) : x2.domain())
-        const t = d3.transition().duration(e.type === 'end' && !reduced ? 400 : 0)
+        const t = d3
+          .transition()
+          .duration(e.type === 'end' && !reduced ? 400 : 0)
         linePath.transition(t).attr('d', line)
         areaPath.transition(t).attr('d', area)
         gx.transition(t)
@@ -228,17 +249,20 @@ function FocusContext({ points, article }: { points: Point[]; article: string })
         className="pointer-events-none absolute top-0 left-0 rounded-md border bg-popover px-2 py-1 text-xs opacity-0 shadow-md"
       />
       <p className="mt-1 text-xs text-muted-foreground">
-        Drag in the lower strip to brush a date range; the chart above zooms to it.
+        Drag in the lower strip to brush a date range; the chart above zooms to
+        it.
       </p>
     </div>
   )
 }
 
 function toPoints(pv: Pageviews, article: string): Point[] {
-  return (pv.articles.find((a) => a.article === article)?.points ?? []).map((p) => ({
-    date: new Date(p.date),
-    views: p.views,
-  }))
+  return (pv.articles.find((a) => a.article === article)?.points ?? []).map(
+    (p) => ({
+      date: new Date(p.date),
+      views: p.views,
+    }),
+  )
 }
 
 export function PageviewsDemo() {
@@ -289,7 +313,11 @@ export function PageviewsDemo() {
         </>
       }
     >
-      <DataState query={query} isEmpty={() => points.length === 0} className="h-[380px]">
+      <DataState
+        query={query}
+        isEmpty={() => points.length === 0}
+        className="h-[380px]"
+      >
         {() => <FocusContext points={points} article={article} />}
       </DataState>
     </DemoSection>

@@ -83,7 +83,9 @@ export function DockShowcase() {
             max={64}
             onChange={setSize}
           />
-          <span className="text-xs text-muted-foreground">Clicked: {clicked}</span>
+          <span className="text-xs text-muted-foreground">
+            Clicked: {clicked}
+          </span>
         </>
       }
     >
@@ -100,7 +102,9 @@ const MASONRY_ITEMS = picsumSet('bits-masonry', 14, 600, 800).map((p, i) => ({
 }))
 
 export function MasonryShowcase() {
-  const [animateFrom, setAnimateFrom] = useState<'bottom' | 'center' | 'random'>('bottom')
+  const [animateFrom, setAnimateFrom] = useState<
+    'bottom' | 'center' | 'random'
+  >('bottom')
   const [blur, setBlur] = useState(true)
   const [run, setRun] = useState(0)
   const props = {
@@ -139,7 +143,11 @@ export function MasonryShowcase() {
             <ToggleGroupItem value="center">Center</ToggleGroupItem>
             <ToggleGroupItem value="random">Random</ToggleGroupItem>
           </ToggleGroup>
-          <SwitchControl label="blurToFocus" checked={blur} onChange={setBlur} />
+          <SwitchControl
+            label="blurToFocus"
+            checked={blur}
+            onChange={setBlur}
+          />
         </>
       }
     >
@@ -320,8 +328,16 @@ export function StackShowcase() {
       )}
       controls={
         <>
-          <SwitchControl label="randomRotation" checked={random} onChange={setRandom} />
-          <SwitchControl label="autoplay" checked={autoplay} onChange={setAutoplay} />
+          <SwitchControl
+            label="randomRotation"
+            checked={random}
+            onChange={setRandom}
+          />
+          <SwitchControl
+            label="autoplay"
+            checked={autoplay}
+            onChange={setAutoplay}
+          />
           <SliderControl
             label="sensitivity"
             value={sensitivity}
@@ -350,7 +366,9 @@ const SPOT = fakeWith('bits-spotlight', (f) =>
 export function SpotlightCardShowcase() {
   const [opacity, setOpacity] = useState(0.25)
   const theme = useChartTheme()
-  const [r, g, b] = (theme.accent.match(/\d+/g) ?? ['139', '127', '255']).map(Number)
+  const [r, g, b] = (theme.accent.match(/\d+/g) ?? ['139', '127', '255']).map(
+    Number,
+  )
   const spotlightColor = `rgba(${r}, ${g}, ${b}, ${opacity})` as const
   return (
     <Showcase
@@ -373,10 +391,16 @@ export function SpotlightCardShowcase() {
     >
       <div className="grid w-full gap-4 sm:grid-cols-2">
         {SPOT.map((s) => (
-          <SpotlightCard key={s.title} spotlightColor={spotlightColor} className="p-6">
+          <SpotlightCard
+            key={s.title}
+            spotlightColor={spotlightColor}
+            className="p-6"
+          >
             <Sparkles className="size-5 text-page-accent" />
             <p className="mt-3 font-semibold">{s.title}</p>
-            <p className="mt-1 line-clamp-3 text-sm text-muted-foreground">{s.body}</p>
+            <p className="mt-1 line-clamp-3 text-sm text-muted-foreground">
+              {s.body}
+            </p>
           </SpotlightCard>
         ))}
       </div>

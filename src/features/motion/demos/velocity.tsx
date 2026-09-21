@@ -17,7 +17,13 @@ const COMPANIES = fakeWith('motion-marquee', (f) =>
   Array.from({ length: 12 }, () => f.company.name()),
 )
 
-function Marquee({ baseVelocity, items }: { baseVelocity: number; items: string[] }) {
+function Marquee({
+  baseVelocity,
+  items,
+}: {
+  baseVelocity: number
+  items: string[]
+}) {
   const reduced = usePrefersReducedMotion()
   const x = useMotionValue(0)
   const { scrollY } = useScroll()
@@ -39,7 +45,8 @@ function Marquee({ baseVelocity, items }: { baseVelocity: number; items: string[
     const f = factor.get()
     if (f < 0) direction.current = -1
     else if (f > 0) direction.current = 1
-    const move = direction.current * baseVelocity * (delta / 1000) * (1 + Math.abs(f))
+    const move =
+      direction.current * baseVelocity * (delta / 1000) * (1 + Math.abs(f))
     x.set(x.get() + move)
   })
 
@@ -69,10 +76,14 @@ function CursorBlob() {
   const vx = useVelocity(x)
   const vy = useVelocity(y)
   // Stretch along the direction of travel, proportional to speed.
-  const speed = useTransform(() => Math.min(1, Math.hypot(vx.get(), vy.get()) / 2500))
+  const speed = useTransform(() =>
+    Math.min(1, Math.hypot(vx.get(), vy.get()) / 2500),
+  )
   const scaleX = useTransform(speed, (s) => 1 + s * 0.8)
   const scaleY = useTransform(speed, (s) => 1 - s * 0.4)
-  const rotate = useTransform(() => (Math.atan2(vy.get(), vx.get()) * 180) / Math.PI)
+  const rotate = useTransform(
+    () => (Math.atan2(vy.get(), vx.get()) * 180) / Math.PI,
+  )
 
   return (
     <div

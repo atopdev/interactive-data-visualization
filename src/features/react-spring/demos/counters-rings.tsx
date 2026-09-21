@@ -21,7 +21,15 @@ interface RingProps {
 const R = 52
 const C = 2 * Math.PI * R
 
-function Ring({ label, value, fraction, format, color, active, hint }: RingProps) {
+function Ring({
+  label,
+  value,
+  fraction,
+  format,
+  color,
+  active,
+  hint,
+}: RingProps) {
   const reduced = usePrefersReducedMotion()
   const { v, f } = useSpring({
     v: active ? value : 0,

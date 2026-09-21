@@ -1,4 +1,10 @@
-import React, { forwardRef, useMemo, useRef, useLayoutEffect, useEffect } from 'react'
+import React, {
+  forwardRef,
+  useMemo,
+  useRef,
+  useLayoutEffect,
+  useEffect,
+} from 'react'
 import { Canvas, useFrame, useThree, type RootState } from '@react-three/fiber'
 import type { Mesh, ShaderMaterial } from 'three'
 import { Color } from 'three'
@@ -103,7 +109,10 @@ interface SilkPlaneProps {
   uniforms: SilkUniforms
 }
 
-const SilkPlane = forwardRef<Mesh, SilkPlaneProps>(function SilkPlane({ uniforms }, ref) {
+const SilkPlane = forwardRef<Mesh, SilkPlaneProps>(function SilkPlane(
+  { uniforms },
+  ref,
+) {
   const { viewport } = useThree()
 
   useLayoutEffect(() => {

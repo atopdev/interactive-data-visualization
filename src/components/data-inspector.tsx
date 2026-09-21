@@ -143,9 +143,14 @@ function InspectorTable<T extends RowData>({
               <TableRow key={group.id}>
                 {group.headers.map((header) => {
                   const sorted = header.column.getIsSorted()
-                  const numeric = columns.find((c) => c.id === header.column.id)?.numeric
+                  const numeric = columns.find(
+                    (c) => c.id === header.column.id,
+                  )?.numeric
                   return (
-                    <TableHead key={header.id} className={cn(numeric && 'text-right')}>
+                    <TableHead
+                      key={header.id}
+                      className={cn(numeric && 'text-right')}
+                    >
                       <button
                         type="button"
                         onClick={header.column.getToggleSortingHandler()}
@@ -174,7 +179,9 @@ function InspectorTable<T extends RowData>({
               table.getRowModel().rows.map((row) => (
                 <TableRow key={row.id}>
                   {row.getAllCells().map((cell) => {
-                    const numeric = columns.find((c) => c.id === cell.column.id)?.numeric
+                    const numeric = columns.find(
+                      (c) => c.id === cell.column.id,
+                    )?.numeric
                     return (
                       <TableCell
                         key={cell.id}
@@ -204,8 +211,8 @@ function InspectorTable<T extends RowData>({
       </div>
       <div className="flex items-center justify-between text-xs text-muted-foreground">
         <span className="tabular-nums">
-          {total.toLocaleString('en')} rows · page {total ? pageIndex + 1 : 0} of{' '}
-          {table.getPageCount()}
+          {total.toLocaleString('en')} rows · page {total ? pageIndex + 1 : 0}{' '}
+          of {table.getPageCount()}
         </span>
         <div className="flex gap-1">
           <Button

@@ -21,7 +21,12 @@ import type { TemperatureYear } from '@/lib/sources/openmeteo'
 import { temperatureYearQuery } from '../queries'
 import { useRef } from 'react'
 
-echarts.use([HeatmapChart, CalendarComponent, VisualMapComponent, TooltipComponent])
+echarts.use([
+  HeatmapChart,
+  CalendarComponent,
+  VisualMapComponent,
+  TooltipComponent,
+])
 
 type Option = ComposeOption<
   | HeatmapSeriesOption
@@ -31,13 +36,20 @@ type Option = ComposeOption<
 >
 type Measure = 'max' | 'min' | 'range'
 
-function Calendar({ data, measure }: { data: TemperatureYear; measure: Measure }) {
+function Calendar({
+  data,
+  measure,
+}: {
+  data: TemperatureYear
+  measure: Measure
+}) {
   const theme = useChartTheme()
   const wrap = useRef<HTMLDivElement>(null)
   const { width } = useElementSize(wrap)
   const option = useMemo<Option>(() => {
     const values = data.days.map(
-      (d) => [d.date, measure === 'range' ? d.max - d.min : d[measure]] as const,
+      (d) =>
+        [d.date, measure === 'range' ? d.max - d.min : d[measure]] as const,
     )
     const nums = values.map((v) => v[1])
     const lo = Math.floor(Math.min(...nums))
@@ -129,7 +141,11 @@ export function CalendarHeatmapDemo() {
         </ToggleGroup>
       }
     >
-      <DataState query={query} isEmpty={(d) => d.days.length === 0} className="h-64">
+      <DataState
+        query={query}
+        isEmpty={(d) => d.days.length === 0}
+        className="h-64"
+      >
         {(data) => <Calendar data={data} measure={measure} />}
       </DataState>
     </DemoSection>

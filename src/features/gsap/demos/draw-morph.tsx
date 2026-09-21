@@ -5,7 +5,13 @@ import { Button } from '@/components/ui/button'
 import { seededRandom } from '@/lib/fake'
 import { gsap, MOTION_OK, useGSAP } from '../gsap'
 
-function starPath(cx: number, cy: number, outer: number, inner: number, points = 5) {
+function starPath(
+  cx: number,
+  cy: number,
+  outer: number,
+  inner: number,
+  points = 5,
+) {
   const step = Math.PI / points
   const pts = Array.from({ length: points * 2 }, (_, i) => {
     const r = i % 2 === 0 ? outer : inner
@@ -49,7 +55,9 @@ function spiral(cx: number, cy: number, turns: number, spacing: number) {
   const pts: string[] = []
   for (let t = 0; t <= turns * Math.PI * 2; t += 0.15) {
     const r = spacing * t
-    pts.push(`${(cx + r * Math.cos(t)).toFixed(1)},${(cy + r * Math.sin(t)).toFixed(1)}`)
+    pts.push(
+      `${(cx + r * Math.cos(t)).toFixed(1)},${(cy + r * Math.sin(t)).toFixed(1)}`,
+    )
   }
   return `M${pts.join(' L')}`
 }
@@ -57,7 +65,9 @@ function spiral(cx: number, cy: number, turns: number, spacing: number) {
 function wave(y: number, amp: number, freq: number, width = 300) {
   const pts: string[] = []
   for (let x = 0; x <= width; x += 4) {
-    pts.push(`${x},${(y + Math.sin((x / width) * Math.PI * 2 * freq) * amp).toFixed(1)}`)
+    pts.push(
+      `${x},${(y + Math.sin((x / width) * Math.PI * 2 * freq) * amp).toFixed(1)}`,
+    )
   }
   return `M${pts.join(' L')}`
 }
@@ -200,7 +210,8 @@ export function DrawMorphDemo() {
             <path data-morph d={SHAPES[0].d} fill="url(#morph-grad)" />
           </svg>
           <p className="text-center font-mono text-xs text-muted-foreground">
-            morphSVG → <span className="text-foreground">{SHAPES[shape].name}</span>
+            morphSVG →{' '}
+            <span className="text-foreground">{SHAPES[shape].name}</span>
           </p>
         </div>
       </div>

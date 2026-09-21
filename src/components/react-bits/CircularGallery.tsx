@@ -81,7 +81,9 @@ async function loadFontFromFile(url: string): Promise<string> {
 async function loadCustomFont(fontUrl: string): Promise<string> {
   const isStylesheet =
     fontUrl.includes('fonts.googleapis.com') || /\.css(\?.*)?$/i.test(fontUrl)
-  return isStylesheet ? loadFontFromStylesheet(fontUrl) : loadFontFromFile(fontUrl)
+  return isStylesheet
+    ? loadFontFromStylesheet(fontUrl)
+    : loadFontFromFile(fontUrl)
 }
 
 // Loads `fontUrl` (a stylesheet such as a Google Fonts URL, or a direct font
@@ -90,7 +92,8 @@ async function loadCustomFont(fontUrl: string): Promise<string> {
 async function resolveFont(font: string, fontUrl?: string): Promise<string> {
   // Use the bundled Figtree stylesheet when the caller relies on the default
   // font, otherwise honor the explicit `fontUrl`.
-  const effectiveUrl = fontUrl || (font === DEFAULT_FONT ? DEFAULT_FONT_URL : null)
+  const effectiveUrl =
+    fontUrl || (font === DEFAULT_FONT ? DEFAULT_FONT_URL : null)
   if (!effectiveUrl) {
     // A custom family was supplied without a URL – make sure it is ready (in
     // case the host page declares it) before we draw it to the canvas,
@@ -234,7 +237,8 @@ class Title {
     const textHeightScaled = this.plane.scale.y * 0.15
     const textWidthScaled = textHeightScaled * aspect
     this.mesh.scale.set(textWidthScaled, textHeightScaled, 1)
-    this.mesh.position.y = -this.plane.scale.y * 0.5 - textHeightScaled * 0.5 - 0.05
+    this.mesh.position.y =
+      -this.plane.scale.y * 0.5 - textHeightScaled * 0.5 - 0.05
     this.mesh.setParent(this.plane)
   }
 }
@@ -401,7 +405,10 @@ class Media {
     img.src = this.image
     img.onload = () => {
       texture.image = img
-      this.program.uniforms.uImageSizes.value = [img.naturalWidth, img.naturalHeight]
+      this.program.uniforms.uImageSizes.value = [
+        img.naturalWidth,
+        img.naturalHeight,
+      ]
     }
   }
 
@@ -424,7 +431,10 @@ class Media {
     })
   }
 
-  update(scroll: { current: number; last: number }, direction: 'right' | 'left') {
+  update(
+    scroll: { current: number; last: number },
+    direction: 'right' | 'left',
+  ) {
     this.plane.position.x = this.x - scroll.current - this.extra
 
     const x = this.plane.position.x
@@ -466,7 +476,10 @@ class Media {
     }
   }
 
-  onResize({ screen, viewport }: { screen?: ScreenSize; viewport?: Viewport } = {}) {
+  onResize({
+    screen,
+    viewport,
+  }: { screen?: ScreenSize; viewport?: Viewport } = {}) {
     if (screen) this.screen = screen
     if (viewport) {
       this.viewport = viewport
@@ -478,8 +491,10 @@ class Media {
       }
     }
     this.scale = this.screen.height / 1500
-    this.plane.scale.y = (this.viewport.height * (900 * this.scale)) / this.screen.height
-    this.plane.scale.x = (this.viewport.width * (700 * this.scale)) / this.screen.width
+    this.plane.scale.y =
+      (this.viewport.height * (900 * this.scale)) / this.screen.height
+    this.plane.scale.x =
+      (this.viewport.width * (700 * this.scale)) / this.screen.width
     this.plane.program.uniforms.uPlaneSizes.value = [
       this.plane.scale.x,
       this.plane.scale.y,
@@ -691,7 +706,8 @@ class App {
       wheelEvent.deltaY ||
       (wheelEvent as WheelEvent & { wheelDelta?: number }).wheelDelta ||
       wheelEvent.detail
-    this.scroll.target += (delta > 0 ? this.scrollSpeed : -this.scrollSpeed) * 0.2
+    this.scroll.target +=
+      (delta > 0 ? this.scrollSpeed : -this.scrollSpeed) * 0.2
     this.onCheckDebounce()
   }
 
@@ -740,7 +756,11 @@ class App {
   }
 
   update() {
-    this.scroll.current = lerp(this.scroll.current, this.scroll.target, this.scroll.ease)
+    this.scroll.current = lerp(
+      this.scroll.current,
+      this.scroll.target,
+      this.scroll.ease,
+    )
     const direction = this.scroll.current > this.scroll.last ? 'right' : 'left'
     if (this.medias) {
       this.medias.forEach((media) => media.update(this.scroll, direction))
@@ -788,7 +808,11 @@ class App {
     window.removeEventListener('touchend', this.boundOnTouchUp)
     // Release the GPU context immediately instead of waiting for GC.
     this.renderer?.gl?.getExtension('WEBGL_lose_context')?.loseContext()
-    if (this.renderer && this.renderer.gl && this.renderer.gl.canvas.parentNode) {
+    if (
+      this.renderer &&
+      this.renderer.gl &&
+      this.renderer.gl.canvas.parentNode
+    ) {
       this.renderer.gl.canvas.parentNode.removeChild(
         this.renderer.gl.canvas as HTMLCanvasElement,
       )
@@ -845,7 +869,16 @@ export default function CircularGallery({
       isMounted = false
       if (app) app.destroy()
     }
-  }, [items, bend, textColor, borderRadius, font, fontUrl, scrollSpeed, scrollEase])
+  }, [
+    items,
+    bend,
+    textColor,
+    borderRadius,
+    font,
+    fontUrl,
+    scrollSpeed,
+    scrollEase,
+  ])
   return (
     <div
       className="h-full w-full cursor-grab overflow-hidden active:cursor-grabbing"

@@ -47,11 +47,13 @@ function ReactSpringPage() {
       focus={demo}
       lead={
         <>
-          React Spring animates with physics instead of durations and easing curves.
-          Paired with <code className="font-mono text-sm">@use-gesture/react</code>,
-          springs pick up the velocity of a drag, so throws, flicks and rubber bands feel
-          physical. With reduced motion enabled, every spring on this page jumps straight
-          to its target via the <code className="font-mono text-sm">immediate</code> flag.
+          React Spring animates with physics instead of durations and easing
+          curves. Paired with{' '}
+          <code className="font-mono text-sm">@use-gesture/react</code>, springs
+          pick up the velocity of a drag, so throws, flicks and rubber bands
+          feel physical. With reduced motion enabled, every spring on this page
+          jumps straight to its target via the{' '}
+          <code className="font-mono text-sm">immediate</code> flag.
         </>
       }
       toc={TOC}

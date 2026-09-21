@@ -27,7 +27,10 @@ export function CountersDemo() {
     if (!npm.data || !quakes.data) return null
     const pkgs = npm.data.data.packages
     const gsapPkg = pkgs.find((p) => p.name === 'gsap')
-    const total = pkgs.reduce((sum, p) => sum + p.downloads.reduce((a, b) => a + b, 0), 0)
+    const total = pkgs.reduce(
+      (sum, p) => sum + p.downloads.reduce((a, b) => a + b, 0),
+      0,
+    )
     const q = quakes.data.data.quakes
     return [
       {
@@ -50,7 +53,9 @@ export function CountersDemo() {
         value: q.reduce((m, x) => Math.max(m, x.mag), 0),
         decimals: 1,
         suffix: ' M',
-        hint: q.reduce((best, x) => (x.mag > best.mag ? x : best), q[0])?.place ?? '',
+        hint:
+          q.reduce((best, x) => (x.mag > best.mag ? x : best), q[0])?.place ??
+          '',
       },
     ]
   }, [npm.data, quakes.data])
@@ -62,8 +67,9 @@ export function CountersDemo() {
       const format = (el: HTMLElement, v: number) => {
         const decimals = Number(el.dataset.decimals ?? 0)
         el.textContent =
-          (decimals ? v.toFixed(decimals) : Math.round(v).toLocaleString('en')) +
-          (el.dataset.suffix ?? '')
+          (decimals
+            ? v.toFixed(decimals)
+            : Math.round(v).toLocaleString('en')) + (el.dataset.suffix ?? '')
       }
       const mm = gsap.matchMedia()
       mm.add(MOTION_OK, () => {
@@ -78,7 +84,9 @@ export function CountersDemo() {
           })
         })
       })
-      mm.add(NO_MOTION, () => els.forEach((el) => format(el, Number(el.dataset.count))))
+      mm.add(NO_MOTION, () =>
+        els.forEach((el) => format(el, Number(el.dataset.count))),
+      )
       return () => mm.revert()
     },
     { scope, dependencies: [stats] },
@@ -115,7 +123,9 @@ export function CountersDemo() {
                 >
                   0
                 </p>
-                <p className="mt-2 truncate text-xs text-muted-foreground">{s.hint}</p>
+                <p className="mt-2 truncate text-xs text-muted-foreground">
+                  {s.hint}
+                </p>
               </div>
             ))
           : Array.from({ length: 4 }, (_, i) => (

@@ -71,7 +71,10 @@ export async function fetchWeatherNow(
     cloudCover: res.current.cloud_cover,
     hourly: res.hourly.time
       .map((time, i) => ({ time, temperature: res.hourly.temperature_2m[i] }))
-      .filter((d): d is { time: string; temperature: number } => d.temperature != null)
+      .filter(
+        (d): d is { time: string; temperature: number } =>
+          d.temperature != null,
+      )
       .slice(0, 36),
   }
 }
@@ -87,7 +90,9 @@ const archiveResponse = z.object({
 export const temperatureYearSchema = z.object({
   city: z.string(),
   year: z.number().int(),
-  days: z.array(z.object({ date: z.string(), max: z.number(), min: z.number() })),
+  days: z.array(
+    z.object({ date: z.string(), max: z.number(), min: z.number() }),
+  ),
 })
 export type TemperatureYear = z.infer<typeof temperatureYearSchema>
 

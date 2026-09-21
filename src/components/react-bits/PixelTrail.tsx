@@ -1,5 +1,10 @@
 import { shaderMaterial, useTrailTexture } from '@react-three/drei'
-import { Canvas, type CanvasProps, type ThreeEvent, useThree } from '@react-three/fiber'
+import {
+  Canvas,
+  type CanvasProps,
+  type ThreeEvent,
+  useThree,
+} from '@react-three/fiber'
 import React, { useEffect, useMemo } from 'react'
 import * as THREE from 'three'
 
@@ -38,7 +43,11 @@ const GooeyFilter: React.FC<GooeyFilterProps> = ({
     <svg className="absolute z-1 overflow-hidden">
       <defs>
         <filter id={id}>
-          <feGaussianBlur in="SourceGraphic" stdDeviation={strength} result="blur" />
+          <feGaussianBlur
+            in="SourceGraphic"
+            stdDeviation={strength}
+            result="blur"
+          />
           <feColorMatrix
             in="blur"
             type="matrix"
@@ -169,7 +178,9 @@ export default function PixelTrail({
 }: PixelTrailProps) {
   return (
     <>
-      {gooeyFilter && <GooeyFilter id={gooeyFilter.id} strength={gooeyFilter.strength} />}
+      {gooeyFilter && (
+        <GooeyFilter id={gooeyFilter.id} strength={gooeyFilter.strength} />
+      )}
       <Canvas
         {...canvasProps}
         dpr={canvasProps.dpr ?? [1, 1.25]}

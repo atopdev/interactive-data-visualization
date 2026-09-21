@@ -26,9 +26,14 @@ export function SliderControl({
 }) {
   const id = useId()
   return (
-    <div className={cn('flex w-full min-w-40 flex-col gap-2 sm:w-48', className)}>
+    <div
+      className={cn('flex w-full min-w-40 flex-col gap-2 sm:w-48', className)}
+    >
       <div className="flex items-center justify-between gap-2 text-xs">
-        <Label htmlFor={id} className="text-xs font-medium text-muted-foreground">
+        <Label
+          htmlFor={id}
+          className="text-xs font-medium text-muted-foreground"
+        >
           {label}
         </Label>
         <span className="font-mono text-xs tabular-nums">{format(value)}</span>

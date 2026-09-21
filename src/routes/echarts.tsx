@@ -7,7 +7,10 @@ import { CandlestickDemo } from '@/features/echarts/demos/candlestick'
 import { GaugesDemo } from '@/features/echarts/demos/gauges'
 import { HierarchyMorphDemo } from '@/features/echarts/demos/hierarchy-morph'
 import { LiveStreamDemo } from '@/features/echarts/demos/live-stream'
-import { NobelGraphDemo, NobelSankeyDemo } from '@/features/echarts/demos/nobel-graph'
+import {
+  NobelGraphDemo,
+  NobelSankeyDemo,
+} from '@/features/echarts/demos/nobel-graph'
 import { PokemonDemo } from '@/features/echarts/demos/pokemon'
 import { RealtimeRaceDemo } from '@/features/echarts/demos/realtime-race'
 import {
@@ -59,12 +62,14 @@ function EChartsPage() {
       focus={demo}
       lead={
         <>
-          Apache ECharts renders declarative options to canvas with built-in animation,
-          interaction and dozens of series types. Every chart here goes through one typed{' '}
-          <code className="font-mono text-sm">&lt;EChart /&gt;</code> wrapper that
-          registers only the modules each demo imports from{' '}
-          <code className="font-mono text-sm">echarts/core</code>, resizes with its
-          container, follows the app&apos;s dark mode and disposes on unmount.
+          Apache ECharts renders declarative options to canvas with built-in
+          animation, interaction and dozens of series types. Every chart here
+          goes through one typed{' '}
+          <code className="font-mono text-sm">&lt;EChart /&gt;</code> wrapper
+          that registers only the modules each demo imports from{' '}
+          <code className="font-mono text-sm">echarts/core</code>, resizes with
+          its container, follows the app&apos;s dark mode and disposes on
+          unmount.
         </>
       }
       toc={TOC}

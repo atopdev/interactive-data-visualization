@@ -48,7 +48,10 @@ export type OwidTable = z.infer<typeof owidTableSchema>
  * The grapher CSV endpoint. `csvType=filtered` only returns a chart's default
  * selection (usually continents), so the country-level demos request `full`.
  */
-function owidUrl(slug: OwidSlug, csvType: 'full' | 'filtered' = 'full'): string {
+function owidUrl(
+  slug: OwidSlug,
+  csvType: 'full' | 'filtered' = 'full',
+): string {
   return `https://ourworldindata.org/grapher/${slug}.csv?v=1&csvType=${csvType}&useColumnShortNames=true`
 }
 
@@ -64,7 +67,10 @@ export async function fetchOwid(
 ): Promise<OwidTable> {
   const rows = await fetchCsv(owidUrl(slug), options)
   const meta = OWID_DATASETS[slug]
-  const byCode = new Map<string, { entity: string; points: Map<number, number> }>()
+  const byCode = new Map<
+    string,
+    { entity: string; points: Map<number, number> }
+  >()
   const yearSet = new Set<number>()
 
   for (const raw of rows) {
@@ -112,7 +118,10 @@ export function roundSig(value: number, digits = 4): number {
  * Trim a table for the bundled snapshot: optionally keep only entities that
  * ever rank in the top N (plenty for a bar race) and round values.
  */
-export function trimOwid(table: OwidTable, { topN }: { topN?: number } = {}): OwidTable {
+export function trimOwid(
+  table: OwidTable,
+  { topN }: { topN?: number } = {},
+): OwidTable {
   let series = table.series
   if (topN) {
     const keep = new Set<string>()

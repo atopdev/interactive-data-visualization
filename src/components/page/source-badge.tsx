@@ -1,6 +1,10 @@
 import { CloudOff, Radio, Sparkles } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip'
 import type { DataSource } from '@/lib/fetchers'
 import { cn } from '@/lib/utils'
 
@@ -29,7 +33,8 @@ export function SourceBadge({
         'gap-1.5 font-medium',
         source === 'live' &&
           'border-emerald-500/40 text-emerald-700 dark:text-emerald-300',
-        source === 'snapshot' && 'border-amber-500/50 text-amber-700 dark:text-amber-300',
+        source === 'snapshot' &&
+          'border-amber-500/50 text-amber-700 dark:text-amber-300',
         source === 'generated' &&
           'border-violet-500/40 text-violet-700 dark:text-violet-300',
         source === 'loading' && 'text-muted-foreground',
@@ -54,7 +59,9 @@ export function SourceBadge({
       <TooltipTrigger asChild>
         <span tabIndex={0}>{badge}</span>
       </TooltipTrigger>
-      <TooltipContent>Live request {reason}; showing bundled data.</TooltipContent>
+      <TooltipContent>
+        Live request {reason}; showing bundled data.
+      </TooltipContent>
     </Tooltip>
   )
 }

@@ -130,7 +130,15 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
     return () => {
       cancelAnimationFrame(animationId)
     }
-  }, [sparkColor, sparkSize, sparkRadius, sparkCount, duration, easeFunc, extraScale])
+  }, [
+    sparkColor,
+    sparkSize,
+    sparkRadius,
+    sparkCount,
+    duration,
+    easeFunc,
+    extraScale,
+  ])
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement>): void => {
     const canvas = canvasRef.current
@@ -152,7 +160,10 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
 
   return (
     <div className="relative h-full w-full" onClick={handleClick}>
-      <canvas ref={canvasRef} className="pointer-events-none absolute inset-0" />
+      <canvas
+        ref={canvasRef}
+        className="pointer-events-none absolute inset-0"
+      />
       {children}
     </div>
   )

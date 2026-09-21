@@ -124,9 +124,13 @@ export function EChart({
       aria: { enabled: true, label: { description: latest.current.ariaLabel } },
     })
     chart.setOption(
-      reduced ? { ...latest.current.option, animation: false } : latest.current.option,
+      reduced
+        ? { ...latest.current.option, animation: false }
+        : latest.current.option,
     )
-    for (const [name, handler] of Object.entries(latest.current.onEvents ?? {})) {
+    for (const [name, handler] of Object.entries(
+      latest.current.onEvents ?? {},
+    )) {
       chart.on(name, (params: unknown) =>
         handler(params as Parameters<EChartsEventHandler>[0]),
       )
@@ -157,10 +161,13 @@ export function EChart({
       isFirst.current = false
       return
     }
-    chartRef.current?.setOption(reduced ? { ...option, animation: false } : option, {
-      notMerge,
-      replaceMerge: latest.current.replaceMerge,
-    })
+    chartRef.current?.setOption(
+      reduced ? { ...option, animation: false } : option,
+      {
+        notMerge,
+        replaceMerge: latest.current.replaceMerge,
+      },
+    )
   }, [option, notMerge, replaceKey, reduced])
 
   return (

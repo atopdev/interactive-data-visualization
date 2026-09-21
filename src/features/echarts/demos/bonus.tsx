@@ -28,7 +28,11 @@ import { WebGLStage } from '@/components/webgl-stage'
 import { useChartTheme } from '@/hooks/use-chart-theme'
 import { badgeFor } from '@/lib/badge'
 import { alpha } from '@/lib/colors'
-import { echarts, type ComposeOption, type EChartsCoreOption } from '@/lib/echarts'
+import {
+  echarts,
+  type ComposeOption,
+  type EChartsCoreOption,
+} from '@/lib/echarts'
 import { countries, type CountryProps } from '@/lib/geo'
 import type { NpmDownloads } from '@/lib/sources/npm'
 import type { Quake } from '@/lib/sources/usgs'
@@ -50,7 +54,8 @@ echarts.use([
  */
 function planarWorld(): FeatureCollection<Geometry, CountryProps> {
   const fixRing = (ring: Position[]): Position[] => {
-    const crosses = ring.some((p) => p[0] > 150) && ring.some((p) => p[0] < -150)
+    const crosses =
+      ring.some((p) => p[0] > 150) && ring.some((p) => p[0] < -150)
     return crosses ? ring.map(([x, y]) => [x < 0 ? x + 360 : x, y]) : ring
   }
   const fixGeometry = (g: Geometry): Geometry =>

@@ -5,7 +5,10 @@ import {
   type SunburstSeriesOption,
   type TreemapSeriesOption,
 } from 'echarts/charts'
-import { TooltipComponent, type TooltipComponentOption } from 'echarts/components'
+import {
+  TooltipComponent,
+  type TooltipComponentOption,
+} from 'echarts/components'
 import { UniversalTransition } from 'echarts/features'
 import { Shuffle } from 'lucide-react'
 import { useEffect, useMemo, useRef, useState } from 'react'
@@ -21,7 +24,12 @@ import { echarts, type ComposeOption } from '@/lib/echarts'
 import type { WorldBankData } from '@/lib/sources/worldbank'
 import { worldBankQuery } from '../queries'
 
-echarts.use([TreemapChart, SunburstChart, TooltipComponent, UniversalTransition])
+echarts.use([
+  TreemapChart,
+  SunburstChart,
+  TooltipComponent,
+  UniversalTransition,
+])
 
 type Option = ComposeOption<
   TreemapSeriesOption | SunburstSeriesOption | TooltipComponentOption
@@ -39,7 +47,8 @@ function buildTree(data: WorldBankData, colors: string[]): Node[] {
   const last = data.years.length - 1
   const byRegion = new Map<string, Node[]>()
   for (const c of data.countries) {
-    const v = c.population[last] ?? c.population.findLast((x) => x !== null) ?? null
+    const v =
+      c.population[last] ?? c.population.findLast((x) => x !== null) ?? null
     if (!v) continue
     const list = byRegion.get(c.region) ?? []
     list.push({ name: c.name, value: v })
@@ -51,7 +60,9 @@ function buildTree(data: WorldBankData, colors: string[]): Node[] {
       // Keep the chart legible: top 10 countries plus an "Other" bucket.
       const top = sorted.slice(0, 10)
       const rest = sorted.slice(10).reduce((s, n) => s + n.value, 0)
-      const children = rest ? [...top, { name: `Other ${region}`, value: rest }] : top
+      const children = rest
+        ? [...top, { name: `Other ${region}`, value: rest }]
+        : top
       return {
         name: region,
         value: children.reduce((s, n) => s + n.value, 0),
@@ -201,7 +212,9 @@ export function HierarchyMorphDemo() {
           <Button
             size="sm"
             variant="outline"
-            onClick={() => setShape((s) => (s === 'treemap' ? 'sunburst' : 'treemap'))}
+            onClick={() =>
+              setShape((s) => (s === 'treemap' ? 'sunburst' : 'treemap'))
+            }
           >
             <Shuffle /> Morph to {shape === 'treemap' ? 'sunburst' : 'treemap'}
           </Button>

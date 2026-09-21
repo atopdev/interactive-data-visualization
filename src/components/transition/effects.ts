@@ -54,7 +54,10 @@ export interface TransitionEffect {
   blocks: gsap.TweenVars
 }
 
-function div(parent: Element, style: Partial<CSSStyleDeclaration>): HTMLDivElement {
+function div(
+  parent: Element,
+  style: Partial<CSSStyleDeclaration>,
+): HTMLDivElement {
   const el = document.createElement('div')
   Object.assign(el.style, style)
   parent.append(el)
@@ -145,12 +148,14 @@ const liquid: TransitionEffect = {
       height: '100%',
     })
     stage.append(svg)
-    const paths = [palette.deep, palette.accent, palette.surface].map((color) => {
-      const path = document.createElementNS(SVG_NS, 'path')
-      path.style.fill = color
-      svg.append(path)
-      return path
-    })
+    const paths = [palette.deep, palette.accent, palette.surface].map(
+      (color) => {
+        const path = document.createElementNS(SVG_NS, 'path')
+        path.style.fill = color
+        svg.append(path)
+        return path
+      },
+    )
     // The edge bows most mid-flight, like an area chart easing between states.
     const bow = (p: number) => Math.sin(p * Math.PI) * 45
     const rising = (p: number) => {
@@ -188,7 +193,9 @@ const liquid: TransitionEffect = {
       },
       reveal: () => {
         const tl = gsap.timeline()
-        ;[...paths].reverse().forEach((path, i) => drive(tl, path, lifting, i * 0.12))
+        ;[...paths]
+          .reverse()
+          .forEach((path, i) => drive(tl, path, lifting, i * 0.12))
         return tl
       },
     }
@@ -248,7 +255,11 @@ const bars: TransitionEffect = {
             },
             '-=0.05',
           )
-          .to(panel, { scaleY: 1, duration: 0.45, ease: 'power3.inOut' }, '-=0.2'),
+          .to(
+            panel,
+            { scaleY: 1, duration: 0.45, ease: 'power3.inOut' },
+            '-=0.2',
+          ),
       reveal: () =>
         gsap
           .timeline()
@@ -283,16 +294,20 @@ const bars: TransitionEffect = {
 const blades: TransitionEffect = {
   name: 'blades',
   create: ({ stage, palette }) => {
-    const panels = [palette.deep, palette.accent, palette.light, palette.surface].map(
-      (background) =>
-        div(stage, {
-          position: 'absolute',
-          top: '0',
-          bottom: '0',
-          left: '-25%',
-          width: '150%',
-          background,
-        }),
+    const panels = [
+      palette.deep,
+      palette.accent,
+      palette.light,
+      palette.surface,
+    ].map((background) =>
+      div(stage, {
+        position: 'absolute',
+        top: '0',
+        bottom: '0',
+        left: '-25%',
+        width: '150%',
+        background,
+      }),
     )
     gsap.set(panels, { skewX: -14, xPercent: 115 })
     return {
@@ -331,9 +346,12 @@ const blades: TransitionEffect = {
 const spring: TransitionEffect = {
   name: 'spring',
   create: ({ stage, palette, width, height, origin }) => {
-    const [ball, flood] = [palette.accent, palette.surface].map((c) => fill(stage, c))
+    const [ball, flood] = [palette.accent, palette.surface].map((c) =>
+      fill(stage, c),
+    )
     const { x, y } = origin
-    const cover = Math.hypot(Math.max(x, width - x), Math.max(y, height - y)) + 2
+    const cover =
+      Math.hypot(Math.max(x, width - x), Math.max(y, height - y)) + 2
     const clip = (el: HTMLElement, r: number) => {
       el.style.clipPath = `circle(${Math.max(0, r)}px at ${x}px ${y}px)`
     }
@@ -432,7 +450,8 @@ const morph: TransitionEffect = {
   create: ({ stage, palette, width, height, origin }) => {
     const layers = [palette.accent, palette.surface].map((c) => fill(stage, c))
     // Grow from the clicked link's box, like a shared-layout animation.
-    const rect = origin.rect ?? new DOMRect(width / 2 - 100, height / 2 - 32, 200, 64)
+    const rect =
+      origin.rect ?? new DOMRect(width / 2 - 100, height / 2 - 32, 200, 64)
     const r = Math.min(rect.height / 2, 32)
     const start = `inset(${rect.top}px ${width - rect.right}px ${height - rect.bottom}px ${rect.left}px round ${r}px ${r}px ${r}px ${r}px)`
     const full = 'inset(0px 0px 0px 0px round 0px 0px 0px 0px)'

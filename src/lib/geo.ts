@@ -1,4 +1,9 @@
-import type { Feature, FeatureCollection, Geometry, MultiLineString } from 'geojson'
+import type {
+  Feature,
+  FeatureCollection,
+  Geometry,
+  MultiLineString,
+} from 'geojson'
 import { feature, mesh } from 'topojson-client'
 import type { GeometryCollection, Topology } from 'topojson-specification'
 import world from 'world-atlas/countries-110m.json'

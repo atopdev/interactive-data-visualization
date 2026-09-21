@@ -67,7 +67,10 @@ export function TabsAccordionDemo() {
               </button>
             ))}
           </div>
-          <div role="tabpanel" className="relative mt-4 min-h-36 overflow-hidden">
+          <div
+            role="tabpanel"
+            className="relative mt-4 min-h-36 overflow-hidden"
+          >
             <AnimatePresence mode="wait" initial={false}>
               <motion.div
                 key={tab}
@@ -78,7 +81,9 @@ export function TabsAccordionDemo() {
                 className="rounded-lg border bg-card p-4"
               >
                 <p className="font-medium">{TABS[tab].heading}</p>
-                <p className="mt-2 text-sm text-muted-foreground">{TABS[tab].body}</p>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  {TABS[tab].body}
+                </p>
               </motion.div>
             </AnimatePresence>
           </div>
@@ -88,7 +93,10 @@ export function TabsAccordionDemo() {
           {FAQ.map((item, i) => {
             const isOpen = open === i
             return (
-              <div key={item.q} className="overflow-hidden rounded-lg border bg-card">
+              <div
+                key={item.q}
+                className="overflow-hidden rounded-lg border bg-card"
+              >
                 <button
                   type="button"
                   aria-expanded={isOpen}
@@ -109,7 +117,9 @@ export function TabsAccordionDemo() {
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ type: 'spring', bounce: 0, duration: 0.4 }}
                     >
-                      <p className="px-4 pb-4 text-sm text-muted-foreground">{item.a}</p>
+                      <p className="px-4 pb-4 text-sm text-muted-foreground">
+                        {item.a}
+                      </p>
                     </motion.div>
                   )}
                 </AnimatePresence>

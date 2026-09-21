@@ -26,7 +26,11 @@ const systemPrefersDark = () => window.matchMedia(DARK_QUERY).matches
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setThemeState] = useState<Theme>(readStoredTheme)
-  const prefersDark = useSyncExternalStore(subscribeSystem, systemPrefersDark, () => true)
+  const prefersDark = useSyncExternalStore(
+    subscribeSystem,
+    systemPrefersDark,
+    () => true,
+  )
   const resolvedTheme: ResolvedTheme =
     theme === 'system' ? (prefersDark ? 'dark' : 'light') : theme
 

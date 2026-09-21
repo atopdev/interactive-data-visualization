@@ -54,20 +54,26 @@ export function SortableListDemo() {
   const [ranking, setRanking] = useState(INITIAL_ORDER)
   const [springs, api] = useSprings(TRACKS.length, layout(INITIAL_ORDER))
 
-  const bind = useDrag(({ args: [originalIndex], active, movement: [, my] }) => {
-    const index = originalIndex as number
-    const curIndex = order.current.indexOf(index)
-    const curRow = clamp(Math.round((curIndex * ROW + my) / ROW), 0, TRACKS.length - 1)
-    const newOrder = move(order.current, curIndex, curRow)
-    api.start((i) => ({
-      ...layout(newOrder, active, index, curIndex, my)(i),
-      ...(reduced && { immediate: true }),
-    }))
-    if (!active) {
-      order.current = newOrder
-      setRanking(newOrder)
-    }
-  })
+  const bind = useDrag(
+    ({ args: [originalIndex], active, movement: [, my] }) => {
+      const index = originalIndex as number
+      const curIndex = order.current.indexOf(index)
+      const curRow = clamp(
+        Math.round((curIndex * ROW + my) / ROW),
+        0,
+        TRACKS.length - 1,
+      )
+      const newOrder = move(order.current, curIndex, curRow)
+      api.start((i) => ({
+        ...layout(newOrder, active, index, curIndex, my)(i),
+        ...(reduced && { immediate: true }),
+      }))
+      if (!active) {
+        order.current = newOrder
+        setRanking(newOrder)
+      }
+    },
+  )
 
   return (
     <DemoSection
@@ -99,7 +105,9 @@ export function SortableListDemo() {
                 {ranking.indexOf(i) + 1}
               </span>
               <div className="min-w-0 flex-1">
-                <p className="truncate text-sm font-medium">{TRACKS[i].title}</p>
+                <p className="truncate text-sm font-medium">
+                  {TRACKS[i].title}
+                </p>
                 <p className="truncate text-xs text-muted-foreground">
                   {TRACKS[i].artist}
                 </p>

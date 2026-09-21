@@ -113,11 +113,15 @@ export function TransitionListDemo() {
               </span>
               <div className="min-w-0 flex-1">
                 <p className="truncate text-sm font-medium">{item.name}</p>
-                <p className="truncate text-xs text-muted-foreground">{item.role}</p>
+                <p className="truncate text-xs text-muted-foreground">
+                  {item.role}
+                </p>
               </div>
               <button
                 type="button"
-                onClick={() => setItems((prev) => prev.filter((x) => x.id !== item.id))}
+                onClick={() =>
+                  setItems((prev) => prev.filter((x) => x.id !== item.id))
+                }
                 className="grid size-7 place-items-center rounded text-muted-foreground hover:bg-muted"
                 aria-label={`Remove ${item.name}`}
               >

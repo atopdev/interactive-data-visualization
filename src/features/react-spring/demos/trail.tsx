@@ -51,7 +51,11 @@ export function TrailDemo() {
       <div className="grid gap-4 lg:grid-cols-2">
         <div className="flex min-h-80 flex-col justify-center rounded-xl bg-surface-2 px-6">
           {words.map(({ height, ...style }, i) => (
-            <animated.div key={WORDS[i]} style={style} className="overflow-hidden">
+            <animated.div
+              key={WORDS[i]}
+              style={style}
+              className="overflow-hidden"
+            >
               <animated.p
                 style={{ height }}
                 className="text-5xl leading-[72px] font-semibold tracking-tight sm:text-6xl"
@@ -74,7 +78,9 @@ export function TrailDemo() {
               />
               <div className="min-w-0">
                 <p className="truncate text-sm font-medium">{LIST[i].name}</p>
-                <p className="truncate text-xs text-muted-foreground">{LIST[i].meta}</p>
+                <p className="truncate text-xs text-muted-foreground">
+                  {LIST[i].meta}
+                </p>
               </div>
             </animated.li>
           ))}

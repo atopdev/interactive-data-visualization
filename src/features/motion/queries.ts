@@ -7,6 +7,8 @@ export const candlesQuery = () =>
     queryKey: ['crypto', 'btc', 'daily-candles'],
     live: (signal) => fetchCandles({ signal }),
     snapshot: () =>
-      import('@/data/snapshots/candles.json').then(parseSnapshot(candleSetSchema)),
+      import('@/data/snapshots/candles.json').then(
+        parseSnapshot(candleSetSchema),
+      ),
     staleTime: 5 * MINUTE,
   })

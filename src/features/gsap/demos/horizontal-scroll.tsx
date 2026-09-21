@@ -39,37 +39,41 @@ export function HorizontalScrollDemo() {
           },
         })
         // Each caption slides in as its panel crosses the viewport (containerAnimation).
-        gsap.utils.toArray<HTMLElement>('[data-caption]', rail).forEach((caption) => {
-          gsap.from(caption, {
-            y: 40,
-            opacity: 0,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: caption,
-              containerAnimation: tween,
-              start: 'left 85%',
-              end: 'left 45%',
-              scrub: true,
-            },
-          })
-        })
-        gsap.utils.toArray<HTMLElement>('[data-panel-img]', rail).forEach((img) => {
-          gsap.fromTo(
-            img,
-            { xPercent: -12 },
-            {
-              xPercent: 12,
-              ease: 'none',
+        gsap.utils
+          .toArray<HTMLElement>('[data-caption]', rail)
+          .forEach((caption) => {
+            gsap.from(caption, {
+              y: 40,
+              opacity: 0,
+              ease: 'power2.out',
               scrollTrigger: {
-                trigger: img,
+                trigger: caption,
                 containerAnimation: tween,
-                start: 'left right',
-                end: 'right left',
+                start: 'left 85%',
+                end: 'left 45%',
                 scrub: true,
               },
-            },
-          )
-        })
+            })
+          })
+        gsap.utils
+          .toArray<HTMLElement>('[data-panel-img]', rail)
+          .forEach((img) => {
+            gsap.fromTo(
+              img,
+              { xPercent: -12 },
+              {
+                xPercent: 12,
+                ease: 'none',
+                scrollTrigger: {
+                  trigger: img,
+                  containerAnimation: tween,
+                  start: 'left right',
+                  end: 'right left',
+                  scrub: true,
+                },
+              },
+            )
+          })
       })
       return () => mm.revert()
     },
@@ -118,7 +122,9 @@ export function HorizontalScrollDemo() {
                 <p className="mt-1 text-xl font-semibold">
                   {panel.place}, {panel.country}
                 </p>
-                <p className="mt-1 max-w-md text-sm text-white/80">{panel.caption}</p>
+                <p className="mt-1 max-w-md text-sm text-white/80">
+                  {panel.caption}
+                </p>
               </figcaption>
             </figure>
           ))}

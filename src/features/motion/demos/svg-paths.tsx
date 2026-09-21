@@ -38,7 +38,11 @@ export function SvgPathsDemo() {
       description="pathLength animates from 0 to 1 to draw any path (Motion normalizes its length). The checkmark draws its circle then its tick in sequence, and the blob morphs its d attribute between shapes with a spring."
       source="generated"
       controls={
-        <Button size="sm" variant="outline" onClick={() => setRun((r) => r + 1)}>
+        <Button
+          size="sm"
+          variant="outline"
+          onClick={() => setRun((r) => r + 1)}
+        >
           <RotateCcw /> Redraw
         </Button>
       }

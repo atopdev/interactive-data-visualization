@@ -60,12 +60,26 @@ function indicatorUrl(indicator: string) {
 }
 
 /** Population + GDP per capita for every (non-aggregate) country, 2000–2023. */
-export async function fetchWorldBank(options?: FetchOptions): Promise<WorldBankData> {
+export async function fetchWorldBank(
+  options?: FetchOptions,
+): Promise<WorldBankData> {
   // The API is slow; the three requests run in parallel, each with its own timeout.
   const [countries, pop, gdp] = await Promise.all([
-    fetchJson(`${WB}/country?format=json&per_page=400`, countriesResponse, options),
-    fetchJson(indicatorUrl(WB_INDICATORS.population), indicatorResponse, options),
-    fetchJson(indicatorUrl(WB_INDICATORS.gdpPerCapita), indicatorResponse, options),
+    fetchJson(
+      `${WB}/country?format=json&per_page=400`,
+      countriesResponse,
+      options,
+    ),
+    fetchJson(
+      indicatorUrl(WB_INDICATORS.population),
+      indicatorResponse,
+      options,
+    ),
+    fetchJson(
+      indicatorUrl(WB_INDICATORS.gdpPerCapita),
+      indicatorResponse,
+      options,
+    ),
   ])
   const years = Array.from(
     { length: WB_LAST_YEAR - WB_FIRST_YEAR + 1 },
@@ -109,7 +123,9 @@ export function trimWorldBank(data: WorldBankData): WorldBankData {
     countries: data.countries.map((c) => ({
       ...c,
       population: c.population.map((v) => (v === null ? null : roundSig(v, 4))),
-      gdpPerCapita: c.gdpPerCapita.map((v) => (v === null ? null : Math.round(v))),
+      gdpPerCapita: c.gdpPerCapita.map((v) =>
+        v === null ? null : Math.round(v),
+      ),
     })),
   }
 }

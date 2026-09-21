@@ -141,7 +141,8 @@ export function StaggerGridDemo() {
                 className="aspect-square rounded-[25%] outline-offset-2 focus-visible:outline-2"
                 style={{
                   background: `color-mix(in oklab, var(--page-accent) ${Math.round(100 - hue * 70)}%, var(--series-7))`,
-                  boxShadow: origin === i ? '0 0 0 2px var(--foreground)' : undefined,
+                  boxShadow:
+                    origin === i ? '0 0 0 2px var(--foreground)' : undefined,
                 }}
               />
             )

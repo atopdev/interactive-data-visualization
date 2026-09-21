@@ -43,7 +43,10 @@ export function ChainDemo() {
   })
 
   // Opening: container first, then tiles. Closing: tiles first, then container.
-  useChain(open ? [boxRef, tilesRef] : [tilesRef, boxRef], [0, open ? 0.15 : 0.5])
+  useChain(open ? [boxRef, tilesRef] : [tilesRef, boxRef], [
+    0,
+    open ? 0.15 : 0.5,
+  ])
 
   return (
     <DemoSection
@@ -61,7 +64,9 @@ export function ChainDemo() {
           aria-expanded={open}
           aria-label={open ? 'Close grid' : 'Open grid'}
           onClick={() => setOpen((o) => !o)}
-          onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && setOpen((o) => !o)}
+          onKeyDown={(e) =>
+            (e.key === 'Enter' || e.key === ' ') && setOpen((o) => !o)
+          }
           className="grid cursor-pointer grid-cols-3 grid-rows-4 gap-2.5 overflow-hidden bg-card p-3 shadow-xl sm:grid-cols-4 sm:grid-rows-3"
           style={{
             width: box.size.to((s) => `${s}%`),
@@ -81,7 +86,9 @@ export function ChainDemo() {
               <span className="truncate text-[11px] font-medium opacity-90">
                 {t.label}
               </span>
-              <span className="text-lg font-semibold tabular-nums">{t.value}</span>
+              <span className="text-lg font-semibold tabular-nums">
+                {t.value}
+              </span>
             </animated.div>
           ))}
         </animated.div>

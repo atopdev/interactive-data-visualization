@@ -1,7 +1,10 @@
 import { useQuery } from '@tanstack/react-query'
 import * as d3 from 'd3'
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { DataInspector, type InspectorColumn } from '@/components/data-inspector'
+import {
+  DataInspector,
+  type InspectorColumn,
+} from '@/components/data-inspector'
 import { SliderControl, SwitchControl } from '@/components/page/control'
 import { DataState } from '@/components/page/data-state'
 import { DemoSection } from '@/components/page/demo-section'
@@ -40,7 +43,9 @@ function Globe({ table, year, points, spin }: GlobeProps) {
   const values = useMemo(() => {
     const yi = table.years.indexOf(year)
     const byName = new Map(table.series.map((s) => [s.entity, s.values[yi]]))
-    return new Map(countries.features.map((f) => [f, byName.get(owidName(f)) ?? null]))
+    return new Map(
+      countries.features.map((f) => [f, byName.get(owidName(f)) ?? null]),
+    )
   }, [table, year])
 
   useEffect(() => {
@@ -64,8 +69,13 @@ function Globe({ table, year, points, spin }: GlobeProps) {
       .rotate(rotation.current)
     const path = d3.geoPath(projection, ctx)
     const graticule = d3.geoGraticule10()
-    const all = [...values.values()].filter((v): v is number => v !== null && v > 0)
-    const [lo, hi] = [d3.quantile(all, 0.02) ?? 0.05, d3.quantile(all, 0.98) ?? 20]
+    const all = [...values.values()].filter(
+      (v): v is number => v !== null && v > 0,
+    )
+    const [lo, hi] = [
+      d3.quantile(all, 0.02) ?? 0.05,
+      d3.quantile(all, 0.98) ?? 20,
+    ]
     const t01 = d3
       .scaleLog()
       .domain([Math.max(0.01, lo), hi])
@@ -143,17 +153,20 @@ function Globe({ table, year, points, spin }: GlobeProps) {
         .on('start', () => {
           dragging = true
         })
-        .on('drag', (e: d3.D3DragEvent<HTMLCanvasElement, unknown, unknown>) => {
-          const r = projection.rotate()
-          const k = 75 / projection.scale()
-          projection.rotate([
-            r[0] + e.dx * k,
-            Math.max(-90, Math.min(90, r[1] - e.dy * k)),
-            r[2],
-          ])
-          rotation.current = projection.rotate()
-          if (!inView || !visible) draw(0)
-        })
+        .on(
+          'drag',
+          (e: d3.D3DragEvent<HTMLCanvasElement, unknown, unknown>) => {
+            const r = projection.rotate()
+            const k = 75 / projection.scale()
+            projection.rotate([
+              r[0] + e.dx * k,
+              Math.max(-90, Math.min(90, r[1] - e.dy * k)),
+              r[2],
+            ])
+            rotation.current = projection.rotate()
+            if (!inView || !visible) draw(0)
+          },
+        )
         .on('end', () => {
           dragging = false
         }),
@@ -163,7 +176,9 @@ function Globe({ table, year, points, spin }: GlobeProps) {
       if (!tip) return
       const [mx, my] = d3.pointer(e)
       const ll = projection.invert?.([mx, my])
-      const hit = ll ? countries.features.find((f) => d3.geoContains(f, ll)) : undefined
+      const hit = ll
+        ? countries.features.find((f) => d3.geoContains(f, ll))
+        : undefined
       if (!hit) {
         tip.style.opacity = '0'
         return
@@ -212,7 +227,10 @@ function Legend() {
       />
       <span>high (log scale, t CO₂/person)</span>
       <span className="ml-3 flex items-center gap-1">
-        <span className="size-2 rounded-full" style={{ background: 'var(--series-8)' }} />{' '}
+        <span
+          className="size-2 rounded-full"
+          style={{ background: 'var(--series-8)' }}
+        />{' '}
         earthquake
       </span>
     </div>

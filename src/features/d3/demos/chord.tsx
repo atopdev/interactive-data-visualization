@@ -53,9 +53,13 @@ function Chord({ fx, threshold }: { fx: FxData; threshold: number }) {
     const size = Math.min(width, 560)
     const outer = size / 2 - 44
     const inner = outer - 14
-    const svg = d3.select(el).attr('viewBox', `${-size / 2} ${-size / 2} ${size} ${size}`)
+    const svg = d3
+      .select(el)
+      .attr('viewBox', `${-size / 2} ${-size / 2} ${size} ${size}`)
     svg.selectAll('*').remove()
-    const chords = d3.chord().padAngle(0.04).sortSubgroups(d3.descending)(matrix)
+    const chords = d3.chord().padAngle(0.04).sortSubgroups(d3.descending)(
+      matrix,
+    )
     const color = (i: number) => `var(--series-${(i % 8) + 1})`
     const arc = d3.arc<d3.ChordGroup>().innerRadius(inner).outerRadius(outer)
     const ribbon = d3.ribbon<d3.Chord, d3.ChordSubgroup>().radius(inner - 2)
@@ -99,7 +103,8 @@ function Chord({ fx, threshold }: { fx: FxData; threshold: number }) {
     group
       .append('text')
       .each((d) => {
-        ;(d as d3.ChordGroup & { angle: number }).angle = (d.startAngle + d.endAngle) / 2
+        ;(d as d3.ChordGroup & { angle: number }).angle =
+          (d.startAngle + d.endAngle) / 2
       })
       .attr('dy', '0.35em')
       .attr('font-size', 12)
@@ -121,7 +126,9 @@ function Chord({ fx, threshold }: { fx: FxData; threshold: number }) {
           .transition()
           .duration(reduced ? 0 : 200)
           .attr('fill-opacity', (d) =>
-            d.source.index === g.index || d.target.index === g.index ? 0.9 : 0.05,
+            d.source.index === g.index || d.target.index === g.index
+              ? 0.9
+              : 0.05,
           )
       })
       .on('pointerleave', () => {

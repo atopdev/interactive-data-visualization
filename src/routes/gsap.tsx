@@ -69,10 +69,11 @@ function GsapPage() {
       focus={search.demo}
       lead={
         <>
-          GSAP is a timeline-first animation engine. Every plugin is now free, so this
-          page uses them all: SplitText, ScrollTrigger, Flip, Draggable with Inertia,
-          DrawSVG, MorphSVG, MotionPath, Observer and ScrambleText. Each demo runs inside
-          a scoped <code className="font-mono text-sm">useGSAP</code> context that cleans
+          GSAP is a timeline-first animation engine. Every plugin is now free,
+          so this page uses them all: SplitText, ScrollTrigger, Flip, Draggable
+          with Inertia, DrawSVG, MorphSVG, MotionPath, Observer and
+          ScrambleText. Each demo runs inside a scoped{' '}
+          <code className="font-mono text-sm">useGSAP</code> context that cleans
           itself up.
         </>
       }

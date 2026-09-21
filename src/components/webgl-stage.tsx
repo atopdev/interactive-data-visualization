@@ -31,7 +31,8 @@ export function WebGLStage({
         <div className="absolute inset-0 grid place-items-center">
           {poster}
           <p className="relative flex items-center gap-1.5 rounded-full border bg-card/80 px-3 py-1 text-xs text-muted-foreground backdrop-blur">
-            <Pause className="size-3" /> WebGL paused: another demo holds the context
+            <Pause className="size-3" /> WebGL paused: another demo holds the
+            context
           </p>
         </div>
       )}

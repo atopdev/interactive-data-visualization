@@ -7,7 +7,13 @@ import { Label } from '@/components/ui/label'
 import { cn } from '@/lib/utils'
 
 /** Code block with a copy-to-clipboard button. */
-export function CodeSnippet({ code, className }: { code: string; className?: string }) {
+export function CodeSnippet({
+  code,
+  className,
+}: {
+  code: string
+  className?: string
+}) {
   const [copied, setCopied] = useState(false)
   const copy = async () => {
     try {
@@ -19,9 +25,16 @@ export function CodeSnippet({ code, className }: { code: string; className?: str
     }
   }
   return (
-    <div className={cn('overflow-hidden rounded-xl border bg-surface-2', className)}>
+    <div
+      className={cn(
+        'overflow-hidden rounded-xl border bg-surface-2',
+        className,
+      )}
+    >
       <div className="flex items-center justify-between border-b px-4 py-1.5">
-        <span className="font-mono text-[11px] text-muted-foreground">Usage (TSX)</span>
+        <span className="font-mono text-[11px] text-muted-foreground">
+          Usage (TSX)
+        </span>
         <Button
           size="xs"
           variant="ghost"
@@ -131,8 +144,12 @@ export function CategoryHeader({
 }) {
   return (
     <div id={id} className="scroll-mt-20 border-b pt-6 pb-3">
-      <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">{title}</h2>
-      <p className="mt-1 max-w-2xl text-sm text-muted-foreground">{description}</p>
+      <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
+        {title}
+      </h2>
+      <p className="mt-1 max-w-2xl text-sm text-muted-foreground">
+        {description}
+      </p>
     </div>
   )
 }

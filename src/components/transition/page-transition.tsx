@@ -100,7 +100,8 @@ export function PageTransition() {
       const page = pageForPath(toPath)
       if (titleRef.current) titleRef.current.textContent = page?.title ?? 'Home'
       if (taglineRef.current)
-        taglineRef.current.textContent = page?.tagline ?? 'Interactive Data Visualization'
+        taglineRef.current.textContent =
+          page?.tagline ?? 'Interactive Data Visualization'
 
       coverRef.current = new Promise<void>((resolve) => {
         const done = () => {
@@ -137,7 +138,9 @@ export function PageTransition() {
 
     const main = document.querySelector('main')
     const heading = main?.querySelector<HTMLElement>('[data-page-heading]')
-    const blocks = main ? gsap.utils.toArray<HTMLElement>('[data-page-reveal]', main) : []
+    const blocks = main
+      ? gsap.utils.toArray<HTMLElement>('[data-page-reveal]', main)
+      : []
     let split: SplitText | null = null
     const cleanup = () => {
       split?.revert()
@@ -213,7 +216,8 @@ export function PageTransition() {
   // Remember where navigations start (pointer position and the clicked link).
   useEffect(() => {
     const onClick = (e: MouseEvent) => {
-      const target = e.target instanceof Element ? e.target.closest('a, button') : null
+      const target =
+        e.target instanceof Element ? e.target.closest('a, button') : null
       const rect = target?.getBoundingClientRect() ?? null
       // Keyboard activation reports (0, 0): use the element's center instead.
       const fromKeyboard = e.detail === 0 && rect
@@ -252,7 +256,10 @@ export function PageTransition() {
           ref={titleRef}
           className="text-4xl font-semibold tracking-tight text-foreground sm:text-6xl"
         />
-        <p ref={taglineRef} className="text-sm text-muted-foreground sm:text-base" />
+        <p
+          ref={taglineRef}
+          className="text-sm text-muted-foreground sm:text-base"
+        />
       </div>
     </div>
   )

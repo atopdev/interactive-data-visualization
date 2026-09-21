@@ -1,4 +1,9 @@
-import { motion, useMotionValue, useTransform, type PanInfo } from 'motion/react'
+import {
+  motion,
+  useMotionValue,
+  useTransform,
+  type PanInfo,
+} from 'motion/react'
 import { useState, useEffect } from 'react'
 
 interface CardRotateProps {
@@ -19,8 +24,14 @@ function CardRotate({
   const rotateX = useTransform(y, [-100, 100], [60, -60])
   const rotateY = useTransform(x, [-100, 100], [-60, 60])
 
-  function handleDragEnd(_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) {
-    if (Math.abs(info.offset.x) > sensitivity || Math.abs(info.offset.y) > sensitivity) {
+  function handleDragEnd(
+    _event: MouseEvent | TouchEvent | PointerEvent,
+    info: PanInfo,
+  ) {
+    if (
+      Math.abs(info.offset.x) > sensitivity ||
+      Math.abs(info.offset.y) > sensitivity
+    ) {
       onSendToBack()
     } else {
       x.set(0)
@@ -30,7 +41,10 @@ function CardRotate({
 
   if (disableDrag) {
     return (
-      <motion.div className="absolute inset-0 cursor-pointer" style={{ x: 0, y: 0 }}>
+      <motion.div
+        className="absolute inset-0 cursor-pointer"
+        style={{ x: 0, y: 0 }}
+      >
         {children}
       </motion.div>
     )
@@ -92,7 +106,9 @@ export default function Stack({
   const shouldDisableDrag = mobileClickOnly && isMobile
   const shouldEnableClick = sendToBackOnClick || shouldDisableDrag
 
-  const [stack, setStack] = useState<{ id: number; content: React.ReactNode }[]>(() => {
+  const [stack, setStack] = useState<
+    { id: number; content: React.ReactNode }[]
+  >(() => {
     if (cards.length) {
       return cards.map((content, index) => ({ id: index + 1, content }))
     } else {

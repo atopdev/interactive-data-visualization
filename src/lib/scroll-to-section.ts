@@ -43,7 +43,8 @@ export function scrollToSection(
     onArrive?.()
   }
 
-  const targetY = window.scrollY + el.getBoundingClientRect().top - HEADER_OFFSET
+  const targetY =
+    window.scrollY + el.getBoundingClientRect().top - HEADER_OFFSET
   if (prefersReducedMotion()) {
     window.scrollTo({ top: targetY, behavior: 'instant' })
     arrive()

@@ -22,7 +22,9 @@ export type Pageviews = z.infer<typeof pageviewsSchema>
 const compact = (d: Date) => d.toISOString().slice(0, 10).replace(/-/g, '')
 
 /** Daily views over the last year (ending two days ago; the API lags a day). */
-export async function fetchPageviews(options?: FetchOptions): Promise<Pageviews> {
+export async function fetchPageviews(
+  options?: FetchOptions,
+): Promise<Pageviews> {
   const end = addDays(new Date(), -2)
   const start = addDays(end, -364)
   const articles = await Promise.all(

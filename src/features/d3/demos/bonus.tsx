@@ -1,6 +1,11 @@
 import { useQuery } from '@tanstack/react-query'
 import * as d3 from 'd3'
-import { sankey, sankeyLinkHorizontal, type SankeyLink, type SankeyNode } from 'd3-sankey'
+import {
+  sankey,
+  sankeyLinkHorizontal,
+  type SankeyLink,
+  type SankeyNode,
+} from 'd3-sankey'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { SliderControl } from '@/components/page/control'
 import { DataState } from '@/components/page/data-state'
@@ -32,7 +37,11 @@ function buildSankey(data: NobelData) {
       country: l.country ?? 'Unknown',
       category: p.category,
       gender:
-        l.gender === 'org' ? 'Organization' : l.gender === 'female' ? 'Female' : 'Male',
+        l.gender === 'org'
+          ? 'Organization'
+          : l.gender === 'female'
+            ? 'Female'
+            : 'Male',
     })),
   )
   const top = d3
@@ -124,13 +133,18 @@ function Sankey({ data }: { data: NobelData }) {
       .join('path')
       .attr('d', sankeyLinkHorizontal())
       .attr('stroke', (l) =>
-        colorOf((l.source as SN).column === 1 ? (l.source as SN) : (l.target as SN)),
+        colorOf(
+          (l.source as SN).column === 1 ? (l.source as SN) : (l.target as SN),
+        ),
       )
       .attr('stroke-opacity', 0.35)
       .attr('stroke-width', (l) => Math.max(1, l.width ?? 1))
     link
       .append('title')
-      .text((l) => `${(l.source as SN).name} → ${(l.target as SN).name}: ${l.value}`)
+      .text(
+        (l) =>
+          `${(l.source as SN).name} → ${(l.target as SN).name}: ${l.value}`,
+      )
     if (!reduced) {
       link
         .attr('stroke-dasharray', function () {
@@ -173,7 +187,9 @@ function Sankey({ data }: { data: NobelData }) {
       .selectAll('text')
       .data(nodes)
       .join('text')
-      .attr('x', (d) => ((d.x0 ?? 0) < width / 2 ? (d.x1 ?? 0) + 6 : (d.x0 ?? 0) - 6))
+      .attr('x', (d) =>
+        (d.x0 ?? 0) < width / 2 ? (d.x1 ?? 0) + 6 : (d.x0 ?? 0) - 6,
+      )
       .attr('y', (d) => ((d.y1 ?? 0) + (d.y0 ?? 0)) / 2)
       .attr('dy', '0.35em')
       .attr('text-anchor', (d) => ((d.x0 ?? 0) < width / 2 ? 'start' : 'end'))
@@ -216,7 +232,9 @@ function RadialTemperature({ data }: { data: TemperatureYear }) {
     const size = Math.min(width, 520)
     const inner = size * 0.16
     const outer = size / 2 - 28
-    const svg = d3.select(el).attr('viewBox', `${-size / 2} ${-size / 2} ${size} ${size}`)
+    const svg = d3
+      .select(el)
+      .attr('viewBox', `${-size / 2} ${-size / 2} ${size} ${size}`)
     svg.selectAll('*').remove()
     const days = data.days
     const x = d3
@@ -340,7 +358,13 @@ function RadialTemperature({ data }: { data: TemperatureYear }) {
 
 /* ---------- Earthquake contour density ---------- */
 
-function QuakeDensity({ points, bandwidth }: { points: Quake[]; bandwidth: number }) {
+function QuakeDensity({
+  points,
+  bandwidth,
+}: {
+  points: Quake[]
+  bandwidth: number
+}) {
   const wrap = useRef<HTMLDivElement>(null)
   const svgRef = useRef<SVGSVGElement>(null)
   const { width } = useElementSize(wrap)
@@ -352,7 +376,9 @@ function QuakeDensity({ points, bandwidth }: { points: Quake[]; bandwidth: numbe
     if (!el || width === 0) return
     const svg = d3.select(el)
     svg.selectAll('*').remove()
-    const projection = d3.geoEquirectangular().fitSize([width, H], { type: 'Sphere' })
+    const projection = d3
+      .geoEquirectangular()
+      .fitSize([width, H], { type: 'Sphere' })
     const path = d3.geoPath(projection)
     svg
       .append('path')
@@ -374,7 +400,10 @@ function QuakeDensity({ points, bandwidth }: { points: Quake[]; bandwidth: numbe
       .bandwidth(bandwidth)
       .thresholds(14)(projected)
     const maxV = d3.max(contours, (c) => c.value) ?? 1
-    const ramp = d3.interpolateRgbBasis([alpha(theme.div[2], 0.05), theme.div[2]])
+    const ramp = d3.interpolateRgbBasis([
+      alpha(theme.div[2], 0.05),
+      theme.div[2],
+    ])
     svg
       .append('g')
       .selectAll('path')

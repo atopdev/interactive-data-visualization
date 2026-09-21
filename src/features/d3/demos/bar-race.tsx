@@ -2,7 +2,10 @@ import { useQuery } from '@tanstack/react-query'
 import * as d3 from 'd3'
 import { Pause, Play, RotateCcw } from 'lucide-react'
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { DataInspector, type InspectorColumn } from '@/components/data-inspector'
+import {
+  DataInspector,
+  type InspectorColumn,
+} from '@/components/data-inspector'
 import { DataState } from '@/components/page/data-state'
 import { DemoSection } from '@/components/page/demo-section'
 import { Button } from '@/components/ui/button'
@@ -114,7 +117,8 @@ function Race({
             .attr('width', 0)
             .attr('fill', (d) => colorOf(d.code)),
         (update) => update,
-        (exit) => exit.transition(t).attr('y', y(TOP)).attr('width', 0).remove(),
+        (exit) =>
+          exit.transition(t).attr('y', y(TOP)).attr('width', 0).remove(),
       )
       .transition(t)
       .attr('y', (_, i) => y(i) + 3)
@@ -140,9 +144,13 @@ function Race({
               .attr('font-size', 12)
               .attr('font-weight', cls === 'name' ? 600 : 400)
               .attr('text-anchor', cls === 'name' ? 'end' : 'start')
-              .attr('fill', cls === 'name' ? 'white' : 'var(--muted-foreground)'),
+              .attr(
+                'fill',
+                cls === 'name' ? 'white' : 'var(--muted-foreground)',
+              ),
           (update) => update,
-          (exit) => exit.transition(t).attr('y', y(TOP)).attr('opacity', 0).remove(),
+          (exit) =>
+            exit.transition(t).attr('y', y(TOP)).attr('opacity', 0).remove(),
         )
         .text((d) =>
           cls === 'name'
@@ -254,7 +262,9 @@ export function BarRaceDemo() {
               setYearIndex(0)
             }}
           >
-            <ToggleGroupItem value="life-expectancy">Life expectancy</ToggleGroupItem>
+            <ToggleGroupItem value="life-expectancy">
+              Life expectancy
+            </ToggleGroupItem>
             <ToggleGroupItem value="population">Population</ToggleGroupItem>
           </ToggleGroup>
           <Button size="sm" onClick={() => setPlaying((p) => !p)}>
@@ -273,7 +283,11 @@ export function BarRaceDemo() {
       }
     >
       <div ref={ref} className="flex flex-col gap-4">
-        <DataState query={query} isEmpty={(d) => d.series.length === 0} className="h-96">
+        <DataState
+          query={query}
+          isEmpty={(d) => d.series.length === 0}
+          className="h-96"
+        >
           {(table) => <Race table={table} year={year} playing={playing} />}
         </DataState>
         <div className="flex items-center gap-3">

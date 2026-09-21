@@ -57,10 +57,10 @@ function MotionPage() {
         lead={
           <>
             Motion (formerly Framer Motion, now imported from{' '}
-            <code className="font-mono text-sm">motion/react</code>) animates React with
-            declarative props: layout and shared-element transitions, presence,
-            orchestration, gestures, drag physics and scroll-linked motion values that
-            update without re-rendering.
+            <code className="font-mono text-sm">motion/react</code>) animates
+            React with declarative props: layout and shared-element transitions,
+            presence, orchestration, gestures, drag physics and scroll-linked
+            motion values that update without re-rendering.
           </>
         }
         toc={TOC}

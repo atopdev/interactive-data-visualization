@@ -65,8 +65,12 @@ export function DemoPage({
     height: number
   } | null>(null)
   useLayoutEffect(() => {
-    const link = listRef.current?.querySelector<HTMLElement>(`[data-toc-id="${active}"]`)
-    setIndicator(link ? { top: link.offsetTop, height: link.offsetHeight } : null)
+    const link = listRef.current?.querySelector<HTMLElement>(
+      `[data-toc-id="${active}"]`,
+    )
+    setIndicator(
+      link ? { top: link.offsetTop, height: link.offsetHeight } : null,
+    )
   }, [active])
   const { prev, next } = neighbors(pageId)
   // Wait for idle: ScrollTrigger refreshes (and pin spacers resize) after the reveal.
@@ -141,14 +145,16 @@ export function DemoPage({
                   onClick={(e) => {
                     // Plain anchors still work without JS; with JS we animate.
                     // Modified clicks keep their default (new tab, etc.).
-                    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return
+                    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0)
+                      return
                     e.preventDefault()
                     go(entry.id)
                   }}
                   aria-current={active === entry.id ? 'location' : undefined}
                   className={cn(
                     'flex gap-2 py-1.5 pl-3 text-sm text-muted-foreground transition-[color,transform] duration-300 hover:translate-x-0.5 hover:text-foreground',
-                    active === entry.id && 'translate-x-1 font-medium text-foreground',
+                    active === entry.id &&
+                      'translate-x-1 font-medium text-foreground',
                   )}
                 >
                   <span className="font-mono text-xs tabular-nums opacity-60">
@@ -176,10 +182,15 @@ export function DemoPage({
                 <ArrowLeft className="size-3.5 transition-transform group-hover:-translate-x-0.5" />
                 Previous
               </span>
-              <span className="font-semibold" style={{ color: `var(${prev.accentVar})` }}>
+              <span
+                className="font-semibold"
+                style={{ color: `var(${prev.accentVar})` }}
+              >
                 {prev.title}
               </span>
-              <span className="text-sm text-muted-foreground">{prev.tagline}</span>
+              <span className="text-sm text-muted-foreground">
+                {prev.tagline}
+              </span>
             </Link>
             <Link
               to={next.to}
@@ -189,10 +200,15 @@ export function DemoPage({
                 Next
                 <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
               </span>
-              <span className="font-semibold" style={{ color: `var(${next.accentVar})` }}>
+              <span
+                className="font-semibold"
+                style={{ color: `var(${next.accentVar})` }}
+              >
                 {next.title}
               </span>
-              <span className="text-sm text-muted-foreground">{next.tagline}</span>
+              <span className="text-sm text-muted-foreground">
+                {next.tagline}
+              </span>
             </Link>
           </nav>
         </div>

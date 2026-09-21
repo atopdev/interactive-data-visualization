@@ -16,7 +16,10 @@ import { fetchCandles, trimCandles } from '../src/lib/sources/crypto.ts'
 import { fetchFx } from '../src/lib/sources/frankfurter.ts'
 import { fetchNobel } from '../src/lib/sources/nobel.ts'
 import { fetchNpmDownloads } from '../src/lib/sources/npm.ts'
-import { fetchTemperatureYear, fetchWeatherNow } from '../src/lib/sources/openmeteo.ts'
+import {
+  fetchTemperatureYear,
+  fetchWeatherNow,
+} from '../src/lib/sources/openmeteo.ts'
 import { fetchOwid, trimOwid } from '../src/lib/sources/owid.ts'
 import { fetchPokemon } from '../src/lib/sources/pokeapi.ts'
 import { fetchQuakes, trimQuakes } from '../src/lib/sources/usgs.ts'
@@ -48,13 +51,17 @@ const jobs: Job[] = [
     file: 'owid-co2.json',
     endpoint: 'ourworldindata.org/grapher/co-emissions-per-capita.csv',
     run: async () =>
-      trimOwid(await fetchOwid('co-emissions-per-capita', { ...opts, fromYear: 1960 })),
+      trimOwid(
+        await fetchOwid('co-emissions-per-capita', { ...opts, fromYear: 1960 }),
+      ),
   },
   {
     file: 'owid-population.json',
     endpoint: 'ourworldindata.org/grapher/population.csv',
     run: async () =>
-      trimOwid(await fetchOwid('population', { ...opts, fromYear: 1950 }), { topN: 30 }),
+      trimOwid(await fetchOwid('population', { ...opts, fromYear: 1950 }), {
+        topN: 30,
+      }),
   },
   {
     file: 'worldbank.json',
@@ -116,7 +123,11 @@ const results = await Promise.allSettled(
     const data = await job.run()
     const json = JSON.stringify(data)
     writeFileSync(path.join(OUT_DIR, job.file), json + '\n')
-    return { job, bytes: Buffer.byteLength(json), ms: performance.now() - started }
+    return {
+      job,
+      bytes: Buffer.byteLength(json),
+      ms: performance.now() - started,
+    }
   }),
 )
 
@@ -136,8 +147,12 @@ for (const [i, result] of results.entries()) {
       ? `kept previous (${(statSync(target).size / 1024).toFixed(1)} KB)`
       : 'NO SNAPSHOT'
     const reason =
-      result.reason instanceof Error ? result.reason.message : String(result.reason)
-    console.error(`✖ ${job.file.padEnd(26)} ${job.endpoint}\n    ${reason}\n    ${kept}`)
+      result.reason instanceof Error
+        ? result.reason.message
+        : String(result.reason)
+    console.error(
+      `✖ ${job.file.padEnd(26)} ${job.endpoint}\n    ${reason}\n    ${kept}`,
+    )
   }
 }
 

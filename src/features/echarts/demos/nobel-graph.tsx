@@ -178,10 +178,19 @@ function Sankey({ data }: { data: NobelData }) {
   const option = useMemo<SankeyOption>(() => {
     const rows = data.laureates.flatMap((l) =>
       l.prizes.map((p) => ({
-        era: p.year < 1950 ? '1901–1949' : p.year < 2000 ? '1950–1999' : '2000–today',
+        era:
+          p.year < 1950
+            ? '1901–1949'
+            : p.year < 2000
+              ? '1950–1999'
+              : '2000–today',
         category: p.category,
         gender:
-          l.gender === 'org' ? 'Organization' : l.gender === 'female' ? 'Women' : 'Men',
+          l.gender === 'org'
+            ? 'Organization'
+            : l.gender === 'female'
+              ? 'Women'
+              : 'Men',
       })),
     )
     const count = new Map<string, number>()

@@ -20,7 +20,10 @@ import {
 } from 'echarts/components'
 import { useMemo } from 'react'
 import { EChart } from '@/components/charts/echart'
-import { DataInspector, type InspectorColumn } from '@/components/data-inspector'
+import {
+  DataInspector,
+  type InspectorColumn,
+} from '@/components/data-inspector'
 import { DataState } from '@/components/page/data-state'
 import { DemoSection } from '@/components/page/demo-section'
 import { useChartTheme } from '@/hooks/use-chart-theme'

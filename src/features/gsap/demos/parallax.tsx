@@ -118,7 +118,11 @@ export function ParallaxDemo() {
     >
       <div ref={scope} className="relative h-[34rem] overflow-hidden bg-black">
         {LAYERS.map((l) => (
-          <div key={l.seed} data-depth={l.depth} className={`absolute ${l.className}`}>
+          <div
+            key={l.seed}
+            data-depth={l.depth}
+            className={`absolute ${l.className}`}
+          >
             <div data-depth-inner={l.depth} className="size-full">
               <SmartImage
                 src={picsum({
@@ -138,7 +142,9 @@ export function ParallaxDemo() {
                 width={l.w}
                 height={l.h}
                 className={
-                  l.depth === 0.15 ? 'size-full opacity-70' : 'rounded-2xl shadow-2xl'
+                  l.depth === 0.15
+                    ? 'size-full opacity-70'
+                    : 'rounded-2xl shadow-2xl'
                 }
                 style={l.depth === 0.15 ? { aspectRatio: 'auto' } : undefined}
               />

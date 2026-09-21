@@ -76,7 +76,11 @@ function buildGraph(data: NobelData, n: number) {
 }
 
 const radius = (d: GNode) =>
-  d.kind === 'category' ? 16 : d.kind === 'country' ? 4 + Math.sqrt(d.weight) * 2.2 : 3.5
+  d.kind === 'category'
+    ? 16
+    : d.kind === 'country'
+      ? 4 + Math.sqrt(d.weight) * 2.2
+      : 3.5
 const fill = (d: GNode) =>
   d.kind === 'country'
     ? 'var(--muted-foreground)'
@@ -173,12 +177,15 @@ function ForceGraph({ data, count }: { data: NobelData; count: number }) {
       linkG
         .selectAll<SVGLineElement, GLink>('line')
         .attr('stroke', (l) =>
-          d && ((l.source as GNode).id === d.id || (l.target as GNode).id === d.id)
+          d &&
+          ((l.source as GNode).id === d.id || (l.target as GNode).id === d.id)
             ? 'var(--page-accent)'
             : 'var(--border)',
         )
         .attr('stroke-opacity', (l) =>
-          !d || (l.source as GNode).id === d.id || (l.target as GNode).id === d.id
+          !d ||
+          (l.source as GNode).id === d.id ||
+          (l.target as GNode).id === d.id
             ? 0.9
             : 0.08,
         )
@@ -362,7 +369,8 @@ function ForceGraph({ data, count }: { data: NobelData; count: number }) {
           </span>
         ))}
         <span className="flex items-center gap-1.5">
-          <span className="size-2.5 rounded-full bg-muted-foreground" /> Birth country
+          <span className="size-2.5 rounded-full bg-muted-foreground" /> Birth
+          country
         </span>
       </div>
       <Button

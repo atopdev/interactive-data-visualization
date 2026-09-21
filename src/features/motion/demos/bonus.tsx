@@ -79,7 +79,9 @@ function CardStack3D() {
               />
               <div className="p-2.5">
                 <p className="truncate text-sm font-semibold">{p.name}</p>
-                <p className="truncate text-[11px] text-muted-foreground">{p.jobTitle}</p>
+                <p className="truncate text-[11px] text-muted-foreground">
+                  {p.jobTitle}
+                </p>
               </div>
             </motion.button>
           )
@@ -181,7 +183,8 @@ function LiveTicker() {
     seedPrice: seed,
   })
   const price = ticker.price ?? seed ?? null
-  const up = ticker.previous === null || price === null || price >= ticker.previous
+  const up =
+    ticker.previous === null || price === null || price >= ticker.previous
   const open = candles.data?.data.candles.at(-1)?.open
   const change = price !== null && open ? ((price - open) / open) * 100 : null
   const text = price === null ? '—' : usd.format(price)

@@ -122,7 +122,9 @@ export function MasonryFilterDemo() {
                         transform: 'rotateY(180deg)',
                       }}
                     >
-                      <p className="text-sm font-semibold capitalize">{t.title}</p>
+                      <p className="text-sm font-semibold capitalize">
+                        {t.title}
+                      </p>
                       <p className="mt-1 line-clamp-3 text-xs text-muted-foreground">
                         {t.caption}
                       </p>

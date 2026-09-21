@@ -20,14 +20,20 @@ export function PullToRefreshDemo() {
       if (refreshing) return cancel()
       // Rubber band: past the max, the panel resists with a logarithmic falloff.
       const pull =
-        my <= 0 ? 0 : my < MAX_PULL ? my : MAX_PULL + Math.log1p(my - MAX_PULL) * 12
+        my <= 0
+          ? 0
+          : my < MAX_PULL
+            ? my
+            : MAX_PULL + Math.log1p(my - MAX_PULL) * 12
       if (active) {
         api.start({ y: pull, immediate: true })
         return
       }
       if (pull > THRESHOLD) {
         api.start({ y: 64, immediate: reduced })
-        void weather.refetch().finally(() => api.start({ y: 0, immediate: reduced }))
+        void weather
+          .refetch()
+          .finally(() => api.start({ y: 0, immediate: reduced }))
       } else {
         api.start({
           y: 0,
@@ -65,11 +71,15 @@ export function PullToRefreshDemo() {
             </>
           ) : (
             <>
-              <animated.span style={{ rotate: y.to([0, THRESHOLD], [0, 180], 'clamp') }}>
+              <animated.span
+                style={{ rotate: y.to([0, THRESHOLD], [0, 180], 'clamp') }}
+              >
                 <ArrowDown className="size-4" />
               </animated.span>
               <animated.span>
-                {y.to((v) => (v > THRESHOLD ? 'Release to refresh' : 'Pull to refresh'))}
+                {y.to((v) =>
+                  v > THRESHOLD ? 'Release to refresh' : 'Pull to refresh',
+                )}
               </animated.span>
             </>
           )}

@@ -88,9 +88,13 @@ export function GesturesDemo() {
               className="rounded-xl border bg-card p-4"
               style={{ transformPerspective: 800 }}
             >
-              <p className="text-xs text-muted-foreground capitalize">{c.adjective}</p>
+              <p className="text-xs text-muted-foreground capitalize">
+                {c.adjective}
+              </p>
               <p className="mt-1 font-medium">{c.product}</p>
-              <p className="mt-3 font-mono text-sm text-page-accent">{c.price}</p>
+              <p className="mt-3 font-mono text-sm text-page-accent">
+                {c.price}
+              </p>
             </motion.article>
           ))}
         </div>

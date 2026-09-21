@@ -21,7 +21,8 @@ function weekly(data: NpmDownloads): { weeks: Week[]; names: string[] } {
   const weeks: Week[] = []
   for (let i = 0; i + 7 <= data.days.length; i += 7) {
     const w: Week = { date: new Date(data.days[i]) }
-    for (const p of data.packages) w[p.name] = d3.sum(p.downloads.slice(i, i + 7))
+    for (const p of data.packages)
+      w[p.name] = d3.sum(p.downloads.slice(i, i + 7))
     weeks.push(w)
   }
   return { weeks, names }
@@ -30,7 +31,13 @@ function weekly(data: NpmDownloads): { weeks: Week[]; names: string[] } {
 const H = 380
 const M = { top: 16, right: 16, bottom: 28, left: 16 }
 
-function Stream({ data, enabled }: { data: NpmDownloads; enabled: Set<string> }) {
+function Stream({
+  data,
+  enabled,
+}: {
+  data: NpmDownloads
+  enabled: Set<string>
+}) {
   const wrap = useRef<HTMLDivElement>(null)
   const svgRef = useRef<SVGSVGElement>(null)
   const tipRef = useRef<HTMLDivElement>(null)
@@ -103,7 +110,9 @@ function Stream({ data, enabled }: { data: NpmDownloads; enabled: Set<string> })
       )
       .call((g) => g.select('.domain').attr('stroke', 'var(--border)'))
       .call((g) => g.selectAll('.tick line').attr('stroke', 'var(--border)'))
-      .call((g) => g.selectAll('.tick text').attr('fill', 'var(--muted-foreground)'))
+      .call((g) =>
+        g.selectAll('.tick text').attr('fill', 'var(--muted-foreground)'),
+      )
 
     // Direct labels at each layer's thickest week.
     svg
@@ -142,7 +151,10 @@ function Stream({ data, enabled }: { data: NpmDownloads; enabled: Set<string> })
       .on('pointermove', (e: PointerEvent) => {
         const [mx] = d3.pointer(e)
         const w = weeks[bisect(weeks, x.invert(mx))]
-        rule.attr('x1', x(w.date)).attr('x2', x(w.date)).attr('stroke-opacity', 0.4)
+        rule
+          .attr('x1', x(w.date))
+          .attr('x2', x(w.date))
+          .attr('stroke-opacity', 0.4)
         if (!tip) return
         tip.innerHTML = `<p class="font-medium mb-1">Week of ${d3.utcFormat('%b %d, %Y')(w.date)}</p>${names
           .filter((n) => enabled.has(n))

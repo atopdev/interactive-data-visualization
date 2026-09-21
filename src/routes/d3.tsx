@@ -64,10 +64,11 @@ function D3Page() {
       focus={demo}
       lead={
         <>
-          D3 is a toolkit rather than a chart library: scales, layouts, geo projections
-          and a data join you compose into anything. Each demo lets D3 own the maths and
-          the DOM inside a React ref, sizes itself with ResizeObserver, renders heavy
-          scenes to canvas and tears everything down on unmount.
+          D3 is a toolkit rather than a chart library: scales, layouts, geo
+          projections and a data join you compose into anything. Each demo lets
+          D3 own the maths and the DOM inside a React ref, sizes itself with
+          ResizeObserver, renders heavy scenes to canvas and tears everything
+          down on unmount.
         </>
       }
       toc={TOC}

@@ -2,7 +2,16 @@ import { z } from 'zod'
 import { addDays, fetchJson, isoDate, type FetchOptions } from '../fetchers'
 
 const FRANKFURTER = 'https://api.frankfurter.dev/v1'
-const FX_CURRENCIES = ['USD', 'JPY', 'GBP', 'CHF', 'CAD', 'AUD', 'CNY', 'INR'] as const
+const FX_CURRENCIES = [
+  'USD',
+  'JPY',
+  'GBP',
+  'CHF',
+  'CAD',
+  'AUD',
+  'CNY',
+  'INR',
+] as const
 
 const latestResponse = z.object({
   base: z.string(),
@@ -38,7 +47,9 @@ export async function fetchFx(options?: FetchOptions): Promise<FxData> {
     ),
   ])
   const dates = Object.keys(series.rates).sort()
-  const currencies = FX_CURRENCIES.filter((c) => dates.every((d) => c in series.rates[d]))
+  const currencies = FX_CURRENCIES.filter((c) =>
+    dates.every((d) => c in series.rates[d]),
+  )
   return {
     base: latest.base,
     latestDate: latest.date,

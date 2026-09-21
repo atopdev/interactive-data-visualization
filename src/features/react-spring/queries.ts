@@ -8,7 +8,9 @@ export const weatherNowQuery = () =>
     queryKey: ['open-meteo', 'now', 'london'],
     live: (signal) => fetchWeatherNow(undefined, { signal }),
     snapshot: () =>
-      import('@/data/snapshots/weather-now.json').then(parseSnapshot(weatherNowSchema)),
+      import('@/data/snapshots/weather-now.json').then(
+        parseSnapshot(weatherNowSchema),
+      ),
     staleTime: 30_000,
   })
 
@@ -18,6 +20,8 @@ export const candlesQuery = () =>
     queryKey: ['crypto', 'btc', 'daily-candles'],
     live: (signal) => fetchCandles({ signal }),
     snapshot: () =>
-      import('@/data/snapshots/candles.json').then(parseSnapshot(candleSetSchema)),
+      import('@/data/snapshots/candles.json').then(
+        parseSnapshot(candleSetSchema),
+      ),
     staleTime: 5 * MINUTE,
   })

@@ -19,7 +19,9 @@ export const candlesQuery = () =>
     queryKey: ['crypto', 'btc', 'daily-candles'],
     live: (signal) => fetchCandles({ signal }),
     snapshot: () =>
-      import('@/data/snapshots/candles.json').then(parseSnapshot(candleSetSchema)),
+      import('@/data/snapshots/candles.json').then(
+        parseSnapshot(candleSetSchema),
+      ),
     staleTime: 5 * MINUTE,
   })
 
@@ -29,7 +31,9 @@ export const worldBankQuery = () =>
     queryKey: ['worldbank', 'pop-gdp', '2000-2023'],
     live: (signal) => fetchWorldBank({ signal }),
     snapshot: () =>
-      import('@/data/snapshots/worldbank.json').then(parseSnapshot(worldBankSchema)),
+      import('@/data/snapshots/worldbank.json').then(
+        parseSnapshot(worldBankSchema),
+      ),
     staleTime: 24 * HOUR,
   })
 
@@ -58,7 +62,9 @@ export const weatherNowQuery = () =>
     queryKey: ['open-meteo', 'now', 'london'],
     live: (signal) => fetchWeatherNow(undefined, { signal }),
     snapshot: () =>
-      import('@/data/snapshots/weather-now.json').then(parseSnapshot(weatherNowSchema)),
+      import('@/data/snapshots/weather-now.json').then(
+        parseSnapshot(weatherNowSchema),
+      ),
     staleTime: 30_000,
     refetchInterval: 60_000,
   })
@@ -68,7 +74,9 @@ export const pokemonQuery = () =>
     queryKey: ['pokeapi', 'selection'],
     live: (signal) => fetchPokemon({ signal }),
     snapshot: () =>
-      import('@/data/snapshots/pokemon.json').then(parseSnapshot(pokemonListSchema)),
+      import('@/data/snapshots/pokemon.json').then(
+        parseSnapshot(pokemonListSchema),
+      ),
     staleTime: 24 * HOUR,
   })
 
@@ -88,6 +96,8 @@ export const quakesQuery = () =>
     queryKey: ['usgs', 'all-week'],
     live: (signal) => fetchQuakes({ signal }),
     snapshot: () =>
-      import('@/data/snapshots/quakes.json').then(parseSnapshot(quakeFeedSchema)),
+      import('@/data/snapshots/quakes.json').then(
+        parseSnapshot(quakeFeedSchema),
+      ),
     staleTime: MINUTE,
   })

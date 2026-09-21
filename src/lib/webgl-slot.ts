@@ -78,7 +78,9 @@ export function useWebGLSlot(
     if (!fullscreen && el) {
       io = new IntersectionObserver(
         ([e]) => {
-          entry.ratio = e.isIntersecting ? Math.max(e.intersectionRatio, 0.001) : 0
+          entry.ratio = e.isIntersecting
+            ? Math.max(e.intersectionRatio, 0.001)
+            : 0
           recompute()
         },
         { threshold: THRESHOLDS },

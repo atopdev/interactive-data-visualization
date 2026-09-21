@@ -70,7 +70,9 @@ export function PresenceDemo() {
                   </div>
                   <button
                     type="button"
-                    onClick={() => setItems((prev) => prev.filter((x) => x.id !== n.id))}
+                    onClick={() =>
+                      setItems((prev) => prev.filter((x) => x.id !== n.id))
+                    }
                     className="grid size-6 place-items-center rounded text-muted-foreground hover:bg-muted"
                     aria-label={`Dismiss ${n.title}`}
                   >
@@ -89,14 +91,17 @@ export function PresenceDemo() {
                 <span
                   className={cn(
                     'grid size-7 shrink-0 place-items-center rounded-full border text-xs font-medium transition-colors',
-                    i < step && 'border-page-accent bg-page-accent text-background',
+                    i < step &&
+                      'border-page-accent bg-page-accent text-background',
                     i === step && 'border-page-accent text-page-accent',
                   )}
                 >
                   {i < step ? <Check className="size-3.5" /> : i + 1}
                 </span>
                 <span className="hidden text-xs sm:inline">{s.label}</span>
-                {i < STEPS.length - 1 && <span className="h-px flex-1 bg-border" />}
+                {i < STEPS.length - 1 && (
+                  <span className="h-px flex-1 bg-border" />
+                )}
               </li>
             ))}
           </ol>
@@ -118,9 +123,13 @@ export function PresenceDemo() {
                 <p className="font-mono text-xs text-muted-foreground">
                   Step {step + 1} of {STEPS.length}
                 </p>
-                <p className="mt-2 text-lg font-semibold">{STEPS[step].label}</p>
+                <p className="mt-2 text-lg font-semibold">
+                  {STEPS[step].label}
+                </p>
                 <p className="mt-1 text-sm">{STEPS[step].body}</p>
-                <p className="mt-3 text-sm text-muted-foreground">{STEPS[step].detail}</p>
+                <p className="mt-3 text-sm text-muted-foreground">
+                  {STEPS[step].detail}
+                </p>
               </motion.div>
             </AnimatePresence>
           </div>
@@ -133,7 +142,11 @@ export function PresenceDemo() {
             >
               <ChevronLeft /> Back
             </Button>
-            <Button size="sm" onClick={() => go(1)} disabled={step === STEPS.length - 1}>
+            <Button
+              size="sm"
+              onClick={() => go(1)}
+              disabled={step === STEPS.length - 1}
+            >
               Next <ChevronRight />
             </Button>
           </div>

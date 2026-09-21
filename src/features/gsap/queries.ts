@@ -20,6 +20,8 @@ export const quakesQuery = () =>
     queryKey: ['usgs', 'all-week'],
     live: (signal) => fetchQuakes({ signal }),
     snapshot: () =>
-      import('@/data/snapshots/quakes.json').then(parseSnapshot(quakeFeedSchema)),
+      import('@/data/snapshots/quakes.json').then(
+        parseSnapshot(quakeFeedSchema),
+      ),
     staleTime: MINUTE,
   })

@@ -8,7 +8,8 @@ function subscribe(onChange: () => void) {
   return () => mql.removeEventListener('change', onChange)
 }
 
-export const prefersReducedMotion = () => window.matchMedia(REDUCED_MOTION_QUERY).matches
+export const prefersReducedMotion = () =>
+  window.matchMedia(REDUCED_MOTION_QUERY).matches
 
 /** Library-agnostic reduced-motion flag (for D3, ECharts, React Spring, canvas). */
 export function usePrefersReducedMotion(): boolean {

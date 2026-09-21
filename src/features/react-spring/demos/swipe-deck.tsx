@@ -25,14 +25,22 @@ const offscreen = () => ({ x: 0, rot: 0, scale: 1.4, y: -1000 })
 export function SwipeDeckDemo() {
   const reduced = usePrefersReducedMotion()
   const gone = useRef(new Set<number>())
-  const [decisions, setDecisions] = useState<{ name: string; liked: boolean }[]>([])
+  const [decisions, setDecisions] = useState<
+    { name: string; liked: boolean }[]
+  >([])
   const [springs, api] = useSprings(PEOPLE.length, (i) => ({
     ...resting(i),
     from: offscreen(),
   }))
 
   const bind = useDrag(
-    ({ args: [index], active, movement: [mx], direction: [xDir], velocity: [vx] }) => {
+    ({
+      args: [index],
+      active,
+      movement: [mx],
+      direction: [xDir],
+      velocity: [vx],
+    }) => {
       const i = index as number
       // A quick flick (velocity) or a long drag throws the card.
       const trigger = vx > 0.2 || Math.abs(mx) > 160
@@ -46,7 +54,11 @@ export function SwipeDeckDemo() {
         if (j !== i) return
         const isGone = gone.current.has(i)
         // Flying cards keep the gesture's velocity so the throw feels physical.
-        const x = isGone ? (200 + window.innerWidth) * (xDir || 1) : active ? mx : 0
+        const x = isGone
+          ? (200 + window.innerWidth) * (xDir || 1)
+          : active
+            ? mx
+            : 0
         const rot = mx / 100 + (isGone ? (xDir || 1) * 10 * Math.max(vx, 1) : 0)
         return {
           x,
@@ -91,7 +103,11 @@ export function SwipeDeckDemo() {
       <div className="grid gap-4 md:grid-cols-[1fr_14rem]">
         <div className="bg-dot-grid relative grid h-[28rem] place-items-center overflow-hidden rounded-xl bg-surface-2">
           {springs.map(({ x, y, rot, scale }, i) => (
-            <animated.div key={PEOPLE[i].id} className="absolute" style={{ x, y }}>
+            <animated.div
+              key={PEOPLE[i].id}
+              className="absolute"
+              style={{ x, y }}
+            >
               <animated.article
                 {...bind(i)}
                 className="w-64 cursor-grab touch-none overflow-hidden rounded-2xl border bg-card shadow-xl select-none sm:w-72"
@@ -135,7 +151,10 @@ export function SwipeDeckDemo() {
             <p className="text-sm text-muted-foreground">Swipe a card</p>
           )}
           {decisions.map((d, i) => (
-            <p key={`${d.name}-${i}`} className="flex items-center gap-2 text-sm">
+            <p
+              key={`${d.name}-${i}`}
+              className="flex items-center gap-2 text-sm"
+            >
               {d.liked ? (
                 <Heart className="size-4 text-emerald-500" />
               ) : (

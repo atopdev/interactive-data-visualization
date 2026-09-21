@@ -22,7 +22,13 @@ import { PAGE_GROUPS, PAGES, pageForPath } from '@/lib/pages'
 import { cn } from '@/lib/utils'
 import { ThemeToggle } from './theme-toggle'
 
-function AccentDot({ accentVar, className }: { accentVar: string; className?: string }) {
+function AccentDot({
+  accentVar,
+  className,
+}: {
+  accentVar: string
+  className?: string
+}) {
   return (
     <span
       aria-hidden
@@ -40,11 +46,16 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-border/60 bg-background/75 backdrop-blur-xl">
       <div className="mx-auto flex h-14 max-w-7xl items-center gap-4 px-4 sm:px-6">
-        <Link to="/" className="flex items-center gap-2 font-semibold tracking-tight">
+        <Link
+          to="/"
+          className="flex items-center gap-2 font-semibold tracking-tight"
+        >
           <span className="grid size-7 place-items-center rounded-lg bg-foreground text-background">
             <Sparkles className="size-4" />
           </span>
-          <span className="hidden sm:inline">Interactive Data Visualization</span>
+          <span className="hidden sm:inline">
+            Interactive Data Visualization
+          </span>
         </Link>
 
         <NavigationMenu viewport={false} className="ml-2 hidden md:flex">

@@ -113,7 +113,11 @@ export function SplitHeroDemo({
             onChange={setStagger}
             format={(v) => `${v.toFixed(3)}s`}
           />
-          <Button variant="outline" size="sm" onClick={() => setReplay((r) => r + 1)}>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setReplay((r) => r + 1)}
+          >
             <RotateCcw /> Replay
           </Button>
           <Button

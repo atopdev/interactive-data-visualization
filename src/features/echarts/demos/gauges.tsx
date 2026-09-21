@@ -136,7 +136,10 @@ export function GaugesDemo() {
       () =>
         setKpi((k) => ({
           uptime: Math.min(100, Math.max(97, k.uptime + (rand() - 0.5) * 0.6)),
-          conversion: Math.min(8, Math.max(1, k.conversion + (rand() - 0.5) * 0.8)),
+          conversion: Math.min(
+            8,
+            Math.max(1, k.conversion + (rand() - 0.5) * 0.8),
+          ),
         })),
       2200,
     )
@@ -204,7 +207,10 @@ export function GaugesDemo() {
       sourceReason={reason}
       sourceLabel="Open-Meteo + generated KPIs"
     >
-      <div ref={ref} className="grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-5">
+      <div
+        ref={ref}
+        className="grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-5"
+      >
         {specs
           ? specs.map((s) => <Gauge key={s.name} spec={s} />)
           : Array.from({ length: 5 }, (_, i) => (

@@ -34,9 +34,12 @@ export function FlipGalleryDemo({
   // Capture positions before React re-renders, then FLIP from them after.
   const capture = () => {
     if (!scope.current) return
-    state.current = Flip.getState(scope.current.querySelectorAll('[data-flip-item]'), {
-      props: 'opacity',
-    })
+    state.current = Flip.getState(
+      scope.current.querySelectorAll('[data-flip-item]'),
+      {
+        props: 'opacity',
+      },
+    )
   }
 
   useLayoutEffect(() => {
@@ -55,7 +58,8 @@ export function FlipGalleryDemo({
           { opacity: 0, scale: 0.85 },
           { opacity: 1, scale: 1, duration: 0.5 },
         ),
-      onLeave: (els) => gsap.to(els, { opacity: 0, scale: 0.85, duration: 0.4 }),
+      onLeave: (els) =>
+        gsap.to(els, { opacity: 0, scale: 0.85, duration: 0.4 }),
     })
     return () => {
       tl.kill()
@@ -119,7 +123,9 @@ export function FlipGalleryDemo({
         ref={scope}
         className={cn(
           'relative grid gap-4',
-          layout === 'grid' ? 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-4' : 'grid-cols-1',
+          layout === 'grid'
+            ? 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-4'
+            : 'grid-cols-1',
         )}
       >
         {PHOTOS.map((p) => (
@@ -139,10 +145,17 @@ export function FlipGalleryDemo({
               width={p.width}
               height={p.height}
               className={cn(
-                layout === 'list' ? 'w-28 shrink-0 rounded-lg sm:w-36' : 'w-full',
+                layout === 'list'
+                  ? 'w-28 shrink-0 rounded-lg sm:w-36'
+                  : 'w-full',
               )}
             />
-            <div className={cn('min-w-0', layout === 'grid' ? 'p-3' : 'flex-1 pr-2')}>
+            <div
+              className={cn(
+                'min-w-0',
+                layout === 'grid' ? 'p-3' : 'flex-1 pr-2',
+              )}
+            >
               <div className="flex items-center justify-between gap-2">
                 <h3 className="truncate text-sm font-semibold">{p.title}</h3>
                 <Badge variant="secondary" className="shrink-0">

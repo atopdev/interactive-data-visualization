@@ -188,7 +188,9 @@ const Threads: React.FC<ThreadsProps> = ({
       const baseDpr = Math.min(window.devicePixelRatio || 1, 2)
       const longestSide = Math.max(clientWidth, clientHeight) * baseDpr
       const dpr =
-        longestSide > MAX_RENDER_DIM ? (baseDpr * MAX_RENDER_DIM) / longestSide : baseDpr
+        longestSide > MAX_RENDER_DIM
+          ? (baseDpr * MAX_RENDER_DIM) / longestSide
+          : baseDpr
       renderer.dpr = dpr
       renderer.setSize(clientWidth, clientHeight)
       program.uniforms.iResolution.value.r = gl.canvas.width
@@ -231,7 +233,8 @@ const Threads: React.FC<ThreadsProps> = ({
       animationFrameId.current = requestAnimationFrame(update)
       if (!isVisible || document.hidden) return
 
-      const { color, amplitude, distance, enableMouseInteraction } = propsRef.current
+      const { color, amplitude, distance, enableMouseInteraction } =
+        propsRef.current
 
       program.uniforms.uColor.value.set(...color)
       program.uniforms.uAmplitude.value = amplitude
@@ -254,7 +257,8 @@ const Threads: React.FC<ThreadsProps> = ({
     animationFrameId.current = requestAnimationFrame(update)
 
     return () => {
-      if (animationFrameId.current) cancelAnimationFrame(animationFrameId.current)
+      if (animationFrameId.current)
+        cancelAnimationFrame(animationFrameId.current)
       resizeObserver.disconnect()
       intersectionObserver.disconnect()
       window.removeEventListener('resize', resize)

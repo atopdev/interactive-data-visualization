@@ -1,5 +1,10 @@
 import { useState, useCallback, useEffect, useRef, type ReactNode } from 'react'
-import { motion, useMotionValue, useAnimationFrame, useTransform } from 'motion/react'
+import {
+  motion,
+  useMotionValue,
+  useAnimationFrame,
+  useTransform,
+} from 'motion/react'
 
 interface GradientTextProps {
   children: ReactNode
@@ -51,7 +56,9 @@ export default function GradientText({
       if (cycleTime < animationDuration) {
         progress.set((cycleTime / animationDuration) * 100)
       } else {
-        progress.set(100 - ((cycleTime - animationDuration) / animationDuration) * 100)
+        progress.set(
+          100 - ((cycleTime - animationDuration) / animationDuration) * 100,
+        )
       }
     } else {
       // Continuously increase position for seamless looping

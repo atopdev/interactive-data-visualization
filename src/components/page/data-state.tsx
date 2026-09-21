@@ -46,8 +46,8 @@ export function DataState<T>({
         )}
       >
         <p className="flex items-center gap-2">
-          <AlertTriangle className="size-4 text-destructive" /> Data unavailable:{' '}
-          {query.error.message}
+          <AlertTriangle className="size-4 text-destructive" /> Data
+          unavailable: {query.error.message}
         </p>
       </div>
     )

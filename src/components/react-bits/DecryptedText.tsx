@@ -74,7 +74,9 @@ export default function DecryptedText({
         .map((char, i) => {
           if (char === ' ') return ' '
           if (currentRevealed.has(i)) return originalText[i]
-          return availableChars[Math.floor(Math.random() * availableChars.length)]
+          return availableChars[
+            Math.floor(Math.random() * availableChars.length)
+          ]
         })
         .join('')
     },
@@ -182,7 +184,11 @@ export default function DecryptedText({
           const nextIndex =
             revealedSet.size % 2 === 0 ? middle + offset : middle - offset - 1
 
-          if (nextIndex >= 0 && nextIndex < textLength && !revealedSet.has(nextIndex)) {
+          if (
+            nextIndex >= 0 &&
+            nextIndex < textLength &&
+            !revealedSet.has(nextIndex)
+          ) {
             return nextIndex
           }
           for (let i = 0; i < textLength; i++) {

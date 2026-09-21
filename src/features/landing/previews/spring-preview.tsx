@@ -16,7 +16,8 @@ export default function SpringPreview() {
   useEffect(() => {
     if (reduced) return
     const id = window.setInterval(
-      () => setHeights(Array.from({ length: BARS }, () => 0.15 + rand() * 0.85)),
+      () =>
+        setHeights(Array.from({ length: BARS }, () => 0.15 + rand() * 0.85)),
       1100,
     )
     return () => window.clearInterval(id)

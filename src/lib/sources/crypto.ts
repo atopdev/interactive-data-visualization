@@ -23,17 +23,33 @@ export type CandleSet = z.infer<typeof candleSetSchema>
 
 // Coinbase: [time(s), low, high, open, close, volume], newest first, max 300.
 const coinbaseResponse = z.array(
-  z.tuple([z.number(), z.number(), z.number(), z.number(), z.number(), z.number()]),
+  z.tuple([
+    z.number(),
+    z.number(),
+    z.number(),
+    z.number(),
+    z.number(),
+    z.number(),
+  ]),
 )
 
 // Binance: [openTime(ms), "open", "high", "low", "close", "volume", ...].
 const binanceResponse = z.array(
   z
-    .tuple([z.number(), z.string(), z.string(), z.string(), z.string(), z.string()])
+    .tuple([
+      z.number(),
+      z.string(),
+      z.string(),
+      z.string(),
+      z.string(),
+      z.string(),
+    ])
     .rest(z.union([z.number(), z.string()])),
 )
 
-async function fetchCoinbaseCandles(options?: FetchOptions): Promise<CandleSet> {
+async function fetchCoinbaseCandles(
+  options?: FetchOptions,
+): Promise<CandleSet> {
   const rows = await fetchJson(
     'https://api.exchange.coinbase.com/products/BTC-USD/candles?granularity=86400',
     coinbaseResponse,

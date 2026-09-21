@@ -6,7 +6,9 @@ export interface Size {
 }
 
 /** Track an element's border-box size (includes padding) with ResizeObserver. */
-export function useElementSize<T extends Element>(ref: RefObject<T | null>): Size {
+export function useElementSize<T extends Element>(
+  ref: RefObject<T | null>,
+): Size {
   const [size, setSize] = useState<Size>({ width: 0, height: 0 })
   useEffect(() => {
     const el = ref.current

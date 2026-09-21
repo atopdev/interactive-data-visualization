@@ -1,4 +1,8 @@
-import { Link, useRouter, type ErrorComponentProps } from '@tanstack/react-router'
+import {
+  Link,
+  useRouter,
+  type ErrorComponentProps,
+} from '@tanstack/react-router'
 import { AlertTriangle, Compass, RotateCcw } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -49,7 +53,9 @@ export function RouteError({ error, reset }: ErrorComponentProps) {
         </span>
         <h1 className="mt-4 text-2xl font-semibold">Something went wrong</h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          {error instanceof Error ? error.message : 'An unexpected error occurred.'}
+          {error instanceof Error
+            ? error.message
+            : 'An unexpected error occurred.'}
         </p>
         <div className="mt-6 flex justify-center gap-2">
           <Button
@@ -79,7 +85,8 @@ export function RouteNotFound() {
         <p className="mt-4 font-mono text-sm text-muted-foreground">404</p>
         <h1 className="mt-1 text-2xl font-semibold">This page wandered off</h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          The route you asked for does not exist. Try one of the six demo pages instead.
+          The route you asked for does not exist. Try one of the six demo pages
+          instead.
         </p>
         <Button className="mt-6" asChild>
           <Link to="/">Back to the overview</Link>

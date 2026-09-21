@@ -2,7 +2,13 @@ import { z } from 'zod'
 import { fetchJson, type FetchOptions } from '../fetchers'
 
 /** The animation/visualization libraries compared across the demos. */
-const NPM_PACKAGES = ['d3', 'echarts', 'gsap', 'motion', '@react-spring/web'] as const
+const NPM_PACKAGES = [
+  'd3',
+  'echarts',
+  'gsap',
+  'motion',
+  '@react-spring/web',
+] as const
 
 const rangeResponse = z.object({
   start: z.string(),
@@ -15,11 +21,15 @@ export const npmDownloadsSchema = z.object({
   start: z.string(),
   end: z.string(),
   days: z.array(z.string()),
-  packages: z.array(z.object({ name: z.string(), downloads: z.array(z.number()) })),
+  packages: z.array(
+    z.object({ name: z.string(), downloads: z.array(z.number()) }),
+  ),
 })
 export type NpmDownloads = z.infer<typeof npmDownloadsSchema>
 
-export async function fetchNpmDownloads(options?: FetchOptions): Promise<NpmDownloads> {
+export async function fetchNpmDownloads(
+  options?: FetchOptions,
+): Promise<NpmDownloads> {
   const results = await Promise.all(
     NPM_PACKAGES.map((pkg) =>
       fetchJson(

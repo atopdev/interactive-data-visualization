@@ -14,7 +14,9 @@ import { seededRandom } from '@/lib/random'
 
 echarts.use([LineChart, BarChart, GridComponent])
 
-type Option = ComposeOption<LineSeriesOption | BarSeriesOption | GridComponentOption>
+type Option = ComposeOption<
+  LineSeriesOption | BarSeriesOption | GridComponentOption
+>
 
 const rand = seededRandom('landing-echarts')
 const initial = Array.from(
@@ -82,6 +84,10 @@ export default function EChartsPreview() {
   )
 
   return (
-    <EChart option={option} className="h-full" ariaLabel="Streaming area chart preview" />
+    <EChart
+      option={option}
+      className="h-full"
+      ariaLabel="Streaming area chart preview"
+    />
   )
 }

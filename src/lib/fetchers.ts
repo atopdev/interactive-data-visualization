@@ -34,12 +34,18 @@ export interface FetchOptions {
   headers?: Record<string, string>
 }
 
-function combinedSignal({ signal, timeoutMs = REQUEST_TIMEOUT_MS }: FetchOptions) {
+function combinedSignal({
+  signal,
+  timeoutMs = REQUEST_TIMEOUT_MS,
+}: FetchOptions) {
   const timeout = AbortSignal.timeout(timeoutMs)
   return signal ? AbortSignal.any([signal, timeout]) : timeout
 }
 
-async function request(url: string, options: FetchOptions = {}): Promise<Response> {
+async function request(
+  url: string,
+  options: FetchOptions = {},
+): Promise<Response> {
   const res = await fetch(url, {
     signal: combinedSignal(options),
     headers: options.headers,

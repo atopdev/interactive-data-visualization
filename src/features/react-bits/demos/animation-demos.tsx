@@ -179,7 +179,11 @@ export function PixelTrailShowcase() {
       previewClassName="p-0 h-72 place-items-stretch"
       controls={
         <>
-          <SwitchControl label="Enable (WebGL)" checked={enabled} onChange={setEnabled} />
+          <SwitchControl
+            label="Enable (WebGL)"
+            checked={enabled}
+            onChange={setEnabled}
+          />
           <SliderControl
             label="gridSize"
             value={gridSize}
@@ -249,8 +253,18 @@ export function SplashCursorShowcase() {
             checked={enabled}
             onChange={setEnabled}
           />
-          <SwitchControl label="Rainbow" checked={rainbow} onChange={setRainbow} />
-          <SliderControl label="CURL" value={curl} min={0} max={30} onChange={setCurl} />
+          <SwitchControl
+            label="Rainbow"
+            checked={rainbow}
+            onChange={setRainbow}
+          />
+          <SliderControl
+            label="CURL"
+            value={curl}
+            min={0}
+            max={30}
+            onChange={setCurl}
+          />
         </>
       }
     >

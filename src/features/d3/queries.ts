@@ -2,7 +2,10 @@ import { HOUR, MINUTE, parseSnapshot, sourcedQuery } from '@/lib/query'
 import { fetchFx, fxSchema } from '@/lib/sources/frankfurter'
 import { fetchNobel, nobelSchema } from '@/lib/sources/nobel'
 import { fetchNpmDownloads, npmDownloadsSchema } from '@/lib/sources/npm'
-import { fetchTemperatureYear, temperatureYearSchema } from '@/lib/sources/openmeteo'
+import {
+  fetchTemperatureYear,
+  temperatureYearSchema,
+} from '@/lib/sources/openmeteo'
 import { fetchOwid, owidTableSchema, type OwidSlug } from '@/lib/sources/owid'
 import { fetchQuakes, quakeFeedSchema } from '@/lib/sources/usgs'
 import { fetchPageviews, pageviewsSchema } from '@/lib/sources/wikimedia'
@@ -40,7 +43,9 @@ export const quakesQuery = () =>
     queryKey: ['usgs', 'all-week'],
     live: (signal) => fetchQuakes({ signal }),
     snapshot: () =>
-      import('@/data/snapshots/quakes.json').then(parseSnapshot(quakeFeedSchema)),
+      import('@/data/snapshots/quakes.json').then(
+        parseSnapshot(quakeFeedSchema),
+      ),
     staleTime: MINUTE,
   })
 
@@ -59,7 +64,8 @@ export const fxQuery = () =>
   sourcedQuery({
     queryKey: ['frankfurter', 'year'],
     live: (signal) => fetchFx({ signal }),
-    snapshot: () => import('@/data/snapshots/fx.json').then(parseSnapshot(fxSchema)),
+    snapshot: () =>
+      import('@/data/snapshots/fx.json').then(parseSnapshot(fxSchema)),
     staleTime: 6 * HOUR,
   })
 
@@ -68,7 +74,9 @@ export const pageviewsQuery = () =>
     queryKey: ['wikimedia', 'pageviews'],
     live: (signal) => fetchPageviews({ signal }),
     snapshot: () =>
-      import('@/data/snapshots/pageviews.json').then(parseSnapshot(pageviewsSchema)),
+      import('@/data/snapshots/pageviews.json').then(
+        parseSnapshot(pageviewsSchema),
+      ),
     staleTime: 6 * HOUR,
   })
 

@@ -28,7 +28,8 @@ const TEXT = fakeWith('bits-text', (f) => ({
   gradient: f.company.name(),
   circular: `${f.word.adjective()} * ${f.word.noun()} * `.toUpperCase(),
   pressure: f.word.noun({ length: { min: 5, max: 8 } }),
-  reveal: Array.from({ length: 2 }, () => f.company.catchPhrase()).join('. ') + '.',
+  reveal:
+    Array.from({ length: 2 }, () => f.company.catchPhrase()).join('. ') + '.',
 }))
 
 const CATEGORY = 'React Bits · Text Animations'
@@ -179,13 +180,18 @@ export function ShinyTextShowcase() {
         </>
       }
     >
-      <ShinyText {...props} className="text-center text-3xl font-semibold capitalize" />
+      <ShinyText
+        {...props}
+        className="text-center text-3xl font-semibold capitalize"
+      />
     </Showcase>
   )
 }
 
 export function DecryptedTextShowcase() {
-  const [animateOn, setAnimateOn] = useState<'hover' | 'view' | 'click'>('hover')
+  const [animateOn, setAnimateOn] = useState<'hover' | 'view' | 'click'>(
+    'hover',
+  )
   const [sequential, setSequential] = useState(true)
   const [speed, setSpeed] = useState(50)
   const props = {
@@ -209,7 +215,9 @@ export function DecryptedTextShowcase() {
             variant="outline"
             size="sm"
             value={animateOn}
-            onValueChange={(v) => v && setAnimateOn(v as 'hover' | 'view' | 'click')}
+            onValueChange={(v) =>
+              v && setAnimateOn(v as 'hover' | 'view' | 'click')
+            }
           >
             <ToggleGroupItem value="hover">Hover</ToggleGroupItem>
             <ToggleGroupItem value="view">View</ToggleGroupItem>
@@ -288,9 +296,9 @@ export function GradientTextShowcase() {
 
 export function CircularTextShowcase() {
   const [spin, setSpin] = useState(20)
-  const [onHover, setOnHover] = useState<'speedUp' | 'slowDown' | 'pause' | 'goBonkers'>(
-    'speedUp',
-  )
+  const [onHover, setOnHover] = useState<
+    'speedUp' | 'slowDown' | 'pause' | 'goBonkers'
+  >('speedUp')
   const props = { text: TEXT.circular, spinDuration: spin, onHover }
   return (
     <Showcase
@@ -317,11 +325,13 @@ export function CircularTextShowcase() {
             onValueChange={(v) => v && setOnHover(v as typeof onHover)}
             className="flex-wrap"
           >
-            {(['speedUp', 'slowDown', 'pause', 'goBonkers'] as const).map((h) => (
-              <ToggleGroupItem key={h} value={h} className="px-2 text-xs">
-                {h}
-              </ToggleGroupItem>
-            ))}
+            {(['speedUp', 'slowDown', 'pause', 'goBonkers'] as const).map(
+              (h) => (
+                <ToggleGroupItem key={h} value={h} className="px-2 text-xs">
+                  {h}
+                </ToggleGroupItem>
+              ),
+            )}
           </ToggleGroup>
         </>
       }

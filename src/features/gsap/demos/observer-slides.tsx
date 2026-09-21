@@ -35,7 +35,11 @@ export function ObserverSlidesDemo() {
       const go = contextSafe((request: number | 'prev' | 'next') => {
         const total = SLIDES.length
         const next =
-          request === 'next' ? index + 1 : request === 'prev' ? index - 1 : request
+          request === 'next'
+            ? index + 1
+            : request === 'prev'
+              ? index - 1
+              : request
         const target = ((next % total) + total) % total
         if (busy || target === index) return
         busy = true
@@ -114,10 +118,18 @@ export function ObserverSlidesDemo() {
       bodyClassName="p-0 sm:p-0"
       controls={
         <div className="flex gap-1.5">
-          <Button variant="outline" size="sm" onClick={() => goRef.current('prev')}>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => goRef.current('prev')}
+          >
             <ChevronLeft /> Previous
           </Button>
-          <Button variant="outline" size="sm" onClick={() => goRef.current('next')}>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => goRef.current('next')}
+          >
             <ChevronRight /> Next
           </Button>
         </div>

@@ -36,7 +36,10 @@ const FlowingMenu: React.FC<FlowingMenuProps> = ({
   borderColor = '#fff',
 }) => {
   return (
-    <div className="h-full w-full overflow-hidden" style={{ backgroundColor: bgColor }}>
+    <div
+      className="h-full w-full overflow-hidden"
+      style={{ backgroundColor: bgColor }}
+    >
       <nav className="m-0 flex h-full flex-col p-0">
         {items.map((item, idx) => (
           <MenuItem
@@ -81,7 +84,8 @@ const MenuItem: React.FC<MenuItemProps> = ({
     height: number,
   ): 'top' | 'bottom' => {
     const topEdgeDist = Math.pow(mouseX - width / 2, 2) + Math.pow(mouseY, 2)
-    const bottomEdgeDist = Math.pow(mouseX - width / 2, 2) + Math.pow(mouseY - height, 2)
+    const bottomEdgeDist =
+      Math.pow(mouseX - width / 2, 2) + Math.pow(mouseY - height, 2)
     return topEdgeDist < bottomEdgeDist ? 'top' : 'bottom'
   }
 
@@ -135,7 +139,8 @@ const MenuItem: React.FC<MenuItemProps> = ({
   }, [text, image, repetitions, speed])
 
   const handleMouseEnter = (ev: React.MouseEvent<HTMLAnchorElement>) => {
-    if (!itemRef.current || !marqueeRef.current || !marqueeInnerRef.current) return
+    if (!itemRef.current || !marqueeRef.current || !marqueeInnerRef.current)
+      return
     const rect = itemRef.current.getBoundingClientRect()
     const edge = findClosestEdge(
       ev.clientX - rect.left,
@@ -152,7 +157,8 @@ const MenuItem: React.FC<MenuItemProps> = ({
   }
 
   const handleMouseLeave = (ev: React.MouseEvent<HTMLAnchorElement>) => {
-    if (!itemRef.current || !marqueeRef.current || !marqueeInnerRef.current) return
+    if (!itemRef.current || !marqueeRef.current || !marqueeInnerRef.current)
+      return
     const rect = itemRef.current.getBoundingClientRect()
     const edge = findClosestEdge(
       ev.clientX - rect.left,

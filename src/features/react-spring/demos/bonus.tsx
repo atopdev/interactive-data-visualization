@@ -166,17 +166,25 @@ export function SpringBonusDemo() {
                 <p className="font-mono text-xs text-muted-foreground">
                   Page {i + 1} / {PAGES.length} · {p.city}
                 </p>
-                <p className="text-2xl font-semibold tracking-tight">{p.title}</p>
+                <p className="text-2xl font-semibold tracking-tight">
+                  {p.title}
+                </p>
                 <Button
                   size="sm"
                   variant="outline"
-                  onClick={() => parallax.current?.scrollTo((i + 1) % PAGES.length)}
+                  onClick={() =>
+                    parallax.current?.scrollTo((i + 1) % PAGES.length)
+                  }
                 >
                   {i < PAGES.length - 1 ? 'Next layer' : 'Back to top'}
                 </Button>
               </ParallaxLayer>
             ))}
-            <ParallaxLayer offset={1.3} speed={-0.3} className="pointer-events-none">
+            <ParallaxLayer
+              offset={1.3}
+              speed={-0.3}
+              className="pointer-events-none"
+            >
               <div className="ml-[70%] size-16 rounded-full bg-page-accent opacity-70 blur-sm" />
             </ParallaxLayer>
           </Parallax>

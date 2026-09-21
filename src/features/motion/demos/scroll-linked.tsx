@@ -48,7 +48,9 @@ export function ScrollLinkedDemo() {
   const rotate = useTransform(smooth, [0, 1], [-8, 8])
   const opacity = useTransform(smooth, [0, 0.25, 0.75, 1], [0, 1, 1, 0])
   const [pct, setPct] = useState(0)
-  useMotionValueEvent(scrollYProgress, 'change', (v) => setPct(Math.round(v * 100)))
+  useMotionValueEvent(scrollYProgress, 'change', (v) =>
+    setPct(Math.round(v * 100)),
+  )
 
   return (
     <DemoSection

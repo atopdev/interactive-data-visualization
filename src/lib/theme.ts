@@ -16,7 +16,9 @@ const THEME_STORAGE_KEY = 'idv-theme'
 export function readStoredTheme(): Theme {
   try {
     const value = localStorage.getItem(THEME_STORAGE_KEY)
-    return value === 'light' || value === 'dark' || value === 'system' ? value : 'system'
+    return value === 'light' || value === 'dark' || value === 'system'
+      ? value
+      : 'system'
   } catch {
     return 'system'
   }

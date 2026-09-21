@@ -44,7 +44,11 @@ export function KeyframesDemo() {
       { rotate: 360 },
       { duration: 0.6, delay: stagger(0.05, { from: 'last' }) },
     )
-    await animate('[data-seq]', { y: 0, rotate: 0 }, { type: 'spring', bounce: 0.5 })
+    await animate(
+      '[data-seq]',
+      { y: 0, rotate: 0 },
+      { type: 'spring', bounce: 0.5 },
+    )
   }
 
   return (
@@ -56,7 +60,11 @@ export function KeyframesDemo() {
       source="generated"
       controls={
         <>
-          <Button size="sm" variant="outline" onClick={() => setSide((s) => !s)}>
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={() => setSide((s) => !s)}
+          >
             <Play /> Race
           </Button>
           <Button size="sm" variant="outline" onClick={() => void sequence()}>

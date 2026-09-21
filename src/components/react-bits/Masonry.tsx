@@ -1,10 +1,22 @@
-import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import React, {
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
 import { gsap } from 'gsap'
 
-const useMedia = (queries: string[], values: number[], defaultValue: number): number => {
+const useMedia = (
+  queries: string[],
+  values: number[],
+  defaultValue: number,
+): number => {
   const get = () => {
     if (typeof window === 'undefined') return defaultValue
-    return values[queries.findIndex((q) => matchMedia(q).matches)] ?? defaultValue
+    return (
+      values[queries.findIndex((q) => matchMedia(q).matches)] ?? defaultValue
+    )
   }
 
   const [value, setValue] = useState<number>(get)
@@ -13,7 +25,9 @@ const useMedia = (queries: string[], values: number[], defaultValue: number): nu
     const handler = () => setValue(get)
     queries.forEach((q) => matchMedia(q).addEventListener('change', handler))
     return () =>
-      queries.forEach((q) => matchMedia(q).removeEventListener('change', handler))
+      queries.forEach((q) =>
+        matchMedia(q).removeEventListener('change', handler),
+      )
   }, [queries])
 
   return value
@@ -107,7 +121,9 @@ const Masonry: React.FC<MasonryProps> = ({
     let direction = animateFrom
     if (animateFrom === 'random') {
       const dirs = ['top', 'bottom', 'left', 'right']
-      direction = dirs[Math.floor(Math.random() * dirs.length)] as typeof animateFrom
+      direction = dirs[
+        Math.floor(Math.random() * dirs.length)
+      ] as typeof animateFrom
     }
 
     switch (direction) {

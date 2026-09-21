@@ -18,7 +18,11 @@ import { useCoinbaseTicker, type Tick } from '@/hooks/use-coinbase-ticker'
 import { useInView } from '@/hooks/use-in-view'
 import { usePageVisible } from '@/hooks/use-page-visible'
 import { alpha } from '@/lib/colors'
-import { echarts, type ComposeOption, type EChartsInstance } from '@/lib/echarts'
+import {
+  echarts,
+  type ComposeOption,
+  type EChartsInstance,
+} from '@/lib/echarts'
 import { candlesQuery } from '../queries'
 
 echarts.use([LineChart, GridComponent, TooltipComponent, MarkLineComponent])
@@ -74,7 +78,8 @@ export function LiveStreamDemo() {
       grid: { left: 72, right: 16, top: 20, bottom: 28 },
       tooltip: {
         trigger: 'axis',
-        valueFormatter: (v) => (typeof v === 'number' ? usd.format(v) : String(v)),
+        valueFormatter: (v) =>
+          typeof v === 'number' ? usd.format(v) : String(v),
       },
       xAxis: { type: 'time', splitLine: { show: false } },
       yAxis: {
@@ -118,7 +123,9 @@ export function LiveStreamDemo() {
 
   const change = ticker.price && open ? ((ticker.price - open) / open) * 100 : 0
   const up =
-    ticker.previous === null || ticker.price === null || ticker.price >= ticker.previous
+    ticker.previous === null ||
+    ticker.price === null ||
+    ticker.price >= ticker.previous
 
   return (
     <DemoSection
@@ -134,12 +141,18 @@ export function LiveStreamDemo() {
             : 'loading'
       }
       sourceLabel={
-        ticker.status === 'simulated' ? 'Simulated fallback stream' : 'Coinbase WebSocket'
+        ticker.status === 'simulated'
+          ? 'Simulated fallback stream'
+          : 'Coinbase WebSocket'
       }
       reveal
       controls={
         <>
-          <Button size="sm" variant="outline" onClick={() => setPaused((p) => !p)}>
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={() => setPaused((p) => !p)}
+          >
             {paused ? <Play /> : <Pause />} {paused ? 'Resume' : 'Pause'}
           </Button>
           <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
@@ -158,7 +171,11 @@ export function LiveStreamDemo() {
           <p
             className={`text-3xl font-semibold tracking-tight tabular-nums ${up ? 'text-emerald-500' : 'text-red-500'}`}
           >
-            {ticker.price ? usd.format(ticker.price) : seed ? usd.format(seed) : '—'}
+            {ticker.price
+              ? usd.format(ticker.price)
+              : seed
+                ? usd.format(seed)
+                : '—'}
           </p>
           <p
             className={`text-sm tabular-nums ${change >= 0 ? 'text-emerald-500' : 'text-red-500'}`}

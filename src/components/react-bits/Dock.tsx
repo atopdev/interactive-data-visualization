@@ -158,7 +158,11 @@ type DockIconProps = {
 }
 
 function DockIcon({ children, className = '' }: DockIconProps) {
-  return <div className={`flex items-center justify-center ${className}`}>{children}</div>
+  return (
+    <div className={`flex items-center justify-center ${className}`}>
+      {children}
+    </div>
+  )
 }
 
 export default function Dock({

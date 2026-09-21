@@ -22,7 +22,9 @@ const PREVIEWS: Record<PageId, LazyExoticComponent<ComponentType>> = {
   d3: lazy(() => import('@/features/landing/previews/d3-preview')),
   echarts: lazy(() => import('@/features/landing/previews/echarts-preview')),
   gsap: lazy(() => import('@/features/landing/previews/gsap-preview')),
-  'react-spring': lazy(() => import('@/features/landing/previews/spring-preview')),
+  'react-spring': lazy(
+    () => import('@/features/landing/previews/spring-preview'),
+  ),
   motion: lazy(() => import('@/features/landing/previews/motion-preview')),
   'react-bits': lazy(() => import('@/features/landing/previews/bits-preview')),
 }
@@ -61,7 +63,10 @@ function Landing() {
         className="accent-glow pointer-events-none absolute inset-x-0 top-0 h-[32rem]"
       />
       <section className="relative mx-auto max-w-7xl px-4 pt-16 pb-12 sm:px-6 sm:pt-24">
-        <p data-page-reveal className="text-sm font-medium text-muted-foreground">
+        <p
+          data-page-reveal
+          className="text-sm font-medium text-muted-foreground"
+        >
           Interactive data visualization &amp; UI motion gallery
         </p>
         <h1
@@ -74,9 +79,10 @@ function Landing() {
           data-page-reveal
           className="mt-6 max-w-2xl text-lg leading-relaxed text-pretty text-muted-foreground"
         >
-          A tour through six animation and visualization libraries, driven by real public
-          data: Nobel laureates, live Bitcoin trades, this week&apos;s earthquakes, a
-          century of life expectancy, and plenty of seeded generated content.
+          A tour through six animation and visualization libraries, driven by
+          real public data: Nobel laureates, live Bitcoin trades, this
+          week&apos;s earthquakes, a century of life expectancy, and plenty of
+          seeded generated content.
         </p>
         <dl
           data-page-reveal

@@ -24,7 +24,12 @@ const dist = (a: { x: number; y: number }, b: { x: number; y: number }) => {
   return Math.sqrt(dx * dx + dy * dy)
 }
 
-const getAttr = (distance: number, maxDist: number, minVal: number, maxVal: number) => {
+const getAttr = (
+  distance: number,
+  maxDist: number,
+  minVal: number,
+  maxVal: number,
+) => {
   const val = maxVal - Math.abs((maxVal * distance) / maxDist)
   return Math.max(minVal, val + minVal)
 }
@@ -86,7 +91,8 @@ const TextPressure: React.FC<TextPressureProps> = ({
     window.addEventListener('touchmove', handleTouchMove, { passive: true })
 
     if (containerRef.current) {
-      const { left, top, width, height } = containerRef.current.getBoundingClientRect()
+      const { left, top, width, height } =
+        containerRef.current.getBoundingClientRect()
       mouseRef.current.x = left + width / 2
       mouseRef.current.y = top + height / 2
       cursorRef.current.x = mouseRef.current.x

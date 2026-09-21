@@ -64,7 +64,9 @@ export default function CountUp({
 
       const formattedNumber = Intl.NumberFormat('en-US', options).format(latest)
 
-      return separator ? formattedNumber.replace(/,/g, separator) : formattedNumber
+      return separator
+        ? formattedNumber.replace(/,/g, separator)
+        : formattedNumber
     },
     [maxDecimals, separator],
   )

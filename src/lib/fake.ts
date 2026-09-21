@@ -65,7 +65,10 @@ export interface FakeNotification {
   time: string
 }
 
-export function fakeNotifications(key: string, count: number): FakeNotification[] {
+export function fakeNotifications(
+  key: string,
+  count: number,
+): FakeNotification[] {
   return fakeWith(key, (f) =>
     Array.from({ length: count }, (_, i) => ({
       id: `${key}-${i}`,

@@ -50,7 +50,12 @@ export function SharedLayoutDemo() {
             aria-label={`Open ${p.title}`}
           >
             <motion.div layoutId={`img-${p.id}`}>
-              <SmartImage src={p.src} alt={p.alt} width={p.width} height={p.height} />
+              <SmartImage
+                src={p.src}
+                alt={p.alt}
+                width={p.width}
+                height={p.height}
+              />
             </motion.div>
             <motion.p
               layoutId={`title-${p.id}`}
@@ -115,7 +120,8 @@ export function SharedLayoutDemo() {
                     </p>
                     <p className="mt-3 text-sm">{photo.story}.</p>
                     <p className="mt-3 text-xs text-muted-foreground">
-                      {photo.likes.toLocaleString('en')} likes · {photo.category}
+                      {photo.likes.toLocaleString('en')} likes ·{' '}
+                      {photo.category}
                     </p>
                   </motion.div>
                 </div>

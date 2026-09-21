@@ -49,7 +49,9 @@ export type NobelData = z.infer<typeof nobelSchema>
 
 const URL_BASE = 'https://api.nobelprize.org/2.1/laureates?limit=1000'
 
-function normalize(raw: z.infer<typeof laureateResponse>['laureates']): Laureate[] {
+function normalize(
+  raw: z.infer<typeof laureateResponse>['laureates'],
+): Laureate[] {
   return raw.map((l) => {
     const origin = l.birth ?? l.founded
     const year = Number(l.birth?.year ?? l.founded?.date?.slice(0, 4))
@@ -57,7 +59,8 @@ function normalize(raw: z.infer<typeof laureateResponse>['laureates']): Laureate
       id: l.id,
       name: l.knownName?.en ?? l.orgName?.en ?? 'Unknown',
       gender: l.orgName ? 'org' : (l.gender ?? 'unknown'),
-      country: origin?.place?.countryNow?.en ?? origin?.place?.country?.en ?? null,
+      country:
+        origin?.place?.countryNow?.en ?? origin?.place?.country?.en ?? null,
       birthYear: Number.isFinite(year) && year > 0 ? year : null,
       prizes: l.nobelPrizes.map((p) => ({
         year: Number(p.awardYear),

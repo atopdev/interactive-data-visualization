@@ -63,7 +63,10 @@ export async function fetchQuakes(options?: FetchOptions): Promise<QuakeFeed> {
 }
 
 /** Keep the snapshot small: drop micro-quakes and cap the count. */
-export function trimQuakes(feed: QuakeFeed, { minMag = 1.5, max = 900 } = {}): QuakeFeed {
+export function trimQuakes(
+  feed: QuakeFeed,
+  { minMag = 1.5, max = 900 } = {},
+): QuakeFeed {
   return {
     generated: feed.generated,
     quakes: feed.quakes

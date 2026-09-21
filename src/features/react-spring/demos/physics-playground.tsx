@@ -1,4 +1,9 @@
-import { animated, config as presets, useSpring, useSprings } from '@react-spring/web'
+import {
+  animated,
+  config as presets,
+  useSpring,
+  useSprings,
+} from '@react-spring/web'
 import { ArrowLeftRight } from 'lucide-react'
 import { useState } from 'react'
 import { SliderControl } from '@/components/page/control'
@@ -6,7 +11,14 @@ import { DemoSection } from '@/components/page/demo-section'
 import { Button } from '@/components/ui/button'
 import { usePrefersReducedMotion } from '@/hooks/use-reduced-motion'
 
-const PRESETS = ['default', 'gentle', 'wobbly', 'stiff', 'slow', 'molasses'] as const
+const PRESETS = [
+  'default',
+  'gentle',
+  'wobbly',
+  'stiff',
+  'slow',
+  'molasses',
+] as const
 
 export function PhysicsPlaygroundDemo() {
   const reduced = usePrefersReducedMotion()
@@ -78,7 +90,9 @@ export function PhysicsPlaygroundDemo() {
           <animated.div
             className="absolute top-1/2 size-14 -translate-y-1/2 rounded-full bg-page-accent shadow-lg"
             style={{
-              left: ball.x.to((x) => `calc(2rem + ${x} * (100% - 4rem - 3.5rem))`),
+              left: ball.x.to(
+                (x) => `calc(2rem + ${x} * (100% - 4rem - 3.5rem))`,
+              ),
               scale: ball.x.to([0, 0.5, 1], [1, 1.25, 1]),
             }}
           />
@@ -94,7 +108,9 @@ export function PhysicsPlaygroundDemo() {
                   className="absolute top-0.5 size-5 rounded-full"
                   style={{
                     background: `var(--series-${i + 1})`,
-                    left: style.x.to((x) => `calc(0.125rem + ${x} * (100% - 1.5rem))`),
+                    left: style.x.to(
+                      (x) => `calc(0.125rem + ${x} * (100% - 1.5rem))`,
+                    ),
                   }}
                 />
               </div>

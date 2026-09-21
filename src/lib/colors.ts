@@ -17,7 +17,9 @@ function toRgb(color: string): string {
     cache.set(key, key)
     return key
   }
-  ctx ??= document.createElement('canvas').getContext('2d', { willReadFrequently: true })
+  ctx ??= document
+    .createElement('canvas')
+    .getContext('2d', { willReadFrequently: true })
   if (!ctx) return key
   ctx.clearRect(0, 0, 1, 1)
   ctx.fillStyle = '#000'
@@ -80,10 +82,14 @@ export interface ChartTheme {
   font: string
 }
 
-export function readChartTheme(el: Element = document.documentElement): ChartTheme {
+export function readChartTheme(
+  el: Element = document.documentElement,
+): ChartTheme {
   const v = (n: string) => cssVar(n, el)
   return {
-    mode: document.documentElement.classList.contains('dark') ? 'dark' : 'light',
+    mode: document.documentElement.classList.contains('dark')
+      ? 'dark'
+      : 'light',
     series: Array.from({ length: 8 }, (_, i) => v(`--series-${i + 1}`)),
     foreground: v('--foreground'),
     muted: v('--muted-foreground'),

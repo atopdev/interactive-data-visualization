@@ -136,7 +136,9 @@ export function useCoinbaseTicker({
         const parsed = tickerMessageSchema.safeParse(json)
         if (!parsed.success) return
         attempts = 0
-        const time = parsed.data.time ? Date.parse(parsed.data.time) : Date.now()
+        const time = parsed.data.time
+          ? Date.parse(parsed.data.time)
+          : Date.now()
         push({ price: parsed.data.price, time })
       }
       socket.onclose = () => {

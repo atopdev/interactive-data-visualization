@@ -1,5 +1,10 @@
 type PropValue =
-  string | number | boolean | readonly unknown[] | Record<string, unknown> | undefined
+  | string
+  | number
+  | boolean
+  | readonly unknown[]
+  | Record<string, unknown>
+  | undefined
 
 function formatValue(value: Exclude<PropValue, undefined>): string {
   if (typeof value === 'string') return JSON.stringify(value)
@@ -21,7 +26,8 @@ export function usage(
 ): string {
   const attrs = Object.entries(props)
     .filter(
-      (entry): entry is [string, Exclude<PropValue, undefined>] => entry[1] !== undefined,
+      (entry): entry is [string, Exclude<PropValue, undefined>] =>
+        entry[1] !== undefined,
     )
     .map(([k, v]) => {
       const formatted = formatValue(v)

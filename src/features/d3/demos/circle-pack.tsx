@@ -64,7 +64,9 @@ function Pack({ data }: { data: NobelData }) {
         .sum((d) => d.value ?? 0)
         .sort((a, b) => (b.value ?? 0) - (a.value ?? 0)),
     )
-    const svg = d3.select(el).attr('viewBox', `${-size / 2} ${-size / 2} ${size} ${size}`)
+    const svg = d3
+      .select(el)
+      .attr('viewBox', `${-size / 2} ${-size / 2} ${size} ${size}`)
     svg.selectAll('*').remove()
 
     const color = (d: d3.HierarchyCircularNode<PackDatum>) =>
@@ -74,7 +76,9 @@ function Pack({ data }: { data: NobelData }) {
 
     const node = svg
       .append('g')
-      .selectAll<SVGCircleElement, d3.HierarchyCircularNode<PackDatum>>('circle')
+      .selectAll<SVGCircleElement, d3.HierarchyCircularNode<PackDatum>>(
+        'circle',
+      )
       .data(root.descendants().slice(1))
       .join('circle')
       .attr('fill', color)
@@ -123,14 +127,23 @@ function Pack({ data }: { data: NobelData }) {
       const k = size / v[2]
       view = v
       label
-        .attr('transform', (d) => `translate(${(d.x - v[0]) * k},${(d.y - v[1]) * k})`)
+        .attr(
+          'transform',
+          (d) => `translate(${(d.x - v[0]) * k},${(d.y - v[1]) * k})`,
+        )
         .attr('font-size', (d) => (d.depth === 1 ? 13 : 11))
       node
-        .attr('transform', (d) => `translate(${(d.x - v[0]) * k},${(d.y - v[1]) * k})`)
+        .attr(
+          'transform',
+          (d) => `translate(${(d.x - v[0]) * k},${(d.y - v[1]) * k})`,
+        )
         .attr('r', (d) => d.r * k)
     }
 
-    function zoom(event: MouseEvent | null, d: d3.HierarchyCircularNode<PackDatum>) {
+    function zoom(
+      event: MouseEvent | null,
+      d: d3.HierarchyCircularNode<PackDatum>,
+    ) {
       focus = d
       setFocusName(
         d
@@ -149,16 +162,21 @@ function Pack({ data }: { data: NobelData }) {
         })
       label
         .filter(function (n) {
-          return n.parent === focus || (this as SVGTextElement).style.display === 'inline'
+          return (
+            n.parent === focus ||
+            (this as SVGTextElement).style.display === 'inline'
+          )
         })
         .transition()
         .duration(duration)
         .style('fill-opacity', (n) => (n.parent === focus ? 1 : 0))
         .on('start', function (n) {
-          if (n.parent === focus) (this as SVGTextElement).style.display = 'inline'
+          if (n.parent === focus)
+            (this as SVGTextElement).style.display = 'inline'
         })
         .on('end', function (n) {
-          if (n.parent !== focus) (this as SVGTextElement).style.display = 'none'
+          if (n.parent !== focus)
+            (this as SVGTextElement).style.display = 'none'
         })
     }
 
@@ -172,7 +190,9 @@ function Pack({ data }: { data: NobelData }) {
 
   return (
     <div ref={wrap} className="flex flex-col items-center gap-2">
-      <p className="self-start font-mono text-xs text-muted-foreground">{focusName}</p>
+      <p className="self-start font-mono text-xs text-muted-foreground">
+        {focusName}
+      </p>
       <svg
         ref={svgRef}
         className="aspect-square w-full max-w-[680px]"

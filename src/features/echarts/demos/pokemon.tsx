@@ -17,7 +17,10 @@ import {
 } from 'echarts/components'
 import { useMemo, useState } from 'react'
 import { EChart } from '@/components/charts/echart'
-import { DataInspector, type InspectorColumn } from '@/components/data-inspector'
+import {
+  DataInspector,
+  type InspectorColumn,
+} from '@/components/data-inspector'
 import { DataState } from '@/components/page/data-state'
 import { DemoSection } from '@/components/page/demo-section'
 import { Toggle } from '@/components/ui/toggle'
@@ -26,7 +29,11 @@ import { useChartTheme } from '@/hooks/use-chart-theme'
 import { badgeFor } from '@/lib/badge'
 import { alpha } from '@/lib/colors'
 import { echarts, type ComposeOption } from '@/lib/echarts'
-import { STAT_KEYS, type Pokemon, type PokemonList } from '@/lib/sources/pokeapi'
+import {
+  STAT_KEYS,
+  type Pokemon,
+  type PokemonList,
+} from '@/lib/sources/pokeapi'
 import { pokemonQuery } from '../queries'
 
 echarts.use([
@@ -72,7 +79,9 @@ function Chart({
     const colorOf = (name: string) =>
       theme.series[list.pokemon.findIndex((p) => p.name === name) % 8]
     const picked = list.pokemon.filter((p) => selected.includes(p.name))
-    const max = Math.max(...list.pokemon.flatMap((p) => STAT_KEYS.map((k) => p.stats[k])))
+    const max = Math.max(
+      ...list.pokemon.flatMap((p) => STAT_KEYS.map((k) => p.stats[k])),
+    )
     if (view === 'radar') {
       return {
         tooltip: {},

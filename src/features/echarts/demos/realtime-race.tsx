@@ -9,7 +9,10 @@ import {
 import { Pause, Play, RotateCcw } from 'lucide-react'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { EChart } from '@/components/charts/echart'
-import { DataInspector, type InspectorColumn } from '@/components/data-inspector'
+import {
+  DataInspector,
+  type InspectorColumn,
+} from '@/components/data-inspector'
 import { DataState } from '@/components/page/data-state'
 import { DemoSection } from '@/components/page/demo-section'
 import { Button } from '@/components/ui/button'
@@ -61,7 +64,8 @@ function Race({
         value: c[metric][yearIndex],
       }))
       .filter(
-        (r): r is { name: string; region: string; value: number } => r.value !== null,
+        (r): r is { name: string; region: string; value: number } =>
+          r.value !== null,
       )
     const fmt = (v: number) =>
       metric === 'population'
@@ -147,7 +151,10 @@ export function RealtimeRaceDemo() {
 
   useEffect(() => {
     if (!playing || !inView || years === 0) return
-    const id = window.setInterval(() => setYearIndex((i) => (i + 1) % years), 1000)
+    const id = window.setInterval(
+      () => setYearIndex((i) => (i + 1) % years),
+      1000,
+    )
     return () => window.clearInterval(id)
   }, [playing, inView, years])
 
@@ -195,7 +202,9 @@ export function RealtimeRaceDemo() {
             onValueChange={(v) => v && setMetric(v as Metric)}
           >
             <ToggleGroupItem value="population">Population</ToggleGroupItem>
-            <ToggleGroupItem value="gdpPerCapita">GDP per capita</ToggleGroupItem>
+            <ToggleGroupItem value="gdpPerCapita">
+              GDP per capita
+            </ToggleGroupItem>
           </ToggleGroup>
           <Button size="sm" onClick={() => setPlaying((p) => !p)}>
             {playing ? <Pause /> : <Play />} {playing ? 'Pause' : 'Play'}
@@ -219,7 +228,11 @@ export function RealtimeRaceDemo() {
           className="h-[26rem]"
         >
           {(data) => (
-            <Race data={data} yearIndex={yearIndex % data.years.length} metric={metric} />
+            <Race
+              data={data}
+              yearIndex={yearIndex % data.years.length}
+              metric={metric}
+            />
           )}
         </DataState>
       </div>

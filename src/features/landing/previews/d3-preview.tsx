@@ -62,8 +62,12 @@ export default function D3Preview() {
       .attr('fill', (d) => `var(--series-${d.group + 1})`)
       .attr('fill-opacity', 0.85)
 
-    const fx = forceX<Node>((d) => layouts[layout][d.group][0] * w).strength(0.08)
-    const fy = forceY<Node>((d) => layouts[layout][d.group][1] * h).strength(0.08)
+    const fx = forceX<Node>((d) => layouts[layout][d.group][0] * w).strength(
+      0.08,
+    )
+    const fy = forceY<Node>((d) => layouts[layout][d.group][1] * h).strength(
+      0.08,
+    )
     const sim = forceSimulation(nodes)
       .force('charge', forceManyBody().strength(-6))
       .force(
@@ -72,7 +76,9 @@ export default function D3Preview() {
       )
       .force('x', fx)
       .force('y', fy)
-      .on('tick', () => circles.attr('cx', (d) => d.x ?? 0).attr('cy', (d) => d.y ?? 0))
+      .on('tick', () =>
+        circles.attr('cx', (d) => d.x ?? 0).attr('cy', (d) => d.y ?? 0),
+      )
 
     if (reduced) {
       sim.stop()

@@ -159,7 +159,9 @@ const Particles: React.FC<ParticlesProps> = ({
     const randoms = new Float32Array(count * 4)
     const colors = new Float32Array(count * 3)
     const palette =
-      particleColors && particleColors.length > 0 ? particleColors : defaultColors
+      particleColors && particleColors.length > 0
+        ? particleColors
+        : defaultColors
 
     for (let i = 0; i < count; i++) {
       let x: number, y: number, z: number, len: number
@@ -171,7 +173,10 @@ const Particles: React.FC<ParticlesProps> = ({
       } while (len > 1 || len === 0)
       const r = Math.cbrt(Math.random())
       positions.set([x * r, y * r, z * r], i * 3)
-      randoms.set([Math.random(), Math.random(), Math.random(), Math.random()], i * 4)
+      randoms.set(
+        [Math.random(), Math.random(), Math.random(), Math.random()],
+        i * 4,
+      )
       const col = hexToRgb(palette[Math.floor(Math.random() * palette.length)])
       colors.set(col, i * 3)
     }
@@ -255,7 +260,9 @@ const Particles: React.FC<ParticlesProps> = ({
     pixelRatio,
   ])
 
-  return <div ref={containerRef} className={`relative h-full w-full ${className}`} />
+  return (
+    <div ref={containerRef} className={`relative h-full w-full ${className}`} />
+  )
 }
 
 export default Particles

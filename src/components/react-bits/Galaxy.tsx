@@ -276,7 +276,10 @@ export default function Galaxy({
         uHueShift: { value: hueShift },
         uSpeed: { value: speed },
         uMouse: {
-          value: new Float32Array([smoothMousePos.current.x, smoothMousePos.current.y]),
+          value: new Float32Array([
+            smoothMousePos.current.x,
+            smoothMousePos.current.y,
+          ]),
         },
         uGlowIntensity: { value: glowIntensity },
         uSaturation: { value: saturation },

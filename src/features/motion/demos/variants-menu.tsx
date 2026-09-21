@@ -1,5 +1,14 @@
 import { motion, type Variants } from 'motion/react'
-import { BarChart3, Folder, Home, Inbox, Menu, Settings, Users, X } from 'lucide-react'
+import {
+  BarChart3,
+  Folder,
+  Home,
+  Inbox,
+  Menu,
+  Settings,
+  Users,
+  X,
+} from 'lucide-react'
 import { useState } from 'react'
 import { SliderControl } from '@/components/page/control'
 import { DemoSection } from '@/components/page/demo-section'
@@ -7,11 +16,16 @@ import { fakeWith } from '@/lib/fake'
 
 const ICONS = [Home, Inbox, Folder, BarChart3, Users, Settings]
 const ITEMS = fakeWith('motion-menu', (f) =>
-  ['Overview', 'Inbox', 'Projects', 'Reports', 'Team', 'Settings'].map((label, i) => ({
-    label,
-    hint: i === 1 ? `${f.number.int({ min: 3, max: 24 })} new` : f.commerce.department(),
-    Icon: ICONS[i],
-  })),
+  ['Overview', 'Inbox', 'Projects', 'Reports', 'Team', 'Settings'].map(
+    (label, i) => ({
+      label,
+      hint:
+        i === 1
+          ? `${f.number.int({ min: 3, max: 24 })} new`
+          : f.commerce.department(),
+      Icon: ICONS[i],
+    }),
+  ),
 )
 
 export function VariantsMenuDemo() {

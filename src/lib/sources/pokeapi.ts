@@ -53,10 +53,16 @@ export type Pokemon = z.infer<typeof pokemonSchema>
 export const pokemonListSchema = z.object({ pokemon: z.array(pokemonSchema) })
 export type PokemonList = z.infer<typeof pokemonListSchema>
 
-export async function fetchPokemon(options?: FetchOptions): Promise<PokemonList> {
+export async function fetchPokemon(
+  options?: FetchOptions,
+): Promise<PokemonList> {
   const list = await Promise.all(
     POKEMON.map((name) =>
-      fetchJson(`https://pokeapi.co/api/v2/pokemon/${name}`, pokemonResponse, options),
+      fetchJson(
+        `https://pokeapi.co/api/v2/pokemon/${name}`,
+        pokemonResponse,
+        options,
+      ),
     ),
   )
   return pokemonListSchema.parse({

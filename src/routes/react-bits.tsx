@@ -70,11 +70,14 @@ function ReactBitsPage() {
       lead={
         <>
           React Bits components are copied into the codebase with{' '}
-          <code className="font-mono text-sm">npx shadcn add @react-bits/…-TS-TW</code>,
-          then owned like any other source. Each card below exposes the component&apos;s
-          props as live controls and a copy-ready usage snippet. The page never holds more
-          than one live WebGL context: the most visible WebGL demo runs while the others
-          pause and dispose theirs.
+          <code className="font-mono text-sm">
+            npx shadcn add @react-bits/…-TS-TW
+          </code>
+          , then owned like any other source. Each card below exposes the
+          component&apos;s props as live controls and a copy-ready usage
+          snippet. The page never holds more than one live WebGL context: the
+          most visible WebGL demo runs while the others pause and dispose
+          theirs.
         </>
       }
       toc={TOC}

@@ -54,7 +54,9 @@ export function TiltCardDemo() {
         <animated.div
           ref={ref}
           onPointerMove={onMove}
-          onPointerLeave={() => api.start({ rx: 0, ry: 0, s: 1, gx: 50, gy: 50 })}
+          onPointerLeave={() =>
+            api.start({ rx: 0, ry: 0, s: 1, gx: 50, gy: 50 })
+          }
           className="relative w-72 overflow-hidden rounded-3xl border bg-card shadow-2xl sm:w-80"
           style={{
             transformStyle: 'preserve-3d',
@@ -89,7 +91,9 @@ export function TiltCardDemo() {
             <p className="font-mono text-[11px] tracking-widest text-white/70 uppercase">
               {CARD.place}
             </p>
-            <p className="mt-1 text-lg leading-tight font-semibold">{CARD.title}</p>
+            <p className="mt-1 text-lg leading-tight font-semibold">
+              {CARD.title}
+            </p>
             <p className="mt-1 text-xs text-white/70">by {CARD.author}</p>
           </div>
         </animated.div>
