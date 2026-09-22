@@ -1,5 +1,5 @@
 import { Link, useRouterState } from '@tanstack/react-router'
-import { Menu, Sparkles } from 'lucide-react'
+import { Menu } from 'lucide-react'
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import {
@@ -46,16 +46,21 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-border/60 bg-background/75 backdrop-blur-xl">
       <div className="mx-auto flex h-14 max-w-7xl items-center gap-4 px-4 sm:px-6">
-        <Link
-          to="/"
-          className="flex items-center gap-2 font-semibold tracking-tight"
-        >
-          <span className="grid size-7 place-items-center rounded-lg bg-foreground text-background">
-            <Sparkles className="size-4" />
-          </span>
-          <span className="hidden sm:inline">
-            Interactive Data Visualization
-          </span>
+        <Link to="/" className="flex shrink-0 items-center">
+          <img
+            src="/brand/logo-light.svg"
+            alt="Interactive Data Visualization"
+            width={118}
+            height={40}
+            className="h-10 w-auto dark:hidden"
+          />
+          <img
+            src="/brand/logo-dark.svg"
+            alt="Interactive Data Visualization"
+            width={118}
+            height={40}
+            className="hidden h-10 w-auto dark:block"
+          />
         </Link>
 
         <NavigationMenu viewport={false} className="ml-2 hidden md:flex">
