@@ -1,0 +1,19 @@
+{
+  "name": "Interactive Data Visualization",
+  "short_name": "Data Viz",
+  "description": "Animated data visualizations and UI motion with D3.js, Apache ECharts, GSAP, React Spring, Motion and React Bits.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0B0D12",
+  "theme_color": "#0B0D12",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    {
+      "src": "/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
