@@ -2,7 +2,9 @@
 
 An interactive gallery of animated data visualization and UI motion, built as a React single-page app. Six pages each showcase one library (**D3.js**, **Apache ECharts**, **GSAP**, **React Spring**, **Motion** and **React Bits**) with 80+ demos driven by real public data, seeded generated content and seeded photography.
 
-- Every route change is a GSAP overlay wipe that waits for data and lazy chunks before revealing the page.
+![Interactive Data Visualization screenshot](https://github.com/user-attachments/assets/a68d6ff2-92e1-410b-b5bb-4cc31064cbee)
+
+- Every route change plays a GSAP transition themed on the destination page, and waits for data and lazy chunks before revealing it.
 - Remote data always has a bundled snapshot fallback, so the whole app works offline.
 - Dark and light themes, reduced-motion support in every library, and a hard limit of one live WebGL context per page.
 
@@ -99,6 +101,8 @@ src/
 
 ### D3.js (`/d3`)
 
+Bespoke, data-driven SVG and canvas visualizations built from first principles: force networks, a spinning globe, chord diagrams, bar races and streamgraphs, all driven by real public data.
+
 1. Force-directed Nobel network (laureate ↔ category ↔ birth country): drag, zoom/pan, neighbor highlighting, keyed enter/exit when the node count changes (`?nodes=`), and a data inspector
 2. Zoomable circle packing of prizes by category and decade (`d3.interpolateZoom`)
 3. Bar chart race over OWID population or life expectancy: play, pause, scrub, pauses off-screen, data inspector
@@ -110,6 +114,8 @@ src/
 9. Bonus: d3-sankey Nobel flow, a radial temperature year (Open-Meteo archive) and earthquake contour density
 
 ### Apache ECharts (`/echarts`)
+
+Declarative, high-performance charts: a live WebSocket price stream, candlesticks, calendar heatmaps, Sankeys, gauges and morphing hierarchies.
 
 1. Live BTC-USD stream over the Coinbase WebSocket (rAF-throttled, reconnect with backoff, simulated fallback)
 2. Candlestick and volume with MA7/MA30 and linked dataZoom (Coinbase, falling back to the Binance mirror)
@@ -123,6 +129,8 @@ src/
 10. Bonus: npm themeRiver, earthquake `effectScatter` on a bundled geo map, and an echarts-gl `bar3D`
 
 ### GSAP (`/gsap`)
+
+Timeline-driven motion and scroll: SplitText, ScrollTrigger, Flip, Draggable, MorphSVG, MotionPath and more.
 
 1. SplitText hero reveal (chars, words or lines, with masks and autoSplit)
 2. Pinned horizontal-scroll gallery with `containerAnimation` captions
@@ -138,6 +146,8 @@ src/
 
 ### React Spring (`/react-spring`)
 
+Physics-based springs: trails, transitions, chains and gesture-driven interactions with real tension and friction.
+
 1. Physics playground (tension, friction, mass) with all six config presets racing
 2. `useTrail` text and list entrance
 3. `useTransition` list with add, remove, shuffle and auto-height
@@ -151,6 +161,8 @@ src/
 11. Bonus: `useScroll` parallax, `useInView` reveal, the `Parallax` component and a measured-height accordion
 
 ### Motion (`/motion`)
+
+Layout animation for React: shared layout, presence, reorder, drag, scroll-linked values and imperative sequences.
 
 1. `layout`/`layoutId` shared-element gallery → detail modal
 2. `AnimatePresence` with `popLayout` (notification stack) and `wait` (stepper)
@@ -167,6 +179,8 @@ src/
 13. Bonus: 3D card stack, per-character text reveal and a rolling-digit live BTC ticker. The whole page is wrapped in `MotionConfig reducedMotion="user"`.
 
 ### React Bits (`/react-bits`)
+
+Copy-in animated components installed through the shadcn registry: text effects, cursors, galleries and WebGL backgrounds.
 
 28 components, each in a showcase with live prop controls and a copy-usage snippet:
 
