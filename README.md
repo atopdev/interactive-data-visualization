@@ -220,6 +220,21 @@ npm run snapshots
 
 Snapshots are loaded with dynamic `import()` only by the routes that use them.
 
+## Deploying to GitHub Pages
+
+The site is published at <https://atopdev.github.io/interactive-data-visualization/> by `.github/workflows/deploy.yml`, which lints, builds and deploys on every push to `main` (or on demand from the Actions tab).
+
+- **Base path.** `vite.config.ts` reads `BASE_PATH` (default `/`). The workflow sets it from the Pages configuration, so the build runs under `/interactive-data-visualization/`, or under `/` with a custom domain. The router uses the same path via `basepath: import.meta.env.BASE_URL`.
+- **Deep links.** GitHub Pages has no SPA fallback, so the build copies `index.html` to `404.html`; opening `/interactive-data-visualization/d3` directly loads the app and the router renders the page.
+- **One-time setup.** In the repository, open **Settings → Pages** and set **Source** to **GitHub Actions**.
+
+To build the Pages version locally:
+
+```bash
+BASE_PATH=/interactive-data-visualization/ npm run build
+npm run preview # http://localhost:4173/interactive-data-visualization/
+```
+
 ## License
 
 [MIT](LICENSE) © atopdev
