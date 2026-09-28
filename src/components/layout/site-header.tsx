@@ -48,14 +48,14 @@ export function SiteHeader() {
       <div className="mx-auto flex h-14 max-w-7xl items-center gap-4 px-4 sm:px-6">
         <Link to="/" className="flex shrink-0 items-center">
           <img
-            src="/brand/logo-light.svg"
+            src={`${import.meta.env.BASE_URL}brand/logo-light.svg`}
             alt="Interactive Data Visualization"
             width={118}
             height={40}
             className="h-10 w-auto dark:hidden"
           />
           <img
-            src="/brand/logo-dark.svg"
+            src={`${import.meta.env.BASE_URL}brand/logo-dark.svg`}
             alt="Interactive Data Visualization"
             width={118}
             height={40}

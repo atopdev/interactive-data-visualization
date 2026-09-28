@@ -12,6 +12,7 @@ const queryClient = createQueryClient()
 
 const router = createRouter({
   routeTree,
+  basepath: import.meta.env.BASE_URL,
   context: { queryClient },
   defaultPreload: 'intent',
   // Let TanStack Query own freshness; the router should always call loaders.

@@ -1,3 +1,4 @@
+import { copyFile } from 'node:fs/promises'
 import path from 'node:path'
 import tailwindcss from '@tailwindcss/vite'
 import { tanstackRouter } from '@tanstack/router-plugin/vite'
@@ -6,6 +7,8 @@ import { defineConfig } from 'vite'
 
 // https://vite.dev/config/
 export default defineConfig({
+  // Public base path: '/' locally, '/<repo>/' for GitHub Pages (set by CI).
+  base: process.env.BASE_PATH ?? '/',
   plugins: [
     // The router plugin must run before the React plugin so generated
     // route chunks are transformed by it.
@@ -28,6 +31,19 @@ export default defineConfig({
     }),
     react(),
     tailwindcss(),
+    {
+      // Static hosts such as GitHub Pages serve 404.html for unknown paths;
+      // making it the app shell lets deep links like /d3 load the SPA.
+      name: 'spa-404-fallback',
+      apply: 'build',
+      async closeBundle() {
+        const dist = path.resolve(import.meta.dirname, 'dist')
+        await copyFile(
+          path.join(dist, 'index.html'),
+          path.join(dist, '404.html'),
+        )
+      },
+    },
   ],
   build: {
     // The React Bits route intentionally carries three.js/ogl/R3F in its own
